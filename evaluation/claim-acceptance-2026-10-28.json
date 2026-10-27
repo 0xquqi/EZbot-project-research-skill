@@ -67,5 +67,89 @@
     "编写者功能验证，不是盲测或跨模型准确率",
     "40条新记录不是原历史40逐条清单",
     "16份活动研究的证据层次不同，9个新增源码例完成部署代码匹配，其余具体局限逐例披露"
-  ]
+  ],
+  "clean_installation": {
+    "code_commit": "c8364fadd0778c8a99dd2c57e76aaeb1a69f46fd",
+    "installation": "new_local_git_clone",
+    "package_files_checked": 36,
+    "unit_tests_passed": 39,
+    "cases": {
+      "bnc_web": {
+        "packet_sha256": "fadcac8f430145b9ef4f232e8136c4e6be3046500e12d36247aea1d83996927d",
+        "started_at": "2026-10-27T17:18:51.820999+00:00",
+        "finished_at": "2026-10-27T17:18:52.628611+00:00",
+        "materials": [
+          {
+            "url": "https://bncworld.fun/agents/",
+            "status": "ok",
+            "sha256": "d4f12ed80dfdec6e12d6afa468c12725c56da0aa41c1c8808d0c625a1835a035"
+          },
+          {
+            "url": "https://bncworld.fun/agents/llms.txt",
+            "status": "ok",
+            "sha256": "a43bb4ac2074b7e3946ee8b2d58aa387f108746c0557299097609f1ba1dbe153"
+          }
+        ]
+      },
+      "silicon_contract": {
+        "packet_sha256": "388f37bbbf3c8fbc39ba1f0a9750133efe2d9ce4dd674de5114f144617d96c89",
+        "started_at": "2026-10-27T17:18:56.022000+00:00",
+        "finished_at": "2026-10-27T17:19:01.503905+00:00",
+        "contract": {
+          "chain_id": 56,
+          "address": "0xA6574a66E45DeDFc878d173522836A49685ea307",
+          "compilation": {
+            "name": "SiliconSouls",
+            "fullyQualifiedName": "SiliconSouls.sol:SiliconSouls"
+          },
+          "status": "deployment_matched",
+          "runtime_code_equal": true,
+          "single_block_snapshot": true,
+          "block_requested": {
+            "number": "0x7c19915",
+            "hash": "0xb12913b9dae1bdfd164d4e97d90e7885e11e6827135ba67c27c8cca576b85c9a",
+            "timestamp": "0x6ae0dd01"
+          }
+        },
+        "reads": [
+          {
+            "signature": "totalSupply()",
+            "decoded": [
+              {
+                "name": "",
+                "type": "uint256",
+                "value": "78"
+              }
+            ],
+            "block_tag": "0x7c19915"
+          },
+          {
+            "signature": "MAX_SUPPLY()",
+            "decoded": [
+              {
+                "name": "",
+                "type": "uint256",
+                "value": "8888"
+              }
+            ],
+            "block_tag": "0x7c19915"
+          },
+          {
+            "signature": "currentPrice()",
+            "decoded": [
+              {
+                "name": "",
+                "type": "uint256",
+                "value": "800000000000000"
+              }
+            ],
+            "block_tag": "0x7c19915"
+          }
+        ],
+        "mint_signature_in_target_abi": [
+          "mint()"
+        ]
+      }
+    }
+  }
 }
