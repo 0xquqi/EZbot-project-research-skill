@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-28",
+  "mode": "author-run functional verification, not blind or live transaction testing",
+  "material_tool": {
+    "entry": "https://build-100.com/lab/#home",
+    "html_sha256": "a23f891be3a18bff3e3b5a1238c6084d16a3618d6823d5afdd6774f9761e0162",
+    "guide_link_found": true,
+    "script_count": 11,
+    "exact_abi_functions_checked": [
+      "commitDraw(bool)",
+      "commitFreeMint()",
+      "drawPrice()",
+      "mintsUsedBy(address)",
+      "pendingStatus(address)",
+      "reveal(address)"
+    ],
+    "all_found": true,
+    "address_roles_automatically_confirmed": false
+  },
+  "browser": {
+    "url": "https://build-100.com/lab/#mint",
+    "observed": [
+      "free starter pack",
+      "paid packs",
+      "BNB and LAB alternatives",
+      "commit-reveal notice"
+    ],
+    "wallet_connected": false
+  },
+  "rpc": {
+    "endpoint": "https://bsc-rpc.publicnode.com",
+    "chain_id": 56,
+    "block_observed_separately": {
+      "number": 130118872,
+      "hash": "0x0a846f1f5538fa25f0f8f2dfa11aecd3a5aaca50b4302c9db322a65a99b61f80",
+      "timestamp": 1793117361
+    },
+    "target": "0xfE5Ab5ce9b1D86a55d70E7D0573a14D559029C18",
+    "code_sha256": "934090787b7f79191a9ba8bf0dd5f752bc91b40db4c35746cf6ac22f8f726f2a",
+    "code_equals_sourcify_onchain_bytecode": true,
+    "sourcify_runtime_match": "match",
+    "sourcify_verification_scope": "service match plus exact RPC code equality; no local recompile",
+    "drawPrice_latest": {
+      "result": "0x00000000000000000000000000000000000000000000000000026a74d672800000000000000000000000000000000000000000000000032d26d12e980b600000",
+      "native_wei": "680000000000000",
+      "token_amount": "15000000000000000000000",
+      "observed_at": "2026-10-27T16:09:22.949505+00:00",
+      "block_tag": "latest",
+      "pinned_to_recorded_block": false
+    },
+    "fixed_block_attempts": [
+      {
+        "id": "build-price",
+        "block": "0x7c174d8",
+        "error": {
+          "code": -32602,
+          "message": "Archive requests require a personal token. Get one at: https://www.allnodes.com/publicnode"
+        }
+      },
+      {
+        "id": "bibi-open",
+        "block": "0x7c174d8",
+        "error": {
+          "code": -32602,
+          "message": "Archive requests require a personal token. Get one at: https://www.allnodes.com/publicnode"
+        }
+      },
+      {
+        "id": "bibi-minted",
+        "block": "0x7c174d8",
+        "error": {
+          "code": -32602,
+          "message": "Archive requests require a personal token. Get one at: https://www.allnodes.com/publicnode"
+        }
+      }
+    ],
+    "limitations": [
+      "Recorded latest calls were not pinned to a single block.",
+      "Fixed-block reads were rejected by the provider; no token purchased or submitted.",
+      "No wallet-specific eligibility, balance or simulation tested."
+    ]
+  },
+  "archive_policy": "Historical JSON bodies not used as learning or test answers in this revision.",
+  "cli_material_runs": [
+    {
+      "case": "build",
+      "exit_code": 0,
+      "links": 26,
+      "scripts": 11,
+      "candidate_addresses": 0,
+      "input_sha256": "a23f891be3a18bff3e3b5a1238c6084d16a3618d6823d5afdd6774f9761e0162",
+      "participation_status": "not_assessed",
+      "abi_functions": 69
+    },
+    {
+      "case": "bibi",
+      "exit_code": 0,
+      "links": 4,
+      "scripts": 0,
+      "candidate_addresses": 3,
+      "input_sha256": "b137e4a22ca3bf955478d75d3325b90370136e1ebc0b5129c6b93d3a39ce7c7f",
+      "participation_status": "not_assessed",
+      "abi_functions": 0
+    },
+    {
+      "case": "punk",
+      "exit_code": 0,
+      "links": 3,
+      "scripts": 0,
+      "candidate_addresses": 3,
+      "input_sha256": "8b56d22c72a5184123c31064ef534c07928a6db05af916c40c5f4243aef32028",
+      "participation_status": "not_assessed",
+      "abi_functions": 0
+    },
+    {
+      "case": "ptah",
+      "exit_code": 0,
+      "links": 46,
+      "scripts": 0,
+      "candidate_addresses": 23,
+      "input_sha256": "f866eb843fc0e7fd18b96f8b7915d2e33f1472f95fb731c293cb1e3f0688128e",
+      "participation_status": "not_assessed",
+      "abi_functions": 0
+    }
+  ],
+  "standalone_skill_copy_cli_passed": true
+}

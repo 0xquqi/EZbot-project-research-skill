@@ -48,9 +48,15 @@ cd EZbot-project-research-skill
 | `references/question-cards.json` | 14 类机制问题 |
 | `references/case-index.md` | 历史资料索引和迁移来源 |
 | `references/*-cases.json` | 完整公开历史案例 |
-| `tools/check.py` | 独立包完整性与文件边界检查 |
+| `references/source-catalog.json` | 本轮新读取的公开原始来源、时间与哈希 |
+| `references/case-studies.md` | 网页、源码和只读链研究的实际样例 |
+| `references/validation.md` | 功能验证范围与局限 |
+| `scripts/inspect_material.py` | 离线解析 HTML、文本及 JSON ABI |
+| `tools/check.py` | 独立包完整性、来源及文件边界检查 |
 
-表中 `references` 位于 Skill 目录内。案例结构包含 5 个基础活动、3 份附加历史报告和 10 个生态案例；这些数量不是实盘验证成功次数。
+表中 `references` 和 `scripts` 均位于 Skill 目录内。原历史档案仍含5个基础活动、3份附加报告和10个生态案例；本轮不将它们作为新方法学习或测试答案来源。原有15项目/16活动的去重映射见 `references/inventory.json`；40条查阅记录缺逐项清单，尚未独立核验。
+
+本轮14张问题卡以重新读取的官方项目材料和技术规范为依据，每张保留来源、支持点、限制和未实操标记。它们可以重叠，不能理解为14种已完成实盘验证的独立铸造技巧。
 
 ## 独立性与验证
 
@@ -60,9 +66,16 @@ cd EZbot-project-research-skill
 
 ```bash
 python3 tools/check.py
+python3 -m unittest discover -s tests -v
 ```
 
 校验检查发布文件白名单、完整性哈希、内部文档链接、JSON 结构、问题卡字段边界及明显凭证/本地依赖痕迹。它不证明所有网站可抓取，也不代替实时合约验证或模型行为评测。发布清单只覆盖文件内容，修改文件后应审核变更再更新 `release-manifest.json`。
+
+## 本轮实际验证
+
+2026-10-28 使用公开官网、浏览器及只读 RPC 研究 BUILD-100，从首页找到指南、主网配置和精确 ABI，取得匹配服务记录并比较部署代码，读取当前报价。还研究了 Bibi 的结束条件、同站多系列、旧 ENS 入口、SeaDrop 证明入口、PoW 与退款/异步规则。细节见 [验证记录](evaluation/README.md)。
+
+这是编写者参与的功能验证，没有使用用户钱包、没有交易、不是独立盲测或跨模型成功率评测。脚本仅整理已取得的材料，网页渲染和链查询仍依赖宿主工具。新项目需要重新核实，旧样例价格不能作为默认参数。
 
 ## 许可
 

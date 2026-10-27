@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "historical_project_families": 15,
+  "historical_activities": 16,
+  "activities": [
+    {
+      "family": "BNC World",
+      "activity": "BNC World",
+      "archive": "agcid-cases.json",
+      "pointer": "cases/bnc-world"
+    },
+    {
+      "family": "BibiAI",
+      "activity": "BibiAI",
+      "archive": "agcid-cases.json",
+      "pointer": "cases/bibi-ai"
+    },
+    {
+      "family": "AgentPunk",
+      "activity": "AgentPunk",
+      "archive": "agcid-cases.json",
+      "pointer": "cases/agent-punk"
+    },
+    {
+      "family": "PTAH",
+      "activity": "PTAH Relic / Loom",
+      "archive": "agcid-cases.json",
+      "pointer": "cases/ptah-relic"
+    },
+    {
+      "family": "PTAH",
+      "activity": "Proof of Agent（POA）",
+      "archive": "agcid-cases.json",
+      "pointer": "cases/ptah-poa"
+    },
+    {
+      "family": "StockerPunk",
+      "activity": "StockerPunk historical activity",
+      "archive": "agcid-cases.json",
+      "pointer": "reports/1"
+    },
+    {
+      "family": "Floppy Agents",
+      "activity": "Floppy Agents 机制研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/floppy-agents"
+    },
+    {
+      "family": "Asset Agents",
+      "activity": "Asset Agents 机制研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/asset-agents"
+    },
+    {
+      "family": "AIGT Genesis",
+      "activity": "AIGT Genesis 机制研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/aigt-genesis"
+    },
+    {
+      "family": "Pixel Pets",
+      "activity": "Pixel Pets 机制研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/pixel-pets"
+    },
+    {
+      "family": "Silicon Souls",
+      "activity": "Silicon Souls 机制研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/silicon-souls"
+    },
+    {
+      "family": "Skynet",
+      "activity": "Skynet 机制研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/skynet-token"
+    },
+    {
+      "family": "GEARZ",
+      "activity": "GEARZ 机制研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/gearz"
+    },
+    {
+      "family": "HashDroids",
+      "activity": "HashDroids 机制研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/hashdroids"
+    },
+    {
+      "family": "Shit Cash",
+      "activity": "Shit Cash 机制研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/shit-cash-sale"
+    },
+    {
+      "family": "AnthroBit",
+      "activity": "AnthroBit 随机铸造与后续生产研究",
+      "archive": "ecosystem-cases.json",
+      "pointer": "cases/anthrobit"
+    }
+  ],
+  "legacy_reviewed_records": {
+    "claimed": 40,
+    "verification": "not_reconciled",
+    "reason": "缺少40条查阅记录的逐条清单；不作为本轮验证数量"
+  },
+  "current_review": "见 source-catalog.json，不能与历史项目数量相加宣称新增实测"
+}

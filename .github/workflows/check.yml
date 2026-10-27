@@ -11,3 +11,4 @@ jobs:
         with:
           python-version: '3.12'
       - run: python tools/check.py
+      - run: python -m unittest discover -s tests -v

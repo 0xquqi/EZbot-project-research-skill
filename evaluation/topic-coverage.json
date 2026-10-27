@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "method": "每项核查主题回到本轮新读取的原始材料，记录支持点与明确边界；不是模型评分或实盘测试",
+  "topics": [
+    {
+      "id": "agent-id",
+      "source_ids": [
+        "build-guide",
+        "bibi"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "direct-mint",
+      "source_ids": [
+        "oz721",
+        "seadrop",
+        "bibi-source",
+        "abi-spec"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "allowlist",
+      "source_ids": [
+        "seadrop",
+        "drop"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "paid-mint",
+      "source_ids": [
+        "erc20",
+        "bibi-source"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "craft",
+      "source_ids": [
+        "build-guide",
+        "erc1155"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "launchpad",
+      "source_ids": [
+        "openfour"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "identity-quota",
+      "source_ids": [
+        "build-guide",
+        "punk"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "quantity-bonus",
+      "source_ids": [
+        "build-guide",
+        "bibi",
+        "erc1155"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "oracle-randomness",
+      "source_ids": [
+        "price-feed",
+        "chainlink-vrf",
+        "build-guide"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "pow-mint",
+      "source_ids": [
+        "pow"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "refundable-sale",
+      "source_ids": [
+        "refund",
+        "build-guide"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "signature-settlement",
+      "source_ids": [
+        "erc3009"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "lifecycle",
+      "source_ids": [
+        "build-guide",
+        "ens",
+        "erc1155"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    },
+    {
+      "id": "token-claim",
+      "source_ids": [
+        "pow",
+        "drop",
+        "erc20"
+      ],
+      "reviewed": true,
+      "evidence_level": "public_material_review",
+      "execution_tested": false,
+      "cross_project_performance": "not_measured"
+    }
+  ]
+}

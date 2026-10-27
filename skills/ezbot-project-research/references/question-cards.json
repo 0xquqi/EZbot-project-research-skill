@@ -1,242 +1,358 @@
 {
-  "schemaVersion": 1,
-  "purpose": "关键词仅用于挑选研究问题，不证明当前资格或可执行性；不继承历史交易参数。",
+  "schemaVersion": 2,
+  "purpose": "14 个可重叠核查主题；逐项附新公开资料依据，不等于14种独立铸造技巧或实盘能力。",
   "rules": [
     {
       "id": "agent-id",
       "name": "Agent ID 资格",
       "keywords": [
-        "agentic",
         "agent id",
-        ".ai",
-        "币安代理"
+        ".ai"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "build-guide",
+        "bibi"
+      ],
+      "supported_points": [
+        "两个官网分别使用身份门禁和 NFT 持有检查。"
       ],
       "questions": [
-        "目标是否要求 Binance Agentic Wallet 签发，还是只要求持有身份 NFT？",
-        "逐号核验 .ai 与钱包地址绑定、资格状态和使用次数；身份名字不等于操作权限。"
-      ]
+        "当前活动到底读取哪个身份注册表、哪个函数？",
+        "检查针对调用者、收件人还是身份本身？用户未给地址时哪些个人条件无法确认？"
+      ],
+      "limits": [
+        "官网声明未自动等于部署规则；本轮未登录钱包或验证任何用户资格。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "direct-mint",
       "name": "直接铸造 NFT",
       "keywords": [
         "mint",
-        "铸造",
         "nft",
-        "erc721",
-        "erc1155"
+        "erc721"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "oz721",
+        "seadrop",
+        "bibi-source",
+        "abi-spec"
+      ],
+      "supported_points": [
+        "公开示例存在接收者参数；不同销售实现会组合自己的条件。"
       ],
       "questions": [
-        "目标合约、链、函数签名、数量单位和本轮价格分别是什么？",
-        "免费是否仅免 mint 本金，是否还有 gas、预言机费、资格资产费用？",
-        "每号数量限制、已铸数量、开放时间和售罄状态是否可读验证？",
-        "只有帖子或合约时，能否从已匹配源码与 ABI 验证 mint？缺活动网页不等于缺代码依据，项目来源另行核实。",
-        "源码 public 变量或 mapping 是否生成所需 getter？精确 ABI 类型、报价是否为本次数量总价，不能凭 mint(1) 猜参数类型。",
-        "NFT 接收者与 BNB 费用收款方是否分开核验？NFT 给 msg.sender、费用转给 CREATOR 本身不是接收者不符；外部调用需另查可达路径与失败处理。",
-        "当前证据属于分析、模拟、提交还是到账？只有目标 receipt、铸造事件和归属/余额核验才能确认收到目标 NFT。"
-      ]
+        "本次应调用销售合约还是 NFT 合约？函数完整参数与收件人来源在哪里？",
+        "是否存在额外活动、暂停、供应、支付或外部依赖检查？"
+      ],
+      "limits": [
+        "不能从 mint 名称或 ERC 标准推出公开可铸造。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "allowlist",
       "name": "白名单 / 签名 / 领取",
       "keywords": [
-        "whitelist",
         "allowlist",
-        "merkle",
         "proof",
-        "signature",
-        "白名单",
-        "claim",
-        "领取"
+        "signature"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "seadrop",
+        "drop"
+      ],
+      "supported_points": [
+        "SeaDrop 的名单证明与签名入口分离；Drop 名单可覆盖普通价格和数量条件。"
       ],
       "questions": [
-        "资格是地址名单、Merkle proof、后端签名还是持有检查？",
-        "proof/签名从哪个官方入口取得？过期时间、chainId、接收钱包是否绑定？",
-        "申请、抽签入选与实际 claim 不可合并为一步。"
-      ]
+        "本阶段使用 Merkle proof 还是签名，证明从哪个当前官方入口获取？",
+        "证明里的数量、币种、收件人和阶段是否覆盖普通规则？缺证明是否应停在未核实状态？"
+      ],
+      "limits": [
+        "已读设计与源码，没有生成、请求或使用真实 proof/签名。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "paid-mint",
       "name": "付费 / 授权",
       "keywords": [
-        "usdt",
-        "approve",
-        "allowance",
         "price",
-        "cost",
-        "付费",
-        "价格",
-        "bnb"
+        "approve",
+        "付费"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "erc20",
+        "bibi-source"
+      ],
+      "supported_points": [
+        "ERC20 授权与原生币 value 是不同支付手段。"
       ],
       "questions": [
-        "支付原生币还是 ERC20？数额单位与 decimals 是否明确？",
-        "如果需要 approve，spender 是否为本项目当前执行合约，额度是否限本次所需？",
-        "本金、gas、协议费、授权交易和可退款项分别列出。"
-      ]
+        "支付规则从哪条目标代码或官方报价得出？单位和 decimals 是否确定？",
+        "需要 ERC20 时谁执行 transferFrom？原生币路径是否根本不需要 ERC20 approve？"
+      ],
+      "limits": [
+        "未测试真实付费；未知支付金额不能按零处理。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "craft",
       "name": "合成 / 质押 / 产出",
       "keywords": [
-        "craft",
-        "weave",
+        "synthesize",
         "stake",
-        "mining",
-        "合成",
-        "挖矿",
-        "质押",
-        "relic",
-        "loom"
+        "合成"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "build-guide",
+        "erc1155"
+      ],
+      "supported_points": [
+        "BUILD 指南区分合成销毁输入与质押；ERC1155 余额按 id 区分。"
       ],
       "questions": [
-        "消耗什么资产、数量和 tokenId？得到什么资产与权重？",
-        "mint、合成、激活、claim 的合约和阶段分别核实。",
-        "奖励是否只是账面 claimable，真正到账须核验 Transfer 和余额。"
-      ]
+        "目标步骤是销毁、转入托管还是仅锁定？每个输入 id 和数量是什么？",
+        "产物在哪个地址、哪个 id 上出现，是否还有领取步骤？"
+      ],
+      "limits": [
+        "合成规则来自官网说明；未进行资产消耗或合成。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "launchpad",
       "name": "发射台买入",
       "keywords": [
-        "four.meme",
-        "flap",
-        "gang.fun",
+        "launchpad",
         "bonding",
-        "发射",
         "内盘"
       ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "openfour"
+      ],
+      "supported_points": [
+        "OpenFour 将报价、交易策略、金库和迁移模块分开。"
+      ],
       "questions": [
-        "这是代币购买还是 NFT mint？核对平台版本、发行模板与目标 CA。",
-        "当前路由是否支持买入及卖出？资格、每钱包限额和转账限制需单独核实。",
-        "API 发现时间不等于链上创建顺序；成交回报不等于完成验链。"
-      ]
+        "目标资产当前走哪个平台版本、金库阶段和模块？",
+        "买卖各有什么条件？达到销售上限与完成迁移之间是否还有步骤？"
+      ],
+      "limits": [
+        "未验证任意发射资产可成交，不将平台文档的参数带入别的平台。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "identity-quota",
       "name": "身份与钱包额度",
       "keywords": [
-        "handleof",
-        "ownerof",
-        "mintedby",
-        "handleclaimed",
-        "身份额度",
-        "每身份"
+        "quota",
+        "mintsUsedBy",
+        "额度"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "build-guide",
+        "punk"
+      ],
+      "supported_points": [
+        "BUILD 按身份限制次数；AgentPunk 文档另有钱包和持有卡片的限制。"
       ],
       "questions": [
-        "身份是余额、tokenId 所有权还是 handle？绑定的注册表是否为本项目部署配置？",
-        "免费次数、付费次数按钱包或身份分别记账；不能靠切换钱包推定额度重置。"
-      ]
+        "额度存在哪个键上：钱包、身份或某张 tokenId？",
+        "同一项目不同入口是否共享计数？转移卡片或切换地址会怎样影响计数？"
+      ],
+      "limits": [
+        "仅说明这些公开文档的差异，不能推定其他项目也使用同样计数。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "quantity-bonus",
       "name": "参数语义与附赠资产",
       "keywords": [
-        "getsfree",
-        "paidcount",
+        "quantity",
         "bonus",
-        "赠品",
-        "附赠",
-        "付费数量"
+        "附赠"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "build-guide",
+        "bibi",
+        "erc1155"
+      ],
+      "supported_points": [
+        "BUILD 页面返利是另发 LAB，不等于铸造操作多出一张卡；ERC1155 数量不等于 tokenId。"
       ],
       "questions": [
-        "输入量、付费量和最终到账量分别是什么？赠品是否占供应和限额？",
-        "多个产物逐个核对合约、事件和数量，不把一笔交易成功等同全部资产到账。"
-      ]
+        "用户输入量、实际扣费量、目标产物数量和附赠资产数量是否分别有依据？",
+        "附赠是同笔链上产物还是需要登记的独立发放？返利能否使用还受原额度限制吗？"
+      ],
+      "limits": [
+        "返利是项目方说明，未验证登记、发放或收益。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "oracle-randomness",
       "name": "动态报价与异步随机性",
       "keywords": [
-        "chainlink",
-        "vrf",
         "oracle",
-        "latestRoundData",
-        "预言机",
-        "随机"
+        "vrf",
+        "random"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "price-feed",
+        "chainlink-vrf",
+        "build-guide"
+      ],
+      "supported_points": [
+        "报价读取与随机结果出现是两件事；BUILD 自己使用 commit-reveal，不是 Chainlink VRF。"
       ],
       "questions": [
-        "美元报价的时效、精度、舍入是否核实？免费本金是否仍有随机性/服务费用？",
-        "请求、回调、产物、退款分别如何查状态？等待回调时不重复发送。"
-      ]
+        "当前目标到底用哪种定价或随机方案？接口精度、时间和额外费用如何解释？",
+        "结果需等待回调还是主动 reveal？如何区分待处理、过期和失败？"
+      ],
+      "limits": [
+        "文档中的通用随机性建议不能替代目标实现，不承诺随机性安全。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "pow-mint",
-      "name": "PoW铸造",
+      "name": "PoW 铸造",
       "keywords": [
         "proof-of-work",
-        "expectedprevwork",
-        "anchorblock",
-        "workhash",
-        "工作量证明"
+        "nonce",
+        "challenge"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "pow"
+      ],
+      "supported_points": [
+        "0xBitcoin 源码把 challenge、调用者和 nonce 组成摘要并检查目标。"
       ],
       "questions": [
-        "工作量证明是否绑定链、合约、钱包及当前锚定块/轮次？竞争后旧证明是否失效？",
-        "计算、付费铸造、销毁领取分别核价，不能套普通 mint(quantity)。"
-      ]
+        "目标函数输入是数量还是工作证明？当前挑战与难度从哪里读？",
+        "证明绑定什么主体，是否已被消耗，结果是否其实为 ERC20？"
+      ],
+      "limits": [
+        "历史源码研究，不代表当前网络运行状态，也不测算挖矿收益。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "refundable-sale",
       "name": "募资与退款",
       "keywords": [
-        "refundof",
-        "refundopen",
-        "teamdrawn",
-        "退款",
-        "refund"
+        "refund",
+        "退款"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "refund",
+        "build-guide"
+      ],
+      "supported_points": [
+        "RefundEscrow 的退款状态需要启用；BUILD 的出价托管与取消也不是 mint 退款。"
       ],
       "questions": [
-        "是否达到售罄/开池/超时条件？退款由谁触发、退给谁、是否按比例扣款？",
-        "旧部署退款与新部署销售分别核验，报价返回0可能表示不可买而非免费。"
-      ]
+        "资金当前属于什么托管和状态？谁可切换到可退款阶段？",
+        "退款接收者、可退金额与扣费是否有明确规则？取消出价和销售退款是否混淆？"
+      ],
+      "limits": [
+        "库代码是机制示例，不代表某项目部署含有该功能。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "signature-settlement",
       "name": "签名支付与中继结算",
       "keywords": [
-        "x402",
         "eip-3009",
-        "transferwithauthorization",
-        "签名支付",
-        "settlestranded"
+        "authorization",
+        "签名支付"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "erc3009"
+      ],
+      "supported_points": [
+        "标准草案将签名授权转账与 allowance 区分，并规定独立 nonce 与时间参数。"
       ],
       "questions": [
-        "签名域、chainId、接收合约、额度、nonce、有效期和中继是否绑定本次操作？",
-        "付款、签名消耗、逐订单结算和到账分开核验；批次成功不证明每一项成功。"
-      ]
+        "目标实际支持哪套签名协议？域、链、合约、付款人、接收者和数额是否完整？",
+        "一条签名被消费和业务产物完成是否属于同一原子交易？"
+      ],
+      "limits": [
+        "没有签名或执行；不假设任意 x402 服务都使用 ERC-3009。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "lifecycle",
       "name": "多阶段资产消耗",
       "keywords": [
-        "burnforpower",
-        "burnreward",
-        "fusion",
-        "fuse",
-        "激活",
-        "销毁",
-        "合成",
-        "harvest"
+        "commit",
+        "reveal",
+        "burn",
+        "销毁"
+      ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "build-guide",
+        "ens",
+        "erc1155"
+      ],
+      "supported_points": [
+        "BUILD 提交后要揭示，合成另消耗资产；ENS 文档展示旧入口失效风险。"
       ],
       "questions": [
-        "持有、激活、合成、销毁、领取属于哪一活动和部署版本？各自消耗及产物分别是什么？",
-        "前置成功不授权后续操作；不可逆销毁、异步等待及退款缺口需要单独说明。"
-      ]
+        "当前只完成了哪一步？后续步骤的前置状态、等待时间和额外消耗是什么？",
+        "失败或过期后有没有目标明确支持的恢复入口？旧教程是否对应当前部署？"
+      ],
+      "limits": [
+        "没有实际多步交易，不把一种系统的恢复方法迁移给另一系统。"
+      ],
+      "execution_tested": false
     },
     {
       "id": "token-claim",
       "name": "代币领取与铸造",
       "keywords": [
-        "claimfreebyid",
-        "quotemint",
-        "bep-20",
-        "erc20 mint",
-        "代币领取",
+        "erc20",
+        "claim",
         "铸币"
       ],
+      "basis": "new_public_source_review",
+      "source_ids": [
+        "pow",
+        "drop",
+        "erc20"
+      ],
+      "supported_points": [
+        "同为 mint/claim，产物可能为 ERC20；Drop 同时有多种 token 标准。"
+      ],
       "questions": [
-        "产物是ERC20而非NFT吗？输入是整数枚还是最小单位，到账用哪种事件和余额核验？",
-        "免费claim与付费mint的资格、窗口和总量分别检查，不自动从一条入口切到另一条。"
-      ]
+        "目标到底生成哪一种资产？输入量与最小单位如何转换？",
+        "奖励是内部记账、可领取余额还是已发生代币转移？"
+      ],
+      "limits": [
+        "未执行领取；标准未强制所有发行场景产生同样的铸造事件。"
+      ],
+      "execution_tested": false
     }
   ]
 }
