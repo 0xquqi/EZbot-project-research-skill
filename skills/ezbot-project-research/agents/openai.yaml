@@ -1,0 +1,4 @@
+interface:
+  display_name: "EZbot 项目研究"
+  short_description: "研究项目网页、合约与参与路径，核实资格、费用及多阶段机制"
+  default_prompt: "使用 $ezbot-project-research 研究这个项目，核实官方来源、当前阶段、参与路径和未解决的问题。"

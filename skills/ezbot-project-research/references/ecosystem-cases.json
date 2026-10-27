@@ -1,0 +1,897 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-10-27",
+  "scope": "从历史生态研究记录筛选机制差异；仅保存公开来源与问题。9份Sourcify源码包重新取得并与历史源码一致，另1例为官网说明。均未在本轮对比当前链上运行代码/钱包资格或执行。",
+  "cases": [
+    {
+      "id": "floppy-agents",
+      "project": "Floppy Agents",
+      "family": "Floppy Agents",
+      "activity": "Floppy Agents 机制研究",
+      "classification": {
+        "asset": "NFT",
+        "product": "收藏",
+        "participation": "一次免费铸造，保留创建者权限",
+        "phase": "当前开放状态未核验"
+      },
+      "mechanism": "一次免费铸造，保留创建者权限",
+      "summary": "公开 mint 拒绝非零 value，每钱包限一次；源码另有创建者预留铸造和版税管理，不因免费就判无权限。",
+      "maturity": "observed",
+      "keywords": [
+        "floppy",
+        "纯免费",
+        "一次免费",
+        "notfree"
+      ],
+      "pattern_ids": [
+        "direct-mint"
+      ],
+      "questions": [
+        "免费入口是否强制 value=0？额度耗尽后是停止还是另有收费入口？",
+        "公开供应与创建者预留是否共用上限？所有者还能更改哪些参数？"
+      ],
+      "boundaries": [
+        "不套用首张免费、第二张付费的默认路径。",
+        "创建者权限存在不等于已发现可利用漏洞。"
+      ],
+      "sources": [
+        {
+          "id": "floppy-agents-S1",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x8F1E4787f131990d793Af253d118aed7Fe1B29AF?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x8F1E4787f131990d793Af253d118aed7Fe1B29AF",
+          "file": "FloppyAgents.sol",
+          "lineStart": 44,
+          "lineEnd": 49,
+          "excerpt": "    function mint() external payable returns (uint256 tokenId) {\n        if (msg.value != 0) revert NotFree();\n        if (AGENT_ID.balanceOf(msg.sender) == 0) revert NotAgentIdHolder();\n        if (hasMinted[msg.sender]) revert AlreadyMinted();\n        hasMinted[msg.sender] = true;\n        tokenId = _mintTo(msg.sender);",
+          "sourceSha256": "522a43c0184f7f702e3ed92aa67d00cbc0e30ea8c539fe465a9f5f9da6dd8d77",
+          "observedAt": "2026-10-27T02:30:36.136825+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "floppy-agents-S2",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x8F1E4787f131990d793Af253d118aed7Fe1B29AF?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x8F1E4787f131990d793Af253d118aed7Fe1B29AF",
+          "file": "FloppyAgents.sol",
+          "lineStart": 59,
+          "lineEnd": 69,
+          "excerpt": "    /// @notice Creator reserve, max 33 tokens in total (including the 2 minted at deploy).\n    function creatorMint(address to, uint256 qty) external onlyOwner {\n        if (creatorMinted + qty > CREATOR_RESERVE) revert ReserveExceeded();\n        creatorMinted += qty;\n        for (uint256 i; i < qty; ++i) _mintTo(to);\n    }\n\n    /// @notice Owner can change the royalty receiver; rate is capped at 5%.\n    function setRoyalty(address receiver, uint96 bps) external onlyOwner {\n        require(bps <= 500, \"max 5%\");\n        _setDefaultRoyalty(receiver, bps);",
+          "sourceSha256": "522a43c0184f7f702e3ed92aa67d00cbc0e30ea8c539fe465a9f5f9da6dd8d77",
+          "observedAt": "2026-10-27T02:30:36.136825+00:00",
+          "verificationRecord": "exact_match"
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": true,
+        "sameAsHistoricalSource": true,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 本案例不授予任何新增执行能力"
+    },
+    {
+      "id": "asset-agents",
+      "project": "Asset Agents",
+      "family": "Asset Agents",
+      "activity": "Asset Agents 机制研究",
+      "classification": {
+        "asset": "NFT",
+        "product": "收藏",
+        "participation": "身份名与钱包双重额度，免费/付费入口分离",
+        "phase": "当前开放状态未核验"
+      },
+      "mechanism": "身份名与钱包双重额度，免费/付费入口分离",
+      "summary": "freeMint 按 handle 哈希和钱包分别记录已领；付费 mint 的已读函数不包含相同身份检查，不能把免费资格泛化到所有入口。",
+      "maturity": "observed",
+      "keywords": [
+        "assetagents",
+        "asset agents",
+        "handleclaimed",
+        "walletclaimed",
+        "双重额度"
+      ],
+      "pattern_ids": [
+        "identity-quota"
+      ],
+      "questions": [
+        "免费资格按钱包、handle 还是 tokenId？更换钱包或身份后原额度是否仍已用？",
+        "免费与付费函数分别检查什么门槛，哪个才是用户当前目标？"
+      ],
+      "boundaries": [
+        "按入口核验，不从项目名或一个函数推广整个合约。",
+        "后续再读部署代码和身份依赖。"
+      ],
+      "sources": [
+        {
+          "id": "asset-agents-S1",
+          "url": "https://sourcify.dev/server/v2/contract/56/0xFC60cdd577759bD2Af7F3351917e80672a91D540?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0xFC60cdd577759bD2Af7F3351917e80672a91D540",
+          "file": "AssetAgents.sol",
+          "lineStart": 44,
+          "lineEnd": 63,
+          "excerpt": "    function freeMint() external {\n        require(!paused, \"paused\");\n        string memory handle = AGENT_ID.handleOf(msg.sender);\n        require(bytes(handle).length > 0, \"no Agent ID\");\n        bytes32 key = keccak256(bytes(handle));\n        require(!handleClaimed[key], \"Agent ID used\");\n        require(!walletClaimed[msg.sender], \"wallet used\");\n        handleClaimed[key] = true;\n        walletClaimed[msg.sender] = true;\n        uint256 id = _mintOne(msg.sender);\n        emit FreeClaimed(msg.sender, handle, id);\n    }\n\n    function mint(uint256 quantity) external payable {\n        require(!paused, \"paused\");\n        require(quantity > 0 && quantity <= MAX_PER_TX, \"bad quantity\");\n        require(msg.value == quantity * PRICE, \"wrong value\");\n        for (uint256 i; i < quantity; ++i) _mintOne(msg.sender);\n        (bool ok, ) = treasury.call{value: msg.value}(\"\");\n        require(ok, \"treasury transfer failed\");",
+          "sourceSha256": "c6d495d473ceba2513a1a8b77f4847ec358817313374bdce0cc3c40a3ebd0a6f",
+          "observedAt": "2026-10-27T02:30:36.136863+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "asset-agents-S2",
+          "url": "https://sourcify.dev/server/v2/contract/56/0xFC60cdd577759bD2Af7F3351917e80672a91D540?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0xFC60cdd577759bD2Af7F3351917e80672a91D540",
+          "file": "AssetAgents.sol",
+          "lineStart": 73,
+          "lineEnd": 80,
+          "excerpt": "    function canFreeMint(address wallet) external view returns (bool) {\n        if (paused || totalSupply >= MAX_SUPPLY || walletClaimed[wallet]) return false;\n        try AGENT_ID.handleOf(wallet) returns (string memory h) {\n            return bytes(h).length > 0 && !handleClaimed[keccak256(bytes(h))];\n        } catch { return false; }\n    }\n\n    function setPaused(bool p) external onlyOwner { paused = p; }",
+          "sourceSha256": "c6d495d473ceba2513a1a8b77f4847ec358817313374bdce0cc3c40a3ebd0a6f",
+          "observedAt": "2026-10-27T02:30:36.136863+00:00",
+          "verificationRecord": "exact_match"
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": true,
+        "sameAsHistoricalSource": true,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 本案例不授予任何新增执行能力"
+    },
+    {
+      "id": "aigt-genesis",
+      "project": "AIGT Genesis",
+      "family": "AIGT Genesis",
+      "activity": "AIGT Genesis 机制研究",
+      "classification": {
+        "asset": "NFT",
+        "product": "收藏与销毁分配",
+        "participation": "按身份跨档USDT报价，销毁与奖励分开",
+        "phase": "当前开放状态未核验"
+      },
+      "mechanism": "按身份跨档USDT报价，销毁与奖励分开",
+      "summary": "mint 先核验 agentId 所有者，priceFor 按该身份累计数量逐张报价，再 transferFrom；burnForPower 销毁 NFT，claim 和抽奖领取是独立操作。",
+      "maturity": "observed",
+      "keywords": [
+        "aigt",
+        "pricefor",
+        "cheap_count",
+        "burnforpower"
+      ],
+      "pattern_ids": [
+        "identity-quota",
+        "paid-mint",
+        "lifecycle"
+      ],
+      "questions": [
+        "跨低价额度时总价是否由本身份本次数量计算？支付代币精度及 spender 是谁？",
+        "销毁是否不可逆，权重与可领取资产是否不同？mint 成功不能当已领奖。"
+      ],
+      "boundaries": [
+        "抽奖、市场、销毁和 claim 不合并到一次 mint。",
+        "身份注册表构造配置未在本轮读链核实。"
+      ],
+      "sources": [
+        {
+          "id": "aigt-genesis-S1",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x1275481d8614D5209857d5524fe60aEBb34d43F4?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x1275481d8614D5209857d5524fe60aEBb34d43F4",
+          "file": "src/AIGTGenesis.sol",
+          "lineStart": 4080,
+          "lineEnd": 4089,
+          "excerpt": "    function mint(uint256 agentId, uint256 quantity) external nonReentrant {\n        if (block.timestamp < startTime) revert NotStarted();\n        if (agentIds.ownerOf(agentId) != msg.sender) revert NotAgentOwner();\n        if (quantity == 0) revert BadQuantity();\n        uint256 done = mintedBy[agentId];\n        if (done + quantity > PER_AGENT) revert AgentQuotaExceeded();\n        if (publicMinted + quantity > publicSupply) revert SoldOut();\n\n        uint256 cost = priceFor(agentId, quantity);\n        usdt.safeTransferFrom(msg.sender, address(this), cost);",
+          "sourceSha256": "f1ce0add66af6220c0443ff35e47b6378a0ce029cfc92ac45998462d91ee33a6",
+          "observedAt": "2026-10-27T02:30:36.136763+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "aigt-genesis-S2",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x1275481d8614D5209857d5524fe60aEBb34d43F4?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x1275481d8614D5209857d5524fe60aEBb34d43F4",
+          "file": "src/AIGTGenesis.sol",
+          "lineStart": 4122,
+          "lineEnd": 4126,
+          "excerpt": "    function priceFor(uint256 agentId, uint256 quantity) public view returns (uint256 cost) {\n        uint256 done = mintedBy[agentId];\n        for (uint256 i; i < quantity; ++i) {\n            cost += (done + i < CHEAP_COUNT) ? PRICE_LOW : PRICE_HIGH;\n        }",
+          "sourceSha256": "f1ce0add66af6220c0443ff35e47b6378a0ce029cfc92ac45998462d91ee33a6",
+          "observedAt": "2026-10-27T02:30:36.136763+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "aigt-genesis-S3",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x1275481d8614D5209857d5524fe60aEBb34d43F4?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x1275481d8614D5209857d5524fe60aEBb34d43F4",
+          "file": "src/AIGTGenesis.sol",
+          "lineStart": 4219,
+          "lineEnd": 4234,
+          "excerpt": "    function burnForPower(uint256 id) external nonReentrant {\n        address holder = _requireOwned(id);\n        if (!_isAuthorized(holder, msg.sender, id)) revert NotAuthorized();\n        Info storage f = _info[id];\n        if (f.tier == 0 && !_reveal(id)) revert NotRevealed();\n        if (f.team && publicMinted < publicSupply) revert TeamLocked();\n\n        uint256 p = powerForTier(f.tier);\n        _settle(holder);\n        powerOf[holder] += p;\n        totalPower += p;\n        _debt[holder] = powerOf[holder] * accPerPower;\n\n        _burn(id);\n        totalBurned += 1;\n        emit Burned(holder, id, f.tier, p);",
+          "sourceSha256": "f1ce0add66af6220c0443ff35e47b6378a0ce029cfc92ac45998462d91ee33a6",
+          "observedAt": "2026-10-27T02:30:36.136763+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "aigt-genesis-S4",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x1275481d8614D5209857d5524fe60aEBb34d43F4?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x1275481d8614D5209857d5524fe60aEBb34d43F4",
+          "file": "src/AIGTGenesis.sol",
+          "lineStart": 4278,
+          "lineEnd": 4286,
+          "excerpt": "    /// @notice Claim USDT rewards earned by your Power.\n    function claim() external nonReentrant {\n        _settle(msg.sender);\n        uint256 amount = _owed[msg.sender] / ACC;\n        if (amount == 0) revert NothingToClaim();\n        _owed[msg.sender] -= amount * ACC;\n        rewardsOut += amount;\n        usdt.safeTransfer(msg.sender, amount);\n        emit Claimed(msg.sender, amount);",
+          "sourceSha256": "f1ce0add66af6220c0443ff35e47b6378a0ce029cfc92ac45998462d91ee33a6",
+          "observedAt": "2026-10-27T02:30:36.136763+00:00",
+          "verificationRecord": "exact_match"
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": true,
+        "sameAsHistoricalSource": true,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 本案例不授予任何新增执行能力"
+    },
+    {
+      "id": "pixel-pets",
+      "project": "Pixel Pets",
+      "family": "Pixel Pets",
+      "activity": "Pixel Pets 机制研究",
+      "classification": {
+        "asset": "NFT",
+        "product": "多品种收藏",
+        "participation": "付费数量、免费品种和里程碑赠品分开",
+        "phase": "当前开放状态未核验"
+      },
+      "mechanism": "付费数量、免费品种和里程碑赠品分开",
+      "summary": "mint(paid) 的参数是付费 Kitty 数量，quote 返回免费 Pup 加付费与里程碑赠品的总数量；传 0 也可能领取一只免费宠物。",
+      "maturity": "observed",
+      "keywords": [
+        "pixel pets",
+        "pixelpets",
+        "getsfree",
+        "paidcount",
+        "赠品",
+        "付费数量"
+      ],
+      "pattern_ids": [
+        "quantity-bonus"
+      ],
+      "questions": [
+        "参数表示付款件数还是最终到账件数？免费与赠品是否占总供应？",
+        "读取本钱包 quote，分别展示付费件数、免费品种、赠品和总费用；不能把用户总数量直接作为 paid。"
+      ],
+      "boundaries": [
+        "同为 mint(uint256) 不证明参数是总铸造数。",
+        "当前准备器不能据这个案例自动扩大数量语义支持。"
+      ],
+      "sources": [
+        {
+          "id": "pixel-pets-S1",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x85188BC437eCB8677b072529Fc80AC602A7a1465?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x85188BC437eCB8677b072529Fc80AC602A7a1465",
+          "file": "PixelPets.sol",
+          "lineStart": 86,
+          "lineEnd": 103,
+          "excerpt": "    function quote(address minter, uint256 paid) public view returns (uint256 tokens, uint256 cost, bool getsFree) {\n        getsFree = !freeClaimed[minter];\n        uint256 a = paidCount[minter];\n        (uint256 j, uint256 r, uint256 d) = _bonus(a, a + paid);\n        tokens = (getsFree ? 1 : 0) + paid + j + r + d;\n        cost = paid * PRICE;\n    }\n\n    /// One call: claims the free Pixel Pup if not yet claimed, plus `paid` Pixel Kitties (paid may be 0)\n    function mint(uint256 paid) external payable {\n        if (block.timestamp >= mintEnd) revert MintClosed();\n        if (AGENT_ID.balanceOf(msg.sender) == 0) revert NotAgent();\n        uint256 a = paidCount[msg.sender];\n        if (a + paid > MAX_PAID_PER_WALLET) revert WalletLimit();\n        (uint256 tokens, uint256 cost, bool getsFree) = quote(msg.sender, paid);\n        if (tokens == 0) revert NothingToMint();\n        if (totalSupply + tokens > MAX_SUPPLY) revert SoldOut();\n        if (msg.value != cost) revert WrongPayment();",
+          "sourceSha256": "4201d2d36286f23d8a72a0504f5a48d3ade300e2882a0d17a98537372ab50b82",
+          "observedAt": "2026-10-27T02:30:37.330631+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "pixel-pets-S2",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x85188BC437eCB8677b072529Fc80AC602A7a1465?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x85188BC437eCB8677b072529Fc80AC602A7a1465",
+          "file": "PixelPets.sol",
+          "lineStart": 105,
+          "lineEnd": 117,
+          "excerpt": "        uint256 id = totalSupply;\n        if (getsFree) {\n            freeClaimed[msg.sender] = true;\n            ++freeMinted;\n            id = _mintOne(msg.sender, id, 0);\n        }\n        for (uint256 k; k < paid; ++k) id = _mintOne(msg.sender, id, 1);\n        paidCount[msg.sender] = a + paid;\n\n        id = _mintBonus(msg.sender, id, a, a + paid);\n\n        _balances[msg.sender] += tokens;\n        totalSupply = id;",
+          "sourceSha256": "4201d2d36286f23d8a72a0504f5a48d3ade300e2882a0d17a98537372ab50b82",
+          "observedAt": "2026-10-27T02:30:37.330631+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "pixel-pets-S3",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x85188BC437eCB8677b072529Fc80AC602A7a1465?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x85188BC437eCB8677b072529Fc80AC602A7a1465",
+          "file": "PixelPets.sol",
+          "lineStart": 125,
+          "lineEnd": 130,
+          "excerpt": "    function _mintBonus(address to, uint256 id, uint256 a, uint256 z) private returns (uint256) {\n        (uint256 j, uint256 r, uint256 d) = _bonus(a, z);\n        if (j > 0) { for (uint256 k; k < j; ++k) id = _mintOne(to, id, 2); emit Milestone(to, 10, j); }\n        if (r > 0) { for (uint256 k; k < r; ++k) id = _mintOne(to, id, 3); emit Milestone(to, 20, r); }\n        if (d > 0) { for (uint256 k; k < d; ++k) id = _mintOne(to, id, 4); emit Milestone(to, 30, d); }\n        bonusMinted += j + r + d;",
+          "sourceSha256": "4201d2d36286f23d8a72a0504f5a48d3ade300e2882a0d17a98537372ab50b82",
+          "observedAt": "2026-10-27T02:30:37.330631+00:00",
+          "verificationRecord": "exact_match"
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": true,
+        "sameAsHistoricalSource": true,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 本案例不授予任何新增执行能力"
+    },
+    {
+      "id": "silicon-souls",
+      "project": "Silicon Souls",
+      "family": "Silicon Souls",
+      "activity": "Silicon Souls 机制研究",
+      "classification": {
+        "asset": "NFT + ERC20",
+        "product": "收藏与附赠资产",
+        "participation": "供应阶梯价与双资产到账",
+        "phase": "当前开放状态未核验"
+      },
+      "mechanism": "供应阶梯价与双资产到账",
+      "summary": "价格由全局供应阶梯决定；mint 同时写入 NFT 归属并调用 SOUL 铸币，再付 treasury 和退回多付款。",
+      "maturity": "observed",
+      "keywords": [
+        "silicon souls",
+        "siliconsouls",
+        "soul_per_mint",
+        "附赠代币"
+      ],
+      "pattern_ids": [
+        "quantity-bonus"
+      ],
+      "questions": [
+        "价格按全局供应还是个人次数分档？再次预览是否已跨档？",
+        "本次是否同时收到 NFT 和 ERC20？两个资产的合约、事件和余额分别核验。"
+      ],
+      "boundaries": [
+        "附赠资产不另算一个项目，NFT 到账不证明赠币到账。",
+        "附赠币的市场价值和流动性未经核实。"
+      ],
+      "sources": [
+        {
+          "id": "silicon-souls-S1",
+          "url": "https://sourcify.dev/server/v2/contract/56/0xA6574a66E45DeDFc878d173522836A49685ea307?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0xA6574a66E45DeDFc878d173522836A49685ea307",
+          "file": "SiliconSouls.sol",
+          "lineStart": 137,
+          "lineEnd": 142,
+          "excerpt": "    function currentPrice() public view returns (uint256) {\n        uint256 tier = totalSupply / TIER_SIZE; // 0..3\n        if (tier == 0) return 0.0008 ether;\n        if (tier == 1) return 0.0014 ether;\n        if (tier == 2) return 0.0020 ether;\n        return 0.0026 ether;",
+          "sourceSha256": "a819870ff603234bca244f2127163195d1b33e0c17e4fd897ed03349bd27e095",
+          "observedAt": "2026-10-27T02:30:36.136588+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "silicon-souls-S2",
+          "url": "https://sourcify.dev/server/v2/contract/56/0xA6574a66E45DeDFc878d173522836A49685ea307?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0xA6574a66E45DeDFc878d173522836A49685ea307",
+          "file": "SiliconSouls.sol",
+          "lineStart": 147,
+          "lineEnd": 169,
+          "excerpt": "    function mint() external payable returns (uint256 tokenId) {\n        if (AGENT_ID.balanceOf(msg.sender) == 0) revert NoAgentId();\n        if (hasMinted[msg.sender]) revert AlreadyMinted();\n        if (totalSupply >= MAX_SUPPLY) revert SoldOut();\n\n        uint256 price = currentPrice();\n        if (msg.value < price) revert Underpaid(price);\n\n        // effects\n        hasMinted[msg.sender] = true;\n        tokenId = ++totalSupply;\n        _ownerOf[tokenId] = msg.sender;\n        unchecked { _balanceOf[msg.sender] += 1; }\n        emit Transfer(address(0), msg.sender, tokenId);\n        emit SoulMinted(msg.sender, tokenId, price);\n\n        // interactions\n        soul.mint(msg.sender, SOUL_PER_MINT);\n        (bool ok, ) = TREASURY.call{value: price}(\"\");\n        require(ok, \"treasury transfer failed\");\n        if (msg.value > price) {\n            (bool r, ) = payable(msg.sender).call{value: msg.value - price}(\"\");\n            require(r, \"refund failed\");",
+          "sourceSha256": "a819870ff603234bca244f2127163195d1b33e0c17e4fd897ed03349bd27e095",
+          "observedAt": "2026-10-27T02:30:36.136588+00:00",
+          "verificationRecord": "exact_match"
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": true,
+        "sameAsHistoricalSource": true,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 本案例不授予任何新增执行能力"
+    },
+    {
+      "id": "skynet-token",
+      "project": "Skynet",
+      "family": "Skynet",
+      "activity": "Skynet 机制研究",
+      "classification": {
+        "asset": "ERC20",
+        "product": "代币发行",
+        "participation": "身份免费领取与预言机付费铸币两条入口",
+        "phase": "当前开放状态未核验"
+      },
+      "mechanism": "身份免费领取与预言机付费铸币两条入口",
+      "summary": "免费领取验证 tokenId 所有者及钱包/身份双额度；付费 mint 用整数枚数，内部乘 decimals 单位；美元价格分时段并经有时效检查的预言机折算。",
+      "maturity": "observed",
+      "keywords": [
+        "skynet",
+        "quotemint",
+        "claimfreebyid",
+        "currentusdprice"
+      ],
+      "pattern_ids": [
+        "token-claim",
+        "oracle-randomness",
+        "identity-quota"
+      ],
+      "questions": [
+        "产物是 ERC20 还是 NFT？amount 是整数枚数还是最小单位？",
+        "免费与付费入口的身份检查、剩余额度及结束状态是否不同？",
+        "报价是否检查预言机更新时间、舍入和当前阶段，不能用旧美元价手工换算。"
+      ],
+      "boundaries": [
+        "不把 ERC20 mint 当 NFT，也不自动调用 claimFree(string)。",
+        "预言机读取失败或过期不能视为零费用。"
+      ],
+      "sources": [
+        {
+          "id": "skynet-token-S1",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x4364991B28184727CAce1ac659e53cc497a940F7?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x4364991B28184727CAce1ac659e53cc497a940F7",
+          "file": "Skynet.sol",
+          "lineStart": 92,
+          "lineEnd": 110,
+          "excerpt": "    function bnbUsd() public view returns (uint256) {\n        (, int256 answer, , uint256 updatedAt, ) = BNB_USD.latestRoundData();\n        require(answer > 0, \"bad price\");\n        require(block.timestamp - updatedAt <= MAX_PRICE_AGE, \"stale price\");\n        return uint256(answer); // 8 decimals\n    }\n\n    /// @notice exact BNB (wei) needed for `amount` paid tokens right now\n    function quoteMint(uint256 amount) public view returns (uint256) {\n        uint256 p = bnbUsd();\n        return (amount * currentUsdPrice() * 1e8 + p - 1) / p;\n    }\n\n    function freeLeft(uint256 agentTokenId, address wallet) public view returns (uint256) {\n        uint256 a = FREE_PER_AGENT - freeClaimedByAgent[agentTokenId];\n        uint256 w = FREE_PER_AGENT - freeClaimedByWallet[wallet];\n        uint256 n = a < w ? a : w;\n        uint256 s = (MAX_SUPPLY - totalSupply) / 1 ether;\n        return n < s ? n : s;",
+          "sourceSha256": "b28509b7933dc41df2432ae719ef41ade12d43b290beb1d2cb7daebc9b40b1c8",
+          "observedAt": "2026-10-27T02:30:37.437822+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "skynet-token-S2",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x4364991B28184727CAce1ac659e53cc497a940F7?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x4364991B28184727CAce1ac659e53cc497a940F7",
+          "file": "Skynet.sol",
+          "lineStart": 118,
+          "lineEnd": 143,
+          "excerpt": "    function claimFree(string calldata agentName) external returns (uint256) {\n        return _claim(uint256(keccak256(bytes(agentName))));\n    }\n\n    function claimFreeById(uint256 agentTokenId) external returns (uint256) {\n        return _claim(agentTokenId);\n    }\n\n    function _claim(uint256 id) internal returns (uint256 n) {\n        require(isOpen(), \"minting closed\");\n        require(AGENT_ID.ownerOf(id) == msg.sender, \"not your Agent ID\");\n        n = freeLeft(id, msg.sender);\n        require(n > 0, \"free quota used\");\n        freeClaimedByAgent[id] += n;\n        freeClaimedByWallet[msg.sender] += n;\n        _mint(msg.sender, n * 1 ether);\n        emit AgentClaim(msg.sender, id, n);\n    }\n\n    function mint(uint256 amount) external payable {\n        require(isOpen(), \"minting closed\");\n        require(amount >= 1 && amount <= MAX_PAID_PER_TX, \"amount 1-10000\");\n        require(AGENT_ID.balanceOf(msg.sender) > 0, \"need .ai Agent ID\");\n        uint256 cost = quoteMint(amount);\n        require(msg.value >= cost, \"send >= quoteMint(amount)\");\n        require(totalSupply + amount * 1 ether <= MAX_SUPPLY, \"sold out\");",
+          "sourceSha256": "b28509b7933dc41df2432ae719ef41ade12d43b290beb1d2cb7daebc9b40b1c8",
+          "observedAt": "2026-10-27T02:30:37.437822+00:00",
+          "verificationRecord": "exact_match"
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": true,
+        "sameAsHistoricalSource": true,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 本案例不授予任何新增执行能力"
+    },
+    {
+      "id": "gearz",
+      "project": "GEARZ",
+      "family": "GEARZ",
+      "activity": "GEARZ 机制研究",
+      "classification": {
+        "asset": "NFT + 后续代币",
+        "product": "募资与生产",
+        "participation": "转账铸造、售罄开池、可能折损退款",
+        "phase": "当前开放状态未核验"
+      },
+      "mechanism": "转账铸造、售罄开池、可能折损退款",
+      "summary": "receive 与 mint 都进入受资格和状态限制的铸造；售罄后 finalize 才开池。退款按 paid*(totalPaid-teamDrawn)/totalPaid，团队提前提款可能降低退款金额。",
+      "maturity": "observed",
+      "keywords": [
+        "gearz",
+        "refundof",
+        "teamdrawn",
+        "退款",
+        "refund"
+      ],
+      "pattern_ids": [
+        "refundable-sale",
+        "lifecycle"
+      ],
+      "questions": [
+        "转账实际进入 receive 还是普通收款？数量金额必须如何整除匹配？",
+        "退款何时开放、退给谁、能退多少，团队是否已提前提走资金？",
+        "铸造、开池、揭示和挖矿分别满足哪些条件？旧部署退款不能当新部署开放。"
+      ],
+      "boundaries": [
+        "退款不是保本承诺；旧版与新版合约不可混用。",
+        "本案例研究不启用转账、退款、开池或后续挖矿执行。"
+      ],
+      "sources": [
+        {
+          "id": "gearz-S1",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x02d46599D57A7027FAA96ac58De19097B6eAB03b?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x02d46599D57A7027FAA96ac58De19097B6eAB03b",
+          "file": "src/MintVault.sol",
+          "lineStart": 154,
+          "lineEnd": 156,
+          "excerpt": "    receive() external payable {\n        _mintFor(msg.sender, quantityFor(msg.sender, msg.value), msg.value);\n    }",
+          "sourceSha256": "2baf15e11372bb1ffdf1e723ff0b39f8125df2a9b4f4ee5c4dd3ded6d9fcea3f",
+          "observedAt": "2026-10-27T02:30:37.663650+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "gearz-S2",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x02d46599D57A7027FAA96ac58De19097B6eAB03b?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x02d46599D57A7027FAA96ac58De19097B6eAB03b",
+          "file": "src/MintVault.sol",
+          "lineStart": 178,
+          "lineEnd": 196,
+          "excerpt": "    function _mintFor(address who, uint256 quantity, uint256 paid) internal nonReentrant {\n        if (finalized) revert AlreadyFinalized();\n        if (refundForced) revert MintCancelled();\n        if (paused) revert MintPaused();\n        if (block.timestamp < mintStart) revert NotStarted();\n        if (block.timestamp >= mintEnd) revert MintEnded();\n        _requireAgentId(who);\n        if (mintedOf[who] >= MAX_PER_ID) revert CapReached();\n        if (quantity == 0) revert WrongAmount();\n        uint256 total = totalMinted + quantity;\n        // the airdrop's room is reserved until it has been pushed out\n        if (total + (airdropCogs - airdropMinted) > PUBLIC_COGS) revert SoldOut();\n        totalMinted = total;\n        mintedOf[who] += quantity;\n        paidOf[who] += paid;\n        totalPaid += paid;\n        cog.mint(who, quantity);\n        emit Minted(who, quantity, paid, total);\n    }",
+          "sourceSha256": "2baf15e11372bb1ffdf1e723ff0b39f8125df2a9b4f4ee5c4dd3ded6d9fcea3f",
+          "observedAt": "2026-10-27T02:30:37.663650+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "gearz-S3",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x02d46599D57A7027FAA96ac58De19097B6eAB03b?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x02d46599D57A7027FAA96ac58De19097B6eAB03b",
+          "file": "src/MintVault.sol",
+          "lineStart": 266,
+          "lineEnd": 276,
+          "excerpt": "    function withdrawTeam() external nonReentrant {\n        if (msg.sender != team) revert NotTeam();\n        if (finalized) revert AlreadyFinalized();\n        if (refundOpen()) revert RefundsOpen();\n        uint256 amount = totalPaid * (BPS - LP_BPS) / BPS - teamDrawn;\n        if (amount == 0) revert NothingToWithdraw();\n        uint256 drawn = teamDrawn + amount;\n        teamDrawn = drawn;\n        if (!_send(team, amount)) revert TransferFailed();\n        emit TeamWithdrawn(amount, drawn);\n    }",
+          "sourceSha256": "2baf15e11372bb1ffdf1e723ff0b39f8125df2a9b4f4ee5c4dd3ded6d9fcea3f",
+          "observedAt": "2026-10-27T02:30:37.663650+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "gearz-S4",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x02d46599D57A7027FAA96ac58De19097B6eAB03b?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x02d46599D57A7027FAA96ac58De19097B6eAB03b",
+          "file": "src/MintVault.sol",
+          "lineStart": 312,
+          "lineEnd": 316,
+          "excerpt": "    function refundOf(address who) public view returns (uint256) {\n        uint256 paid = paidOf[who];\n        if (paid == 0) return 0;\n        return paid * (totalPaid - teamDrawn) / totalPaid;\n    }",
+          "sourceSha256": "2baf15e11372bb1ffdf1e723ff0b39f8125df2a9b4f4ee5c4dd3ded6d9fcea3f",
+          "observedAt": "2026-10-27T02:30:37.663650+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "gearz-S5",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x02d46599D57A7027FAA96ac58De19097B6eAB03b?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x02d46599D57A7027FAA96ac58De19097B6eAB03b",
+          "file": "src/MintVault.sol",
+          "lineStart": 303,
+          "lineEnd": 308,
+          "excerpt": "    function refundOpen() public view returns (bool) {\n        if (finalized) return false;\n        if (refundForced) return true;\n        if (block.timestamp < mintEnd) return false;\n        return totalMinted < PUBLIC_COGS || block.timestamp >= mintEnd + FINALIZE_WINDOW;\n    }",
+          "sourceSha256": "2baf15e11372bb1ffdf1e723ff0b39f8125df2a9b4f4ee5c4dd3ded6d9fcea3f",
+          "observedAt": "2026-10-27T02:30:37.663650+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "gearz-S6",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x02d46599D57A7027FAA96ac58De19097B6eAB03b?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x02d46599D57A7027FAA96ac58De19097B6eAB03b",
+          "file": "src/MintVault.sol",
+          "lineStart": 229,
+          "lineEnd": 256,
+          "excerpt": "    function finalize() external nonReentrant {\n        if (finalized) revert AlreadyFinalized();\n        if (refundForced) revert MintCancelled();\n        if (totalMinted < PUBLIC_COGS) revert NotSoldOut();\n        if (block.timestamp >= mintEnd + FINALIZE_WINDOW) revert FinalizeWindowClosed();\n        finalized = true;\n\n        address pair = IGearzToken(address(token)).pair();\n        uint256 bnb = address(this).balance;\n        // the pool gets 80% of everything paid in, including what the team already took; the team gets the rest\n        uint256 toLp = (bnb + teamDrawn) * LP_BPS / BPS;\n        uint256 toTeam = bnb - toLp;\n        uint256 tokens = token.balanceOf(address(this));\n\n        // Mint on the pair directly, not through the router: WBNB pre-loaded into the pair by someone cannot block it\n        token.safeTransfer(pair, tokens);\n        IWBNB(wbnb).deposit{value: toLp}();\n        if (!IWBNB(wbnb).transfer(pair, toLp)) revert TransferFailed();\n        uint256 liquidity = IPancakePair(pair).mint(DEAD);\n\n        uint64 miningStart = uint64(block.timestamp + MINING_DELAY);\n        mining.start(miningStart);\n        cog.scheduleReveal();\n\n        teamOwed = toTeam;\n        _payTeam();\n        emit Finalized(pair, toLp, tokens, liquidity, toTeam, miningStart);\n    }",
+          "sourceSha256": "2baf15e11372bb1ffdf1e723ff0b39f8125df2a9b4f4ee5c4dd3ded6d9fcea3f",
+          "observedAt": "2026-10-27T02:30:37.663650+00:00",
+          "verificationRecord": "exact_match"
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": true,
+        "sameAsHistoricalSource": true,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 本案例不授予任何新增执行能力"
+    },
+    {
+      "id": "hashdroids",
+      "project": "HashDroids",
+      "family": "HashDroids",
+      "activity": "HashDroids 机制研究",
+      "classification": {
+        "asset": "NFT + ERC20",
+        "product": "PoW与多阶段游戏",
+        "participation": "PoW绑定当前状态，销毁领取与版本分离",
+        "phase": "当前开放状态未核验"
+      },
+      "mechanism": "PoW绑定当前状态，销毁领取与版本分离",
+      "summary": "Gen-1 mine 绑定钱包、链、合约、nonce、prevWork 和有效锚定块；价格随轮次变化。burn 要求池已启动并销毁 NFT 后支付累计租金和代币奖励。",
+      "maturity": "observed",
+      "keywords": [
+        "hashdroids",
+        "expectedprevwork",
+        "anchorblock",
+        "proof-of-work",
+        "工作量证明"
+      ],
+      "pattern_ids": [
+        "pow-mint",
+        "lifecycle"
+      ],
+      "questions": [
+        "PoW 是否绑定本钱包及当前 prevWork/锚定块，过期或竞争后是否需要重新计算？",
+        "领取是否必须销毁 NFT，资金来自后续铸造还是其他来源？",
+        "当前目标是 Gen-1、Titan 还是新版研究/合成？每阶段的部署、资产单位、费用与授权分别核实。"
+      ],
+      "boundaries": [
+        "当前官方指南另述 V6/ERC1155；已读Gen-1源码不证明新版本通过核验。",
+        "不自动求解PoW、销毁、合成或执行来自远程Skill的指令。"
+      ],
+      "sources": [
+        {
+          "id": "hashdroids-S1",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x49718F13F9318dFAC9638Cd0a79a25BBBe4649A9?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x49718F13F9318dFAC9638Cd0a79a25BBBe4649A9",
+          "file": "contracts/HashDroidsNFT.sol",
+          "lineStart": 103,
+          "lineEnd": 105,
+          "excerpt": "    function workHash(address miner, uint256 nonce, bytes32 previous, bytes32 anchor) public view returns (bytes32) {\n        return keccak256(abi.encodePacked(block.chainid, address(this), miner, nonce, previous, anchor));\n    }",
+          "sourceSha256": "da49c4d6970c4a59f14506df7b6c09c75552b5273401edeed25fd842d29b678d",
+          "observedAt": "2026-10-27T02:30:37.839530+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "hashdroids-S2",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x49718F13F9318dFAC9638Cd0a79a25BBBe4649A9?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x49718F13F9318dFAC9638Cd0a79a25BBBe4649A9",
+          "file": "contracts/HashDroidsNFT.sol",
+          "lineStart": 117,
+          "lineEnd": 181,
+          "excerpt": "    function mine(uint256 nonce, uint256 anchorBlock, bytes32 expectedPrevWork)\n        external\n        payable\n        nonReentrant\n        returns (uint256 id)\n    {\n        if (block.timestamp < mintStartsAt) revert MintNotOpen(mintStartsAt);\n        if (agentRegistry.balanceOf(msg.sender) == 0) revert NotVerifiedAgent();\n        if (totalMinted != 0 && block.timestamp < lastMintAt + MIN_MINT_INTERVAL) {\n            revert MintTooSoon(lastMintAt + MIN_MINT_INTERVAL);\n        }\n        uint256 price = mintPrice();\n        if (msg.value != price) revert InvalidPayment();\n        if (\n            totalMinted >= MAX_SUPPLY || expectedPrevWork != prevWork || anchorBlock >= block.number\n                || block.number - anchorBlock > 128\n        ) revert InvalidWork();\n\n        bytes32 anchor = blockhash(anchorBlock);\n        bytes32 work = workHash(msg.sender, nonce, prevWork, anchor);\n        uint256 target = effectiveTarget();\n        if (anchor == bytes32(0) || uint256(work) >= target) revert InvalidWork();\n\n        uint256 alive = totalSupply();\n        uint256 rent = price * 70 / 100;\n        uint256 protocolFee = price * 15 / 100;\n        uint256 vaultFee = price - rent - protocolFee;\n\n        pendingRent += rent;\n        if (alive != 0) {\n            accPerDroid += pendingRent * SCALE / alive;\n            pendingRent = 0;\n        }\n\n        id = ++totalMinted;\n        claimedAcc[id] = accPerDroid;\n        seedOf[id] = keccak256(abi.encode(work, id));\n        prevWork = work;\n\n        if (target > currentTarget) {\n            currentTarget = target;\n            windowStart = block.timestamp;\n            windowMints = 0;\n        } else if (++windowMints == 8) {\n            uint256 elapsed = block.timestamp - windowStart;\n            elapsed = elapsed < 80 ? 80 : elapsed > 320 ? 320 : elapsed;\n            currentTarget = Math.mulDiv(currentTarget, elapsed, 160);\n            currentTarget = currentTarget < HARDEST_TARGET\n                ? HARDEST_TARGET\n                : currentTarget > EASIEST_TARGET ? EASIEST_TARGET : currentTarget;\n            windowStart = block.timestamp;\n            windowMints = 0;\n        }\n        lastMintAt = block.timestamp;\n\n        totalProtocolFeesPaid += protocolFee;\n        (bool sentProtocol,) = protocolTreasury.call{value: protocolFee}(\"\");\n        require(sentProtocol, \"Protocol fee transfer failed\");\n\n        (bool sentVault,) = address(buybackRouter).call{value: vaultFee}(\"\");\n        require(sentVault, \"Vault fee transfer failed\");\n\n        _safeMint(msg.sender, id);\n        emit Mined(id, msg.sender, seedOf[id]);\n    }",
+          "sourceSha256": "da49c4d6970c4a59f14506df7b6c09c75552b5273401edeed25fd842d29b678d",
+          "observedAt": "2026-10-27T02:30:37.839530+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "hashdroids-S3",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x49718F13F9318dFAC9638Cd0a79a25BBBe4649A9?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x49718F13F9318dFAC9638Cd0a79a25BBBe4649A9",
+          "file": "contracts/HashDroidsNFT.sol",
+          "lineStart": 189,
+          "lineEnd": 204,
+          "excerpt": "    function burn(uint256 id) external nonReentrant {\n        if (ownerOf(id) != msg.sender) revert Unauthorized();\n        require(buybackRouter.bootstrapped(), \"Community pool not launched\");\n        uint256 rent = claimableRent(id);\n        uint256 reward = burnReward();\n        _burn(id);\n        delete claimedAcc[id];\n        burnedCount++;\n        hdroidToken.mintReward(msg.sender, reward);\n        if (rent != 0) {\n            (bool ok,) = msg.sender.call{value: rent}(\"\");\n            require(ok, \"Rent transfer failed\");\n        }\n        emit RentRedeemed(id, msg.sender, rent);\n        emit Burned(id, reward);\n    }",
+          "sourceSha256": "da49c4d6970c4a59f14506df7b6c09c75552b5273401edeed25fd842d29b678d",
+          "observedAt": "2026-10-27T02:30:37.839530+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "hashdroids-guide",
+          "url": "https://hashdroids.fun/skill.md",
+          "kind": "official_site_claim",
+          "observedAt": "2026-10-27",
+          "excerpt": "Updated **2026-10-26**, V6 ERC-1155."
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": true,
+        "sameAsHistoricalSource": true,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 本案例不授予任何新增执行能力",
+      "versionObservation": "当前公开指南包含ERC1155资源、专利及多阶段研究；仅用于发现需另查的新分支，不把其开服声明或测试网结果当独立主网验证。"
+    },
+    {
+      "id": "shit-cash-sale",
+      "project": "Shit Cash",
+      "family": "Shit Cash",
+      "activity": "Shit Cash 机制研究",
+      "classification": {
+        "asset": "ERC20",
+        "product": "签名支付发行",
+        "participation": "x402/EIP3009中继结算与逐订单结果",
+        "phase": "当前开放状态未核验"
+      },
+      "mechanism": "x402/EIP3009中继结算与逐订单结果",
+      "summary": "Sale 的买入通过 EIP-3009 授权拉取支付币并由 relayer 结算；身份检查在 Sale 且可由零配置关闭。批处理允许单项失败，签名已消费不等于发币已结算。",
+      "maturity": "observed",
+      "keywords": [
+        "shit.cash",
+        "x402",
+        "eip-3009",
+        "transferwithauthorization",
+        "签名支付"
+      ],
+      "pattern_ids": [
+        "signature-settlement"
+      ],
+      "questions": [
+        "核对 Token、Sale、支付币与身份注册表的角色，不只读 Token 就判断参与门槛。",
+        "签名是否绑定链、支付合约、金额、接收方、nonce 与有效期？中继是否有唯一订单可查？",
+        "批次成功时本订单是否失败或付款滞留？逐项查事件、结算状态及收币，避免重复付款。"
+      ],
+      "boundaries": [
+        "不是普通 approve+mint；网页未实现此签名结算路线。",
+        "当前LP控制权、owner、relayer及退款权限仍需新鲜链上核验。"
+      ],
+      "sources": [
+        {
+          "id": "shit-cash-sale-S1",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x17F5104aCDa9c778aD564920Ef11d9223fF42069?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x17F5104aCDa9c778aD564920Ef11d9223fF42069",
+          "file": "src/ShitSale.sol",
+          "lineStart": 305,
+          "lineEnd": 313,
+          "excerpt": "    function buyWithAuthorization(Authorization calldata auth, Limits calldata limits, uint256 deadline)\n        external\n        nonReentrant\n        returns (BuyResult memory r)\n    {\n        if (msg.sender != relayer) revert NotRelayer();\n        if (block.timestamp > deadline) revert BadParams();\n        r = _buy(auth, limits);\n    }",
+          "sourceSha256": "01d3c8794aa1b945772af062e72186ba5cf5adaed3f05f0adb7cce5d977d8635",
+          "observedAt": "2026-10-27T02:30:38.530041+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "shit-cash-sale-S2",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x17F5104aCDa9c778aD564920Ef11d9223fF42069?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x17F5104aCDa9c778aD564920Ef11d9223fF42069",
+          "file": "src/ShitSale.sol",
+          "lineStart": 320,
+          "lineEnd": 337,
+          "excerpt": "    function buyBatch(Authorization[] calldata auths, Limits[] calldata limits, uint256 deadline)\n        external\n        nonReentrant\n        returns (bool[] memory ok, BuyResult[] memory results)\n    {\n        if (msg.sender != relayer) revert NotRelayer();\n        uint256 n = auths.length;\n        if (block.timestamp > deadline || n == 0 || n > MAX_BATCH || limits.length != n) revert BadParams();\n        ok = new bool[](n);\n        results = new BuyResult[](n);\n        for (uint256 i; i < n; i++) {\n            if (gasleft() < MIN_ITEM_GAS) revert BatchGasTooLow(i, gasleft());\n            try this.buyOne(auths[i], limits[i]) returns (BuyResult memory r) {\n                ok[i] = true;\n                results[i] = r;\n            } catch (bytes memory reason) {\n                emit BatchItemFailed(i, auths[i].from, auths[i].nonce, reason);\n            }",
+          "sourceSha256": "01d3c8794aa1b945772af062e72186ba5cf5adaed3f05f0adb7cce5d977d8635",
+          "observedAt": "2026-10-27T02:30:38.530041+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "shit-cash-sale-S3",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x17F5104aCDa9c778aD564920Ef11d9223fF42069?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x17F5104aCDa9c778aD564920Ef11d9223fF42069",
+          "file": "src/ShitSale.sol",
+          "lineStart": 347,
+          "lineEnd": 353,
+          "excerpt": "    function _buy(Authorization calldata auth, Limits calldata limits) internal returns (BuyResult memory) {\n        _claim(auth.from, auth.nonce);\n        uint256 usdFloor = USD.balanceOf(address(this)); // any U already here is someone else's stranded payment — must not be touched\n        IERC3009(address(USD)).transferWithAuthorization(\n            auth.from, address(this), PRICE, auth.validAfter, auth.validBefore, auth.nonce, auth.v, auth.r, auth.s\n        );\n        return _distribute(auth.from, limits, usdFloor);",
+          "sourceSha256": "01d3c8794aa1b945772af062e72186ba5cf5adaed3f05f0adb7cce5d977d8635",
+          "observedAt": "2026-10-27T02:30:38.530041+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "shit-cash-sale-S4",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x17F5104aCDa9c778aD564920Ef11d9223fF42069?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x17F5104aCDa9c778aD564920Ef11d9223fF42069",
+          "file": "src/ShitSale.sol",
+          "lineStart": 358,
+          "lineEnd": 370,
+          "excerpt": "    function settleStranded(address from, bytes32 nonce, Limits calldata limits, uint256 deadline)\n        external\n        nonReentrant\n        returns (BuyResult memory r)\n    {\n        if (msg.sender != relayer) revert NotRelayer();\n        if (block.timestamp > deadline) revert BadParams();\n        if (!IERC3009(address(USD)).authorizationState(from, nonce)) revert AuthorizationNotUsed();\n        _claim(from, nonce);\n\n        uint256 stranded = USD.balanceOf(address(this));\n        if (stranded < PRICE) revert NoStrandedPayment(stranded, PRICE);\n        r = _distribute(from, limits, stranded - PRICE);",
+          "sourceSha256": "01d3c8794aa1b945772af062e72186ba5cf5adaed3f05f0adb7cce5d977d8635",
+          "observedAt": "2026-10-27T02:30:38.530041+00:00",
+          "verificationRecord": "exact_match"
+        },
+        {
+          "id": "shit-cash-sale-S5",
+          "url": "https://sourcify.dev/server/v2/contract/56/0x17F5104aCDa9c778aD564920Ef11d9223fF42069?fields=all",
+          "kind": "verified_source_record",
+          "chainId": 56,
+          "contract": "0x17F5104aCDa9c778aD564920Ef11d9223fF42069",
+          "file": "src/ShitSale.sol",
+          "lineStart": 389,
+          "lineEnd": 408,
+          "excerpt": "    function _claim(address from, bytes32 nonce) internal {\n        if (lpTokenId == 0) revert NotSeeded();\n        if (!lpReady()) revert LpNotApproved(lpTokenId);\n        if (from == address(0)) revert BadParams();\n        if (address(AGENT_ID) != address(0) && AGENT_ID.balanceOf(from) == 0) revert NotAgentWallet(from);\n        if (settled[from][nonce]) revert AlreadySettled(from, nonce);\n        settled[from][nonce] = true;\n    }\n\n    /// @param usdFloor U balance this contract must return to after the order (only stranded payments may remain).\n    function _distribute(address buyer, Limits calldata limits, uint256 usdFloor)\n        internal\n        returns (BuyResult memory r)\n    {\n        uint256 inventory = TOKEN.balanceOf(address(this));\n        if (inventory < 2 * SHARE) revert SoldOut(inventory, 2 * SHARE);\n\n        salesSettled += 1;\n        usdProcessed += PRICE;\n        TOKEN.safeTransfer(buyer, SHARE);",
+          "sourceSha256": "01d3c8794aa1b945772af062e72186ba5cf5adaed3f05f0adb7cce5d977d8635",
+          "observedAt": "2026-10-27T02:30:38.530041+00:00",
+          "verificationRecord": "exact_match"
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": true,
+        "sameAsHistoricalSource": true,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 本案例不授予任何新增执行能力"
+    },
+    {
+      "id": "anthrobit",
+      "project": "AnthroBit",
+      "family": "AnthroBit",
+      "activity": "AnthroBit 随机铸造与后续生产研究",
+      "classification": {
+        "asset": "NFT + 游戏资源",
+        "product": "收藏与生产",
+        "participation": "每日优惠与异步随机性",
+        "phase": "官网声称已上线；当前链上状态未核验"
+      },
+      "mechanism": "每日免费档仍有VRF费用，铸造与后续训练合成分离",
+      "summary": "官网说明每天UTC首个单倍mint免铸造费，仍支付VRF与Gas；随机请求、最终产物和后续训练/融合分开研究。",
+      "maturity": "observed",
+      "keywords": [
+        "anthrobit",
+        "vrf",
+        "randomness",
+        "随机",
+        "预言机"
+      ],
+      "pattern_ids": [
+        "oracle-randomness",
+        "lifecycle"
+      ],
+      "questions": [
+        "免费仅免本金还是也免VRF费用？按UTC日和倍率分别核对优惠资格。",
+        "随机请求成功是否仅处于等待回调？如何核验最终产物和可退回的未用预算？",
+        "训练、融合、工作和领取分别消耗什么，是否需要新的授权与确认？"
+      ],
+      "boundaries": [
+        "仅官网资料阅读，未取得本轮源码/部署一致性和完整回调证据。",
+        "不推定网站所称仅AI钱包等于可验证的钱包软件身份。"
+      ],
+      "sources": [
+        {
+          "id": "anthrobit-S1",
+          "url": "https://anthrobit.fun/",
+          "kind": "official_site_claim",
+          "observedAt": "2026-10-27",
+          "excerpt": "Every mint also pays a Chainlink VRF fee and gas; unused oracle budget is refundable."
+        }
+      ],
+      "verification": {
+        "sourceRecordRefetched": false,
+        "currentRuntimeCompared": false,
+        "walletEligibilityChecked": false,
+        "simulated": false,
+        "executed": false
+      },
+      "executionSupport": "research_only; 多参数/VRF流程不自动准备"
+    }
+  ],
+  "excluded": [
+    {
+      "id": "agentbrowser-lite-badge",
+      "reason": "资料描述ERC8004身份；没有SPACE ID .ai关系证据，不混入本生态正例。"
+    },
+    {
+      "id": "agentid-participation-passport",
+      "reason": "只读资格查询工具，不是新铸造项目。"
+    },
+    {
+      "id": "agent-punks",
+      "reason": "与已有AgentPunk名称相似但不能按名字归并，活动和部署证据不足，暂不纳入。"
+    }
+  ],
+  "neverInherit": [
+    "链、地址与合约角色",
+    "当前费用、价格、配额与开放状态",
+    "身份资格、签名或授权",
+    "安全结论、收益承诺、真实成功阶段",
+    "旧版calldata、部署或测试网结果"
+  ]
+}

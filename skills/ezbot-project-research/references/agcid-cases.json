@@ -1,0 +1,1462 @@
+{
+  "version": "0.3",
+  "panel_activity_count": 5,
+  "distinct_project_families": 4,
+  "scope": "4 个项目家族、5 种面板历史活动；已补 BibiAI、AgentPunk、PTAH 官方指南与支付差异，BNC World 仍仅历史线索。只读证据与模拟测试不等于真实铸造成功。",
+  "cases": [
+    {
+      "id": "bnc-world",
+      "project": "BNC World",
+      "family": "BN World",
+      "source": "打新面板 2026-10 月历史快照",
+      "source_url": "https://signals.ezbot.vip/",
+      "project_url": "https://bncworld.fun/agents",
+      "observed_at": 1792941012,
+      "mechanism": "先免费后收费",
+      "note": "面板历史描述为前两张免费、后续每张收费；本轮官网仅可读标题，现价和已用免费次数未知。",
+      "evidence": {
+        "action": "在币安AI钱包中打开bncworld.fun/agents，将提示词复制给各个agent完成铸造",
+        "cost": "前两张免费，后续每张1美元",
+        "eligibility": null
+      },
+      "questions": [
+        "免费额度按钱包、Agent ID 还是账户计算？已经用掉几次？",
+        "输入数量跨过免费额度时，逐张列成本并再次提示收费。"
+      ],
+      "maturity": "面板历史记录；未在本工具实操，不证明当前可铸造",
+      "identity_relation": "面板 Agent 钱包 / 身份相关候选；须逐目标核验身份合约，不按名字或 AI 标签确认为 AGCID",
+      "source_type": "third_party_historical_panel"
+    },
+    {
+      "id": "bibi-ai",
+      "project": "BibiAI",
+      "family": "BibiAI",
+      "source": "打新面板 2026-10 月历史快照",
+      "source_url": "https://signals.ezbot.vip/",
+      "project_url": "https://bibiai.fun/agents",
+      "observed_at": 1792941012,
+      "mechanism": "首张免费 + 原生币动态报价",
+      "note": "官网指南与公开源码确认按钱包记录免费/付费次数，以持有 Agent ID 为资格，不限制必须由某种 AI 客户端发起。2026-10-25 官方状态显示 mintEnded=true 且已满 4444；mintOpen=true 不代表仍可铸造。",
+      "evidence": {
+        "action": "通过币安AI在bibiai.fun/agents页面免费铸造第一张NFT",
+        "cost": "免费",
+        "eligibility": "只能通过币安AI参与"
+      },
+      "questions": [
+        "首张免费是否已被该身份使用？后续价格未明确时不能默认免费。",
+        "网站要求 AI 钱包不等于已经证明要求持有特定 Agent ID NFT，须分开核验。"
+      ],
+      "maturity": "已读取本轮官方规则；真实 mint 未在本轮执行；详情见本地 evaluation/REPORT.md",
+      "identity_relation": "官方指南明确 Binance .ai Agent ID 资格；仍须对本轮目标合约和每个钱包独立核验",
+      "official_sources": [
+        "https://bibiai.fun/llms.txt"
+      ],
+      "source_type": "third_party_historical_panel"
+    },
+    {
+      "id": "agent-punk",
+      "project": "AgentPunk",
+      "family": "AgentPunk",
+      "source": "打新面板 2026-10 月历史快照",
+      "source_url": "https://signals.ezbot.vip/",
+      "project_url": "https://agentpunk.fun/collection/agent-punk-id",
+      "observed_at": 1792941012,
+      "mechanism": "每次一张、首张免费、后续 BNB 报价",
+      "note": "官网指南确认 mint() 无数量参数，quote(address) 查询下一张价格；须检查身份、mintedBy、开关及供应。同站 Nakamigos 的数量函数和阶段规则另算。",
+      "evidence": {
+        "action": "在agentpunk.fun连接钱包进行mint，第一张免费，后续每张支付0.0004B，最多可mint 10张",
+        "cost": "第一张免费，后续每张0.0004B；10张总成本约3u",
+        "eligibility": null
+      },
+      "questions": [
+        "先区分 mint 入口与市场购买入口，二级市场价格不是铸造价格。",
+        "先核实币种、已用次数和数量上限，再展示逐张金额；不继承历史收益描述。"
+      ],
+      "maturity": "已读取本轮官方规则；真实 mint 未在本轮执行；详情见本地 evaluation/REPORT.md",
+      "identity_relation": "官方指南明确 Binance .ai Agent ID 资格；仍须对本轮目标合约和每个钱包独立核验",
+      "official_sources": [
+        "https://agentpunk.fun/llms.txt"
+      ],
+      "source_type": "third_party_historical_panel"
+    },
+    {
+      "id": "ptah-relic",
+      "project": "PTAH Relic / Loom",
+      "family": "PTAH",
+      "source": "打新面板 2026-10 月历史快照",
+      "source_url": "https://signals.ezbot.vip/",
+      "project_url": "https://ptah.trade/mint",
+      "observed_at": 1792941012,
+      "mechanism": "历史 ERC20 授权付费 + 合成；销售结束",
+      "note": "当前官网说明 Genesis public sale has ended；未来发行平台规划不能当已开放铸造。历史 uint8 参数、支付币和 spender 必须本轮核验。",
+      "evidence": {
+        "action": "用币安Agentic Wallet和已注册的.ai Agent ID在ptah.trade/mint铸造Relic，单钱包最多4个；也可收集10个Relic合成1个Loom",
+        "cost": "第1个1 USDT，后3个每个4.44 USDT，4个总成本约14.32 USDT",
+        "eligibility": "需持有币安Agentic Wallet并已注册.ai Agent ID；每个Agent ID/钱包最多铸造4个"
+      },
+      "questions": [
+        "免费资格与低价额度不是同一件事；逐张核价，不能用首张价格乘总数量。",
+        "ERC20 付款前核对 decimals、spender、定额 allowance；合成消耗 NFT，领取奖励另算一步。"
+      ],
+      "maturity": "含脱敏 BNB Mint 历史实操记录及完整教程；本轮未执行 mint，当前状态仍需独立核验。",
+      "identity_relation": "官方指南明确 Binance .ai Agent ID 资格；仍须对本轮目标合约和每个钱包独立核验",
+      "official_sources": [
+        "https://ptah.trade/llms.txt"
+      ],
+      "learning_report": {
+        "title": "PTAH BNB 铸造 · 脱敏历史报告",
+        "historical": true,
+        "notice": "这是保留的历史学习报告，不是当前铸造指令。历史报价、合约调用方式及开放状态必须重新核验；收费与 Gas 须在操作前再次确认。",
+        "evidence_scope": "原教程由官方资料整理，原有“未经实际操作验证”标记保留。另附脱敏实操记录：仅 BNB Mint 路径曾核对成功回执与 4 枚 NFT 转入；不代表 USDT、合成、挖矿、领取或出售已验证，也不代表现在仍可铸造。",
+        "research": {
+          "summary": "Ptah 是 BNB Chain 上的 Relic NFT 与 Loom 合成项目。Relic 铸造要求已注册的币安 .ai Agent ID；BNB 和 USDT 两条支付路径共用每个 ID 的四枚额度。本教程只整理 BNB Mint，不把 Mint 等同于开始挖矿。",
+          "mechanism": "先取得 Relic，后续可集齐十枚并永久销毁，合成一枚可转让的 Loom。官网称 Loom 按权重分享 PTAH 挖矿储备，开挖时间与排放依链上配置。单个 Agent ID 最多 Mint 四枚，因此一次四枚 Mint 本身不够合成 Loom；是否补齐是另一个操作与成本决策。币安 Agent ID 是资格条件，不能据此推定项目获得币安背书。",
+          "prerequisites": "准备绑定 .ai Agent ID 的 Agentic Wallet，以及 BNB Chain 上的付款 BNB 和 Gas。选择可运行官方技能与 baw CLI 的 Agent 环境；普通网页聊天未必具有执行环境。首次从未 Mint 的 ID，按本次官网报价四枚参考总价为 0.0194 BNB，Gas 另付；已有 Mint 会影响折扣与剩余额度，必须重新查询。",
+          "limitations": "报价与剩余额度以提交前查询为准，不照抄示例金额。BNB 路径无需 USDT 授权；合约预览通过、未提示风险也不代表合约安全。官网将流动性池描述为另行添加，不能据此承诺可卖出或收益。此处只覆盖 BNB Mint；USDT、合成、领取与出售需另核规则。不包含任何个人账户、交易或 NFT 编号。",
+          "sources": [
+            {
+              "title": "官方关联网页 · ptah.trade",
+              "url": "https://ptah.trade/mint",
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "title": "官方关联网页 · ptah.trade",
+              "url": "https://ptah.trade/",
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "title": "官方关联网页 · raw.githubusercontent.com",
+              "url": "https://raw.githubusercontent.com/binance/binance-skills-hub/main/README.md",
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "title": "官方关联网页 · raw.githubusercontent.com",
+              "url": "https://raw.githubusercontent.com/binance/binance-skills-hub/main/skills/binance-web3/binance-agentic-wallet/references/preflight.md",
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "title": "官方关联网页 · raw.githubusercontent.com",
+              "url": "https://raw.githubusercontent.com/binance/binance-skills-hub/main/skills/binance-web3/binance-agentic-wallet/references/authentication.md",
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "title": "官方关联网页 · raw.githubusercontent.com",
+              "url": "https://raw.githubusercontent.com/binance/binance-skills-hub/main/skills/binance-web3/binance-agentic-wallet/references/external-sign.md",
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            }
+          ],
+          "classification": {
+            "asset_forms": [
+              "NFT/独特收藏品"
+            ],
+            "product_roles": [
+              "游戏/合成玩法"
+            ],
+            "participation_mechanisms": [
+              "定价铸造"
+            ],
+            "phases": [
+              "铸造/领取"
+            ],
+            "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+          },
+          "unknowns": [
+            "合成与领取的当前链上配置、实际奖励和退出情况，本文不做实操结论。",
+            "历史价格、订单和余额不用于承诺当前可参与或成交。"
+          ],
+          "claims": [
+            {
+              "topic": "参与身份",
+              "kind": "issuer_statement",
+              "statement": "本轮 Relic Mint 需要已注册 .ai Agent ID。",
+              "status": "supported",
+              "as_of": 1792695582,
+              "valid_until": null,
+              "sources": [
+                {
+                  "title": "官方原文 · ptah.trade",
+                  "url": "https://ptah.trade/mint",
+                  "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+                }
+              ],
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "topic": "执行链",
+              "kind": "issuer_statement",
+              "statement": "本轮 BNB Mint 使用 BNB Chain，链 ID 为 56。",
+              "status": "supported",
+              "as_of": 1792695582,
+              "valid_until": null,
+              "sources": [
+                {
+                  "title": "官方原文 · ptah.trade",
+                  "url": "https://ptah.trade/mint",
+                  "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+                }
+              ],
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "topic": "共享额度",
+              "kind": "issuer_statement",
+              "statement": "每个 Agent ID 的 USDT 与 BNB Mint 共用最多四枚额度；已转出或烧毁不恢复历史额度。",
+              "status": "supported",
+              "as_of": 1792695582,
+              "valid_until": null,
+              "sources": [
+                {
+                  "title": "官方原文 · ptah.trade",
+                  "url": "https://ptah.trade/mint",
+                  "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+                }
+              ],
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "topic": "计价与Gas",
+              "kind": "inference",
+              "statement": "官网该次报价首枚 0.0014 BNB，额外每枚 0.006 BNB；因此首次四枚为 0.0194 BNB，Gas 另付。提交前须重新报价。",
+              "status": "supported",
+              "as_of": 1792695582,
+              "valid_until": null,
+              "sources": [
+                {
+                  "title": "官方原文 · ptah.trade",
+                  "url": "https://ptah.trade/mint",
+                  "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+                }
+              ],
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "topic": "钱包权限",
+              "kind": "issuer_statement",
+              "statement": "外部合约预览与执行需要开发者模式；开启后仍应预览、核对风险并明确确认。",
+              "status": "supported",
+              "as_of": 1792695582,
+              "valid_until": null,
+              "sources": [
+                {
+                  "title": "官方原文 · raw.githubusercontent.com",
+                  "url": "https://raw.githubusercontent.com/binance/binance-skills-hub/main/skills/binance-web3/binance-agentic-wallet/references/external-sign.md",
+                  "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+                }
+              ],
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            },
+            {
+              "topic": "Mint与后续",
+              "kind": "inference",
+              "statement": "Loom 合成需要销毁十枚 Relic；开挖及排放按链上配置，四枚 Mint 本身不能证明已经产币。",
+              "status": "supported",
+              "as_of": 1792695582,
+              "valid_until": null,
+              "sources": [
+                {
+                  "title": "官方原文 · ptah.trade",
+                  "url": "https://ptah.trade/",
+                  "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+                }
+              ],
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            }
+          ],
+          "guide": {
+            "kind": "source_compiled_guide",
+            "purpose": "issuance",
+            "title": "Ptah Relics：BNB 铸造与常见问题",
+            "activity_scope": "本轮 Ptah Relic NFT 的 BNB Mint 路径；以首次四枚为示例，不含 USDT、合成、领取和出售实操。",
+            "steps": [
+              {
+                "text": "准备身份与资金：在币安 App 的 Binance Wallet 进入 Agentic Wallet，通过 Agent ID 横幅领取 .ai 名称。确认后续使用的是绑定该 ID 的钱包，并在 BNB Chain 预留付款 BNB 和 Gas。",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "text": "安装环境：使用可运行技能和命令的 Agent，按官方 Binance Skills Hub 说明安装 binance-agentic-wallet。安装 Skill 后还要检查 baw CLI；若提示找不到 baw，安装官方 @binance/agentic-wallet，并按技能要求检查版本。Node.js 需满足官方要求，不能只装 Skill 就认为环境已完整。",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "text": "完成钱包登录：让 Agent 发起登录，在币安 App 核对配对码后确认；等待 auth verify 完成，再用 baw wallet status --json 确认 CONNECTED。手机显示已登录而 CLI 仍 UNCONNECTED 时，重新发起一次新登录；不要反复使用过期二维码。",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "text": "检查交易权限：完成登录后、首次合约预览前，先让 Agent 检查 baw wallet settings --json 的 devMode.enabled。若为 false，在币安 App 的 Agentic Wallet 设置中开启开发者模式，再让 Agent 重查；开启后仍须逐笔预览和确认，不等于授权 Agent 任意交易。",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "text": "获取当次 Mint 指令：在官网 Mint 页选择 BNB 与数量，复制对应官方提示词。让 Agent 检查钱包、Agent ID、已有铸造、剩余额度、当前开放条件和完整报价。首次四枚的页面参考总价为 0.0194 BNB，Gas 另付；任一条件变化就刷新，额度不足时停下，不自动拆单或减量。",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "text": "先预览再确认：要求 Agent 只准备交易并展示模拟结果，核对 BNB Chain、官网对应 PtahGame、付款金额、预计收到的 Relic 数量，以及异常授权或资产变化。BNB 路径应由自己的 AI 钱包一次支付整批金额、输入数据为空 0x，并估算合约 Gas；不能用交易所提币替代。预览报错先处理，不直接强行执行。",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "text": "提交并核对到账：确认预览信息后，再明确同意提交。BROADCASTED 只代表已广播；若需 App 批准，先完成批准，再等待链上成功，并在浏览器回执或官网 My relics 核对实际到账数量。等待期间先查原交易状态，不因页面未刷新就重复铸造。",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "text": "结束与权限整理：完成后回到币安 App 检查开发者模式，不再需要时关闭，并按需让 Agent 执行 baw auth signout --json 清除本地会话。BNB Mint 无需 USDT approve，不要机械新增授权或执行“取消全部授权”。保留交易回执自行核对；对外分享时隐去账户、交易和 NFT 编号。",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              }
+            ],
+            "sources": [
+              {
+                "title": "官方关联网页 · ptah.trade",
+                "url": "https://ptah.trade/mint",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "title": "官方关联网页 · ptah.trade",
+                "url": "https://ptah.trade/",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "title": "官方关联网页 · raw.githubusercontent.com",
+                "url": "https://raw.githubusercontent.com/binance/binance-skills-hub/main/README.md",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "title": "官方关联网页 · raw.githubusercontent.com",
+                "url": "https://raw.githubusercontent.com/binance/binance-skills-hub/main/skills/binance-web3/binance-agentic-wallet/references/preflight.md",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "title": "官方关联网页 · raw.githubusercontent.com",
+                "url": "https://raw.githubusercontent.com/binance/binance-skills-hub/main/skills/binance-web3/binance-agentic-wallet/references/authentication.md",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              },
+              {
+                "title": "官方关联网页 · raw.githubusercontent.com",
+                "url": "https://raw.githubusercontent.com/binance/binance-skills-hub/main/skills/binance-web3/binance-agentic-wallet/references/external-sign.md",
+                "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+              }
+            ],
+            "disclaimer": "本教程由 Agent 基于公开资料自主探索、研究并整理生成，未经实际操作验证。参与前请核对官方最新规则与操作入口。",
+            "current_participation_confirmed": false,
+            "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+          },
+          "delivery": "analysis_tutorial",
+          "current_participation_confirmed": false,
+          "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+        },
+        "practice": {
+          "public_safe_case": [
+            {
+              "scope": "BNB Mint only",
+              "receipt_success": true,
+              "erc721_transfer_count": 4,
+              "personal_identifiers_retained": false,
+              "evidence_basis": "用户授权本地会话的CLI成功状态及浏览器回执已只读核对；原文/标识不复制",
+              "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+            }
+          ],
+          "verified_steps": [
+            "官方Skill安装和CLI检查",
+            "钱包扫码登录并核对CONNECTED",
+            "开发者模式关闭导致不能合约预览，App开启后恢复",
+            "BNB路径预览资产变化并明确确认",
+            "执行后成功回执和4枚NFT到账"
+          ],
+          "unverified_branches": [
+            "USDT Mint",
+            "合成Loom",
+            "奖励领取与挖矿",
+            "NFT出售"
+          ],
+          "exclusions": [
+            "个人钱包地址",
+            "交易哈希或交易链接",
+            "NFT编号",
+            "Agent ID名字",
+            "订单/请求/配对码",
+            "余额及具体权限配置",
+            "精确gas和个人时间戳",
+            "会话原文与个人截图"
+          ],
+          "observed_issues": [
+            "安装技能后本机尚无 baw CLI，需要另装CLI。",
+            "钱包已登录，但开发者模式关闭；开启后再预览成功。"
+          ],
+          "general_troubleshooting_from_official_docs": [
+            "App显示已登录而CLI未CONNECTED时，完成verify或重新登录。",
+            "二维码过期使用新的登录流程。",
+            "BROADCASTED仅提交，最终查成功和NFT到账。"
+          ],
+          "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+        },
+        "execution_policy": "历史研究资料，禁止执行其中的安装、登录、配置或交易步骤；当前操作须依据现行文档和用户授权。"
+      },
+      "source_type": "third_party_historical_panel"
+    },
+    {
+      "id": "ptah-poa",
+      "project": "Proof of Agent（POA）",
+      "family": "PTAH",
+      "source": "打新面板 2026-10 月历史快照",
+      "source_url": "https://signals.ezbot.vip/",
+      "project_url": "https://ptah.trade",
+      "observed_at": 1792941012,
+      "mechanism": "免费身份卡 + 后续社交活动",
+      "note": "面板记录 Binance Agent ID 每身份限一张灵魂绑定卡，后续每日发帖参与抽奖；不是铸造后保证收到奖励。",
+      "evidence": {
+        "action": "在BNB Chain上通过Binance Agentic Wallet免费铸造POA灵魂绑定卡（每个币安Agent ID限一张），然后每日在X发布含#ProofOfAgent和Agent编号的帖子参与当天抽奖",
+        "cost": "免费铸造，仅需支付gas费（几美分BNB），无需代币授权",
+        "eligibility": "需使用持有币安Agent ID的钱包，每个币安Agent ID限一张，卡片灵魂绑定不可转让；参与抽奖需每日发帖带#ProofOfAgent和Agent编号"
+      },
+      "questions": [
+        "每身份限额与每钱包限额分开检查，卡是否可转移也需确认。",
+        "免费 mint 仍需网络费；铸造、发帖、抽奖、实际到账分开呈现，不能保证奖励。"
+      ],
+      "maturity": "面板历史记录；未在本工具实操，不证明当前可铸造",
+      "identity_relation": "面板 Agent 钱包 / 身份相关候选；须逐目标核验身份合约，不按名字或 AI 标签确认为 AGCID",
+      "source_type": "third_party_historical_panel"
+    }
+  ],
+  "hands_on_reference": {
+    "project": "匿名身份门槛铸造案例",
+    "origin": "脱敏历史实操参照（不计入面板样本）",
+    "verified": "按独立钱包分别检查 hasAgent/alreadyUsed/供应后 value=0 mint，再核验 receipt 与 ownerOf；仍支付 Gas。",
+    "not_panel_sample": true
+  },
+  "excluded": [
+    "Binance 标签下的 PTAH 同一活动：去重",
+    "CONSO / 普通 NFT：没有 Binance Agent ID 关联证据",
+    "Units Agentic：仅 AI agent 描述不足以确认 Binance Agent ID，暂不纳入已支持案例"
+  ],
+  "rules": [
+    "历史价格和免费额度仅用于提出问题，不填写新项目交易参数。",
+    "收费或费用未知均在结果、步骤和提交前反复提醒；免费 mint 不代表零成本。",
+    "官网、面板摘要、个人实操分开标记；只有证据相同才合并，同项目多份报告不增加样本数。"
+  ],
+  "reports": [
+    {
+      "title": "BibiAI · 脱敏历史分析",
+      "data": {
+        "url": "https://bibiai.fun/agents",
+        "analysis": {
+          "summary": "本轮资料显示 Bibi 是 BNB Smart Chain（chain id 56）上的 NFT 项目，官方文档称持有 .ai Agent ID 的钱包可调用 mint(uint256 quantity) 铸造，数量 1 到 4，首张免费、之后最多三张按 1 美元等值 BNB 计价。但 /api/state 同时给出 mintOpen=true 与 mintEnded=true，且 minted=4444 等于 supply=4444，存在结束/售罄证据，不能把当前状态当作可继续铸造；需先核验链上 mintOpen、totalMinted 与个人 freeClaimed/paidMinted。本文只整理参与与铸造线索，不构成可执行教程，不承诺收益或安全。",
+          "facts": [
+            {
+              "topic": "项目与链",
+              "statement": "来源称 Bibi 是部署在 BNB Smart Chain（chain id 56）上的 NFT 市场项目，与 Binance 无关联。",
+              "source": "D2",
+              "quote": "bibiai.fun is an NFT market on BNB Smart Chain built for agents with a Binance Agentic Wallet"
+            },
+            {
+              "topic": "开放与售罄条件",
+              "statement": "来源称铸造在开放前和结束后报 MintClosed()，超过 4444 报 SoldOut()。",
+              "source": "D2",
+              "quote": "Ids go out in order. MintClosed() before opening and after minting ends; SoldOut() past 4444."
+            },
+            {
+              "topic": "当前状态接口",
+              "statement": "来源的 /api/state 同时返回 mintOpen=true 与 mintEnded=true，minted=4444、supply=4444。",
+              "source": "D3",
+              "quote": "\"supply\":4444,\"minted\":4444,\"mintOpen\":true,\"mintEnded\":true"
+            },
+            {
+              "topic": "当前单价字段",
+              "statement": "来源的 /api/state 返回 unitPrice 为 1351910705629833 wei。",
+              "source": "D3",
+              "quote": "\"unitPrice\":\"1351910705629833\""
+            },
+            {
+              "topic": "合约地址来源",
+              "statement": "来源的 /api/state 返回 Bibi NFT 地址 [历史地址或调用数据已隐去，需重新核验] 与市场地址 [历史地址或调用数据已隐去，需重新核验]。",
+              "source": "D3",
+              "quote": "\"nft\":\"[历史地址或调用数据已隐去，需重新核验]\",\"market\":\"[历史地址或调用数据已隐去，需重新核验]\""
+            },
+            {
+              "topic": "市场费用",
+              "statement": "来源称 Bibi 市场费率为 2.5%，从卖家价格中扣除；Ptah Relics 与 Ptah Looms 为 0%。",
+              "source": "D2",
+              "quote": "| Bibi | /api/state \"nft\" | /api/state \"market\" | 2.5% | 1..4444 |"
+            },
+            {
+              "topic": "市场最低价",
+              "statement": "来源称挂单或报价最低为 0.001 BNB，且不收取创作者版税。",
+              "source": "D2",
+              "quote": "Minimum price or offer: 0.001 BNB. No creator royalty is charged."
+            },
+            {
+              "topic": "授权方式",
+              "statement": "来源称挂单后需在 NFT 上对市场 approve(market, tokenId)，一次一个 id，不使用 setApprovalForAll。",
+              "source": "D2",
+              "quote": "// then, on the NFT: approve(market, tokenId) // 0x095ea7b3; one id at a time: setApprovalForAll is NOT used"
+            }
+          ],
+          "steps": [
+            {
+              "topic": "第二步：核对铸造是否仍开放",
+              "statement": "据原文，mintOpen() 可读铸造是否开放，MintClosed() 表示开放前或结束后；本轮 /api/state 同时出现 mintOpen=true 与 mintEnded=true，须先独立核验链上状态再谈操作。",
+              "source": "D2",
+              "quote": "function mintOpen() external view returns (bool);"
+            },
+            {
+              "topic": "第三步：核对供应量是否售罄",
+              "statement": "据原文，totalMinted() 可读已铸数量，超过 4444 报 SoldOut()；本轮 /api/state 显示 minted=4444、supply=4444，存在售罄证据，不能忽略。",
+              "source": "D2",
+              "quote": "function totalMinted() external view returns (uint256);"
+            },
+            {
+              "topic": "第四步：核对个人资格与已用额度",
+              "statement": "据原文，应先用 hasAgentId(wallet) 确认钱包是否持有 Agent ID，再用 freeClaimed(wallet) 与 paidMinted(wallet) 核对首张免费是否已用、已付费几张。",
+              "source": "D2",
+              "quote": "function hasAgentId(address wallet) external view returns (bool); // may this wallet mint?"
+            },
+            {
+              "topic": "第六步：模拟后调用 mint",
+              "statement": "据原文，mint(uint256 quantity) 的 quantity 为 1 到 4，且只铸给调用者；原文要求每笔交易先用 eth_call 模拟并报告交易哈希。",
+              "source": "D2",
+              "quote": "mint(uint256 quantity) payable, quantity 1 to 4."
+            },
+            {
+              "topic": "第七步：二级市场参与（非铸造）",
+              "statement": "据原文，市场挂单需先 list 再对市场 approve 单个 tokenId；购买时 msg.value 须等于挂单价。涉及 approve 授权与付款时须再次提醒收费并核对总预算。",
+              "source": "D2",
+              "quote": "buy(uint256 tokenId) payable // 0xd96a094a; msg.value = the listed price exactly"
+            }
+          ],
+          "unknowns": [
+            "本轮未独立验链，Bibi 当前真实 mintOpen 状态待核验：/api/state 同时给出 mintOpen=true 与 mintEnded=true，且 minted=4444 等于 supply=4444，是否已售罄/结束须以链上 totalMinted()、mintOpen() 为准。",
+            "本轮资料未给出铸造开放与结束的具体时间，不能推定当前可铸。",
+            "本轮资料未给出该钱包的 hasAgentId、freeClaimed、paidMinted 实际值，个人首张免费是否已用、已付费几张待查。",
+            "本轮资料未给出 quote(wallet, quantity) 的实际返回值，本次铸造的精确 BNB 成本待查；unitPrice 字段仅为当前单张付费价，不等于本次总价。",
+            "本轮资料未给出 Gas 费用估算，免费铸造仍需网络费，具体金额待查。",
+            "本轮资料未给出 Chainlink 价格源当前是否新鲜，StalePrice() 是否触发待查。",
+            "本轮资料未给出该钱包是否已持有 .ai Agent ID 的链上证明，资格待核验。",
+            "本轮资料未给出市场挂单与购买的具体可成交标的，二级市场参与细节待查。"
+          ],
+          "conflicts": [
+            "同一来源 /api/state 在同一条件下同时返回 mintOpen=true 与 mintEnded=true，二者互不相容，须以链上 mintOpen() 核验。"
+          ],
+          "rejectedClaims": 10,
+          "label": "AI 据原文整理，已校验逐字引文；语义与链上状态仍需核实"
+        },
+        "fees": {
+          "state": "payment_cues",
+          "title": "发现收费 / 支出线索，先核实再操作",
+          "evidence": [
+            {
+              "source": "D2",
+              "quote": "price (OverLimit() past that), counted for the wallet even after its pieces move. Send at least quote(wallet, quantity).cost;",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D2",
+              "quote": "function quote(address minter, uint256 quantity) external view returns (uint256 cost, uint256 paid);",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D2",
+              "quote": "transferFrom. Minimum price or offer: 0.001 BNB. No creator royalty is charged.",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D2",
+              "quote": "anything over is refunded. Underpaid() if short, StalePrice() if the feed is too old (free mints still work).",
+              "status": "页面线索，需确认本轮适用性"
+            }
+          ],
+          "confirmedFree": false,
+          "reminders": [
+            "先核对单价 × 数量、支付币、授权额度和总支出；价格可能随阶段变化。",
+            "Mint 本金、网络 Gas、协议费、前置资格资产分别计算；value=0 或 Free Mint 不等于零成本。",
+            "进入收费步骤前再次确认预算；到交易确认页还要单独勾选费用确认。不确定价格、扣款对象或上限时先停止。"
+          ]
+        },
+        "mintReview": {
+          "state": "stop",
+          "title": "发现结束 / 售罄线索，先停止并核实活动",
+          "stops": [
+            {
+              "source": "D3",
+              "reason": "官方状态接口提示已结束 / 未开放 / 已售罄；即使 mintOpen=true，也不能据此铸造。",
+              "quote": "{\"live\":true,\"chainId\":56,\"nft\":\"[历史地址或调用数据已隐去，需重新核验]\",\"market\":\"[历史地址或调用数据已隐去，需重新核验]\",\"explorer\":\"https://bscscan.com\",\"supply\":4444,\"minted\":4444,\"mintOpen\":true,\"mintEnded\":true,\"unitPrice\":\"1351910705629833\",\"agentId\":\"[历史地址或调用数据已隐去，需重新核验]\",\"provenance\":\"[历史地址或调用数据已隐去，需重新核验]\",\"seedHash\":\"[历史地址或调用数据已隐去，需重新核验]\",\"seed\":null,\"holders\":1668,\"floor\":\"1000000000000000\",\"topOffer\":\"6000000000000000\",\"topSale\":{\"price\":\"200000000000000000\",\"at\":1792719659000,\"plot\":null,\"tx\":null},\"volume\":{\"total\":\"10714313440735451547\",\"day\":\"933617111111111106\"},\"listed\":641,\"offers\":1,\"updatedAt\":1792942219399,\"full\":\"/api/state.js\"}"
+            }
+          ],
+          "checks": [
+            {
+              "key": "identity",
+              "label": "逐个钱包确认身份、资格与已用额度",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "contract",
+              "label": "确认链、目标合约、当前实现及精确函数参数",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "availability",
+              "label": "同时检查开关、结束标记、供应量和个人上限",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "quote",
+              "label": "按当前钱包和本次数量读取总价，不用首张价乘数量",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "payment",
+              "label": "核对支付币、decimals、spender、授权额度及 Gas",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "simulation",
+              "label": "用同一账号、数量和报价模拟；状态变化后重新确认",
+              "status": "待本轮独立核验"
+            }
+          ],
+          "executionReady": false
+        },
+        "questions": [
+          "目标是否要求 Binance Agentic Wallet 签发，还是只要求持有身份 NFT？",
+          "逐号核验 .ai 与钱包地址绑定、资格状态和使用次数；身份名字不等于操作权限。",
+          "目标合约、链、函数签名、数量单位和本轮价格分别是什么？",
+          "免费是否仅免 mint 本金，是否还有 gas、预言机费、资格资产费用？",
+          "每号数量限制、已铸数量、开放时间和售罄状态是否可读验证？",
+          "资格是地址名单、Merkle proof、后端签名还是持有检查？",
+          "proof/签名从哪个官方入口取得？过期时间、chainId、接收钱包是否绑定？",
+          "申请、抽签入选与实际 claim 不可合并为一步。",
+          "支付原生币还是 ERC20？数额单位与 decimals 是否明确？",
+          "如果需要 approve，spender 是否为本项目当前执行合约，额度是否限本次所需？",
+          "本金、gas、协议费、授权交易和可退款项分别列出。",
+          "消耗什么资产、数量和 tokenId？得到什么资产与权重？",
+          "mint、合成、激活、claim 的合约和阶段分别核实。",
+          "奖励是否只是账面 claimable，真正到账须核验 Transfer 和余额。",
+          "这是代币购买还是 NFT mint？核对平台版本、发行模板与目标 CA。",
+          "当前路由是否支持买入及卖出？资格、每钱包限额和转账限制需单独核实。",
+          "API 发现时间不等于链上创建顺序；成交回报不等于完成验链。"
+        ],
+        "warning": null,
+        "evidence": [
+          {
+            "topic": "网络与身份",
+            "quote": "bibiai.fun is an NFT market on BNB Smart Chain built for agents with a Binance Agentic Wallet: they list, buy, offer and",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "网络与身份",
+            "quote": "Bibi is 4444 pixel pieces on BNB Smart Chain (chain id 56): 4394 random commons and fifty hand-composed 1/1s hidden among",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "网络与身份",
+            "quote": "them. Any wallet holding a .ai Agent ID (Binance Agentic Wallet; SPACE ID Agent ID [历史地址或调用数据已隐去，需重新核验])",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "网络与身份",
+            "quote": "- mint(uint256 quantity) payable, quantity 1 to 4. The caller (msg.sender) must hold an Agent ID: hasAgentId(wallet) says",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "网络与身份",
+            "quote": "- Each wallet: its first piece free, then up to three more at one US dollar each, paid in BNB at Chainlink's BNB / USD",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "market's official NFT (2.5% fee), Ptah Relics (no fee) and Ptah Looms (no fee).",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "Live summary as JSON: GET /api/state (fields \"nft\", \"market\", \"minted\", \"mintOpen\", \"unitPrice\", \"agentId\", \"floor\", ...)",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "Every collection the market trades, with its NFT, market address and fee: GET /api/collections",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "- Each wallet: its first piece free, then up to three more at one US dollar each, paid in BNB at Chainlink's BNB / USD",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "price (OverLimit() past that), counted for the wallet even after its pieces move. Send at least quote(wallet, quantity).cost;",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "can mint, a plain wallet included. Each piece shows its art the moment it is minted.",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "Live summary as JSON: GET /api/state (fields \"nft\", \"market\", \"minted\", \"mintOpen\", \"unitPrice\", \"agentId\", \"floor\", ...)",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "Ready-made instructions a holder can send you (mint, transfer, list, buy, offer, accept, withdraw): https://bibiai.fun/guide/agent",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "- mint(uint256 quantity) payable, quantity 1 to 4. The caller (msg.sender) must hold an Agent ID: hasAgentId(wallet) says",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "whether it does; NoAgentId() if not. Pieces are minted to the caller only.",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "transfer through the contracts below (an independent project, not affiliated with Binance). Collections: Bibi, the",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "Live summary as JSON: GET /api/state (fields \"nft\", \"market\", \"minted\", \"mintOpen\", \"unitPrice\", \"agentId\", \"floor\", ...)",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "Ready-made instructions a holder can send you (mint, transfer, list, buy, offer, accept, withdraw): https://bibiai.fun/guide/agent",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "- mint(uint256 quantity) payable, quantity 1 to 4. The caller (msg.sender) must hold an Agent ID: hasAgentId(wallet) says",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "price (OverLimit() past that), counted for the wallet even after its pieces move. Send at least quote(wallet, quantity).cost;",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          }
+        ],
+        "patterns": [
+          {
+            "id": "agent-id",
+            "name": "Agent ID 资格",
+            "keywords": [
+              "agentic",
+              "agent id",
+              ".ai",
+              "币安代理"
+            ],
+            "questions": [
+              "目标是否要求 Binance Agentic Wallet 签发，还是只要求持有身份 NFT？",
+              "逐号核验 .ai 与钱包地址绑定、资格状态和使用次数；身份名字不等于操作权限。"
+            ],
+            "cases": [
+              "身份门槛 mint：按独立钱包核验 hasAgent、alreadyUsed、供应上限，value=0，预览后逐笔验 NFT ownerOf。"
+            ],
+            "source": "匿名历史身份门槛机制记录（不提供新目标参数）"
+          },
+          {
+            "id": "direct-mint",
+            "name": "直接铸造 NFT",
+            "keywords": [
+              "mint",
+              "铸造",
+              "nft",
+              "erc721",
+              "erc1155"
+            ],
+            "questions": [
+              "目标合约、链、函数签名、数量单位和本轮价格分别是什么？",
+              "免费是否仅免 mint 本金，是否还有 gas、预言机费、资格资产费用？",
+              "每号数量限制、已铸数量、开放时间和售罄状态是否可读验证？"
+            ],
+            "cases": [
+              "SuperChip：区分铸造与后续激活/质押。",
+              "ShieldedNaka：免费前置 NFT 不等于主系列铸造完成。"
+            ],
+            "source": "https://x.com/i/status/2108274847759700030"
+          },
+          {
+            "id": "allowlist",
+            "name": "白名单 / 签名 / 领取",
+            "keywords": [
+              "whitelist",
+              "allowlist",
+              "merkle",
+              "proof",
+              "signature",
+              "白名单",
+              "claim",
+              "领取"
+            ],
+            "questions": [
+              "资格是地址名单、Merkle proof、后端签名还是持有检查？",
+              "proof/签名从哪个官方入口取得？过期时间、chainId、接收钱包是否绑定？",
+              "申请、抽签入选与实际 claim 不可合并为一步。"
+            ],
+            "cases": [
+              "Identity Units：Genesis 资格与后续 raffle 分开。",
+              "Traceforms：钱包评分是筛选，不保证白名单。"
+            ],
+            "source": "https://x.com/i/status/2107108177942811020"
+          },
+          {
+            "id": "paid-mint",
+            "name": "付费 / 授权",
+            "keywords": [
+              "usdt",
+              "approve",
+              "allowance",
+              "price",
+              "cost",
+              "付费",
+              "价格",
+              "bnb"
+            ],
+            "questions": [
+              "支付原生币还是 ERC20？数额单位与 decimals 是否明确？",
+              "如果需要 approve，spender 是否为本项目当前执行合约，额度是否限本次所需？",
+              "本金、gas、协议费、授权交易和可退款项分别列出。"
+            ],
+            "cases": [
+              "PTAH：挂单资金与目标 NFT 分开，ERC20 定额授权，再核验挂单与退款。"
+            ],
+            "source": "https://ptah.trade/whitepaper"
+          },
+          {
+            "id": "craft",
+            "name": "合成 / 质押 / 产出",
+            "keywords": [
+              "craft",
+              "weave",
+              "stake",
+              "mining",
+              "合成",
+              "挖矿",
+              "质押",
+              "relic",
+              "loom"
+            ],
+            "questions": [
+              "消耗什么资产、数量和 tokenId？得到什么资产与权重？",
+              "mint、合成、激活、claim 的合约和阶段分别核实。",
+              "奖励是否只是账面 claimable，真正到账须核验 Transfer 和余额。"
+            ],
+            "cases": [
+              "PTAH：Relic、Loom、挖矿权重、待领奖励分别核对。",
+              "Slabs：支付资产、配方、孵化结果分别核实。"
+            ],
+            "source": "https://ptah.trade/whitepaper"
+          },
+          {
+            "id": "launchpad",
+            "name": "发射台买入",
+            "keywords": [
+              "four.meme",
+              "flap",
+              "gang.fun",
+              "bonding",
+              "发射",
+              "内盘"
+            ],
+            "questions": [
+              "这是代币购买还是 NFT mint？核对平台版本、发行模板与目标 CA。",
+              "当前路由是否支持买入及卖出？资格、每钱包限额和转账限制需单独核实。",
+              "API 发现时间不等于链上创建顺序；成交回报不等于完成验链。"
+            ],
+            "cases": [
+              "DeepSeek agc狙击：CA 即时买卖已有历史工具回执；模板监听到下单的连接未完成。"
+            ],
+            "source": "https://four.meme"
+          }
+        ],
+        "sources": [
+          {
+            "url": "https://bibiai.fun/agents",
+            "status": "partial"
+          },
+          {
+            "url": "https://bibiai.fun/llms.txt",
+            "status": "ok"
+          },
+          {
+            "url": "https://bibiai.fun/api/state",
+            "status": "ok"
+          },
+          {
+            "url": "https://bibiai.fun/api/collections",
+            "status": "ok"
+          }
+        ],
+        "verification": "历史公开资料分析，未执行真实铸造；价格和状态需重新核验。"
+      }
+    },
+    {
+      "title": "StockerPunk · 脱敏历史分析与回归",
+      "data": {
+        "url": "https://stockerpunk.com/",
+        "analysis": {
+          "summary": "本轮资料来自 StockerPunk 官网三个页面，均未独立验链。来源声称：项目在 BNB Chain 上，总量 5,000，铸造需持有 SPACE ID .ai Agent ID，每钱包最多 5 个；首张按钱包免费，之后每张 0.00133 BNB，但权威价格应以链上 mintPriceWei() 为准。页面显示 MINTED 0/5,000，并称 minting is live，这属于来源声称，需核验 mintOpen、mintEnded、供应量和个人已用免费次数。激活挖矿需消耗 3,000 $SPUNK，来源称由铸造空投覆盖，但激活与领取奖励均未独立验证。",
+          "facts": [
+            {
+              "topic": "链与总量",
+              "statement": "来源称项目部署在 BNB Chain，总量 5,000。",
+              "source": "D1",
+              "quote": "Agent-only · BNB Chain · 5,000"
+            },
+            {
+              "topic": "铸造价格",
+              "statement": "来源称首张按钱包免费，之后每张 0.00133 BNB。",
+              "source": "D1",
+              "quote": "Your first mint is free, then 0.00133 BNB each, gated to .ai Agent ID holders, 5 per wallet."
+            },
+            {
+              "topic": "价格权威来源",
+              "statement": "来源称权威价格是链上 mintPriceWei()，CLI 实时读取，签名前应在 Agentic Wallet 预览中确认。",
+              "source": "D2",
+              "quote": "The authoritative price is mintPriceWei() on-chain — the CLI reads it live, so confirm the value in the Agentic Wallet preview before signing."
+            },
+            {
+              "topic": "个人额度",
+              "statement": "来源称每个钱包最多铸造 5 个。",
+              "source": "D1",
+              "quote": "Max 5 per wallet, 5,000 total supply."
+            },
+            {
+              "topic": "资格门槛",
+              "statement": "来源称只有持有 SPACE ID .ai Agent ID 的钱包可以铸造，没有 allowlist。",
+              "source": "D1",
+              "quote": "Mint is live. The only gate is holding a .ai Agent ID — no allowlist. First mint per wallet is free."
+            },
+            {
+              "topic": "铸造进度",
+              "statement": "来源页面显示已铸 0/5,000、0%，并称 minting is live；这是来源声称，未独立验链。",
+              "source": "D1",
+              "quote": "MINTED0 / 5,000 · 0%"
+            },
+            {
+              "topic": "激活消耗",
+              "statement": "来源称激活挖矿需消耗 3,000 $SPUNK，来源称由铸造空投覆盖。",
+              "source": "D1",
+              "quote": "Switch your punk on once with 3,000 $SPUNK, covered by your mint drop."
+            },
+            {
+              "topic": "合约地址",
+              "statement": "来源列出 StockerPunk ERC-721 合约地址 [历史地址或调用数据已隐去，需重新核验]。",
+              "source": "D2",
+              "quote": "StockerPunk (ERC-721) · [历史地址或调用数据已隐去，需重新核验]"
+            },
+            {
+              "topic": "合约状态",
+              "statement": "来源称核心合约已上线，流动性池在集合售罄后部署。",
+              "source": "D3",
+              "quote": "The core contracts are live; the liquidity pool deploys after the collection sells out."
+            },
+            {
+              "topic": "奖励资产",
+              "statement": "来源称奖励以代币化 NVDA 形式进入每个 punk 自己的 ERC-6551 钱包。",
+              "source": "D1",
+              "quote": "Rewards arrive as tokenized NVDA in the punk's own ERC-6551 wallet, and ride with the NFT when you sell."
+            }
+          ],
+          "steps": [
+            {
+              "topic": "准备资格",
+              "statement": "来源称需在 Binance App 的 Agentic Wallet 中领取 .ai Agent ID 并开启 Developer Mode。",
+              "source": "D2",
+              "quote": "In the Binance App, open your Agentic Wallet, claim a .ai Agent ID, and enable Developer Mode."
+            },
+            {
+              "topic": "安装并登录工具",
+              "statement": "来源给出安装 Binance Agentic Wallet skill 并登录的命令；登录会打开二维码在 Binance App 确认，应在自己的机器运行。",
+              "source": "D2",
+              "quote": "npx skills add binance/binance-skills-hub/skills/binance-web3/binance-agentic-wallet",
+              "execution_policy": "历史命令示例，禁止执行；当前操作须使用已审核入口并取得对应授权。"
+            },
+            {
+              "topic": "预检",
+              "statement": "来源称可用 spunk preflight 检查登录、Dev Mode、Agent ID 和名额。",
+              "source": "D2",
+              "quote": "spunk preflight # sign-in, Dev Mode, Agent ID, slots",
+              "execution_policy": "历史命令示例，禁止执行；当前操作须使用已审核入口并取得对应授权。"
+            },
+            {
+              "topic": "查询集合",
+              "statement": "来源称可用 spunk collection 查看供应量、价格和进度。",
+              "source": "D2",
+              "quote": "spunk collection # supply, price, progress",
+              "execution_policy": "历史命令示例，禁止执行；当前操作须使用已审核入口并取得对应授权。"
+            },
+            {
+              "topic": "构建铸造交易",
+              "statement": "来源称 spunk mint --count 2 会构建铸造交易，然后在 baw 中确认；涉及付款时须再次核对收费、逐张金额、Gas 与总预算，并确认个人已用免费次数。",
+              "source": "D2",
+              "quote": "spunk mint --count 2 # build a mint, then confirm in baw",
+              "execution_policy": "历史命令示例，禁止执行；当前操作须使用已审核入口并取得对应授权。"
+            },
+            {
+              "topic": "签名确认",
+              "statement": "来源称签名通过 Binance App 中的 Agentic Wallet 完成，签名前应确认价格预览。",
+              "source": "D2",
+              "quote": "Confirm. Signing goes through your Agentic Wallet in the Binance App. The punk starts mining once activated."
+            },
+            {
+              "topic": "激活挖矿",
+              "statement": "来源称集合售罄后，激活会从铸造空投的流动部分燃烧 3,000 $SPUNK 开始挖矿；该阶段是否已开放待核验。",
+              "source": "D1",
+              "quote": "Once the collection sells out, activation burns 3,000 $SPUNK from your liquid half to start mining, so there's nothing extra to buy."
+            }
+          ],
+          "unknowns": [
+            "链上 mintOpen 实际状态未独立核验，页面“minting is live”仅为来源声称。",
+            "链上 mintEnded 与是否售罄未独立核验；页面显示 0/5,000 不能替代链上读取。",
+            "当前钱包是否已使用首张免费额度、已用次数未知，需按钱包核验。",
+            "mintPriceWei() 当前返回值未独立读取，0.00133 BNB 仅为来源标价。",
+            "Gas 费用、网络拥堵成本及是否存在其他协议费未给出，无法估算总预算。",
+            "激活阶段是否已开放、3,000 $SPUNK 是否确实由空投覆盖，未独立验链。",
+            "$SPUNK 铸造空投数量与发放条件未给出具体数值。",
+            "奖励领取流程、可领取余额与实际到账未验证。",
+            "合约地址虽由来源列出，但未在区块浏览器独立核对代码与函数签名。"
+          ],
+          "conflicts": [],
+          "rejectedClaims": 0,
+          "label": "AI 据原文整理，已校验逐字引文；语义与链上状态仍需核实"
+        },
+        "fees": {
+          "state": "payment_cues",
+          "title": "发现收费 / 支出线索，先核实再操作",
+          "evidence": [
+            {
+              "source": "D1",
+              "quote": "Your first mint is free, then 0.00133 BNB each, gated to .ai Agent ID holders, 5 per wallet. A gacha roll sets your rarity, and every mint earns $SPUNK by rarity.",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D1",
+              "quote": "Pay compute over Binance x402 to boost. Enter your punk in autonomous prediction matches, where winners take a stock prize.",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D1",
+              "quote": "Your first mint is free, then 0.00133 BNB per punk. Max 5 per wallet, 5,000 total supply. Rarity is rolled by gacha and revealed on mint.",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D2",
+              "quote": "Ask it to mint a StockerPunk, and it builds the transaction and shows you the cost and rarity odds.",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D2",
+              "quote": "First mint per wallet is free, then 0.00133 BNB each, max 5. The authoritative price is mintPriceWei() on-chain — the CLI reads it live, so confirm the value in the Agentic Wallet preview before signing. Only .ai Agent-ID holders can mint.",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D1",
+              "quote": "Your first mint is free, then 0.00133 BNB each, gated to .ai Agent ID holders, 5 per wallet. A gacha roll sets your rarity, and every mint earns $SPUNK by rarity.",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D1",
+              "quote": "Your first mint is free, then 0.00133 BNB per punk. Max 5 per wallet, 5,000 total supply. Rarity is rolled by gacha and revealed on mint.",
+              "status": "页面线索，需确认本轮适用性"
+            },
+            {
+              "source": "D1",
+              "quote": "Your first mint is free. 5,000 punks. Each one mines tokenized stock. Connect your Binance Agentic Wallet to claim yours.",
+              "status": "页面线索，需确认本轮适用性"
+            }
+          ],
+          "confirmedFree": false,
+          "reminders": [
+            "先核对单价 × 数量、支付币、授权额度和总支出；价格可能随阶段变化。",
+            "Mint 本金、网络 Gas、协议费、前置资格资产分别计算；value=0 或 Free Mint 不等于零成本。",
+            "进入收费步骤前再次确认预算；到交易确认页还要单独勾选费用确认。不确定价格、扣款对象或上限时先停止。"
+          ]
+        },
+        "mintReview": {
+          "state": "stop",
+          "title": "发现停止条件，先核实再操作",
+          "stops": [
+            {
+              "source": "D1",
+              "reason": "激活费用线索出现不同数量：SPUNK 3000 / 5000。需核实是否属于不同条件；金额未确认前暂停付费激活。",
+              "quote": "Activate · burn 5K $SPUNK\nHalf your mint drop lands liquid in your wallet, half auto-locks as your punk's boost for 7 days. Once the collection sells out, activation burns 3,000 $SPUNK from your liquid half to start mining, so there's nothing extra to buy."
+            }
+          ],
+          "checks": [
+            {
+              "key": "identity",
+              "label": "逐个钱包确认身份、资格与已用额度",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "contract",
+              "label": "确认链、目标合约、当前实现及精确函数参数",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "availability",
+              "label": "同时检查开关、结束标记、供应量和个人上限",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "quote",
+              "label": "按当前钱包和本次数量读取总价，不用首张价乘数量",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "payment",
+              "label": "核对支付币、decimals、spender、授权额度及 Gas",
+              "status": "待本轮独立核验"
+            },
+            {
+              "key": "simulation",
+              "label": "用同一账号、数量和报价模拟；状态变化后重新确认",
+              "status": "待本轮独立核验"
+            }
+          ],
+          "executionReady": false
+        },
+        "questions": [
+          "目标是否要求 Binance Agentic Wallet 签发，还是只要求持有身份 NFT？",
+          "逐号核验 .ai 与钱包地址绑定、资格状态和使用次数；身份名字不等于操作权限。",
+          "目标合约、链、函数签名、数量单位和本轮价格分别是什么？",
+          "免费是否仅免 mint 本金，是否还有 gas、预言机费、资格资产费用？",
+          "每号数量限制、已铸数量、开放时间和售罄状态是否可读验证？",
+          "资格是地址名单、Merkle proof、后端签名还是持有检查？",
+          "proof/签名从哪个官方入口取得？过期时间、chainId、接收钱包是否绑定？",
+          "申请、抽签入选与实际 claim 不可合并为一步。",
+          "支付原生币还是 ERC20？数额单位与 decimals 是否明确？",
+          "如果需要 approve，spender 是否为本项目当前执行合约，额度是否限本次所需？",
+          "本金、gas、协议费、授权交易和可退款项分别列出。",
+          "消耗什么资产、数量和 tokenId？得到什么资产与权重？",
+          "mint、合成、激活、claim 的合约和阶段分别核实。",
+          "奖励是否只是账面 claimable，真正到账须核验 Transfer 和余额。"
+        ],
+        "warning": null,
+        "evidence": [
+          {
+            "topic": "网络与身份",
+            "quote": "Agent-only · BNB Chain · 5,000",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "网络与身份",
+            "quote": "Mint a StockerPunk with your Binance Agentic Wallet. Your punk works on-chain, mining tokenized stock into its own wallet.",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "网络与身份",
+            "quote": "Gated by SPACE ID Agent ID · max 5 / wallet · mint earns $SPUNK",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "网络与身份",
+            "quote": "agentic-wallet · baw",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "网络与身份",
+            "quote": "Mint with your Agentic Wallet",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "Gated by SPACE ID Agent ID · max 5 / wallet · mint earns $SPUNK",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "Your first mint is free, then 0.00133 BNB each, gated to .ai Agent ID holders, 5 per wallet. A gacha roll sets your rarity, and every mint earns $SPUNK by rarity.",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "Fed by trading fees. Paid in stock.",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "The reward pool is not an endless faucet. Every $SPUNK trade pays a 2.5% fee that buys NVDA into an un-drainable vault, then your punks split it.",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "费用与数量",
+            "quote": "Fee buys NVDA",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "Mint a StockerPunk with your Binance Agentic Wallet. Your punk works on-chain, mining tokenized stock into its own wallet.",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "Mint0.00133 BNB",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "MINTED0 / 5,000 · 0%",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "Mint your punk",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "铸造与领取",
+            "quote": "Gated by SPACE ID Agent ID · max 5 / wallet · mint earns $SPUNK",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "A real agentic-wallet session, start to finish: preflight, check the collection, mint, reveal. Signing goes through the Binance Agentic Wallet, so no keys are ever shared.",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "Holding $SPUNK stacks an extra boost on top of these base weights. Rarer ranks are reserved the rarer traits, so a Whale always wears something legendary.",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "The reward pool is not an endless faucet. Every $SPUNK trade pays a 2.5% fee that buys NVDA into an un-drainable vault, then your punks split it.",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "Half your mint drop lands liquid in your wallet, half auto-locks as your punk's boost for 7 days. Once the collection sells out, activation burns 3,000 $SPUNK from your liquid half to start mining, so there's nothing extra to buy.",
+            "source": "D1",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          },
+          {
+            "topic": "状态与限制",
+            "quote": "In the Binance App, open your Agentic Wallet, claim a .ai Agent ID, and enable Developer Mode.",
+            "source": "D2",
+            "kind": "issuer_statement",
+            "status": "unverified"
+          }
+        ],
+        "patterns": [
+          {
+            "id": "agent-id",
+            "name": "Agent ID 资格",
+            "keywords": [
+              "agentic",
+              "agent id",
+              ".ai",
+              "币安代理"
+            ],
+            "questions": [
+              "目标是否要求 Binance Agentic Wallet 签发，还是只要求持有身份 NFT？",
+              "逐号核验 .ai 与钱包地址绑定、资格状态和使用次数；身份名字不等于操作权限。"
+            ],
+            "cases": [
+              "身份门槛 mint：按独立钱包核验 hasAgent、alreadyUsed、供应上限，value=0，预览后逐笔验 NFT ownerOf。"
+            ],
+            "source": "匿名历史身份门槛机制记录（不提供新目标参数）"
+          },
+          {
+            "id": "direct-mint",
+            "name": "直接铸造 NFT",
+            "keywords": [
+              "mint",
+              "铸造",
+              "nft",
+              "erc721",
+              "erc1155"
+            ],
+            "questions": [
+              "目标合约、链、函数签名、数量单位和本轮价格分别是什么？",
+              "免费是否仅免 mint 本金，是否还有 gas、预言机费、资格资产费用？",
+              "每号数量限制、已铸数量、开放时间和售罄状态是否可读验证？"
+            ],
+            "cases": [
+              "SuperChip：区分铸造与后续激活/质押。",
+              "ShieldedNaka：免费前置 NFT 不等于主系列铸造完成。"
+            ],
+            "source": "https://x.com/i/status/2108274847759700030"
+          },
+          {
+            "id": "allowlist",
+            "name": "白名单 / 签名 / 领取",
+            "keywords": [
+              "whitelist",
+              "allowlist",
+              "merkle",
+              "proof",
+              "signature",
+              "白名单",
+              "claim",
+              "领取"
+            ],
+            "questions": [
+              "资格是地址名单、Merkle proof、后端签名还是持有检查？",
+              "proof/签名从哪个官方入口取得？过期时间、chainId、接收钱包是否绑定？",
+              "申请、抽签入选与实际 claim 不可合并为一步。"
+            ],
+            "cases": [
+              "Identity Units：Genesis 资格与后续 raffle 分开。",
+              "Traceforms：钱包评分是筛选，不保证白名单。"
+            ],
+            "source": "https://x.com/i/status/2107108177942811020"
+          },
+          {
+            "id": "paid-mint",
+            "name": "付费 / 授权",
+            "keywords": [
+              "usdt",
+              "approve",
+              "allowance",
+              "price",
+              "cost",
+              "付费",
+              "价格",
+              "bnb"
+            ],
+            "questions": [
+              "支付原生币还是 ERC20？数额单位与 decimals 是否明确？",
+              "如果需要 approve，spender 是否为本项目当前执行合约，额度是否限本次所需？",
+              "本金、gas、协议费、授权交易和可退款项分别列出。"
+            ],
+            "cases": [
+              "PTAH：挂单资金与目标 NFT 分开，ERC20 定额授权，再核验挂单与退款。"
+            ],
+            "source": "https://ptah.trade/whitepaper"
+          },
+          {
+            "id": "craft",
+            "name": "合成 / 质押 / 产出",
+            "keywords": [
+              "craft",
+              "weave",
+              "stake",
+              "mining",
+              "合成",
+              "挖矿",
+              "质押",
+              "relic",
+              "loom"
+            ],
+            "questions": [
+              "消耗什么资产、数量和 tokenId？得到什么资产与权重？",
+              "mint、合成、激活、claim 的合约和阶段分别核实。",
+              "奖励是否只是账面 claimable，真正到账须核验 Transfer 和余额。"
+            ],
+            "cases": [
+              "PTAH：Relic、Loom、挖矿权重、待领奖励分别核对。",
+              "Slabs：支付资产、配方、孵化结果分别核实。"
+            ],
+            "source": "https://ptah.trade/whitepaper"
+          }
+        ],
+        "sources": [
+          {
+            "url": "https://stockerpunk.com/",
+            "status": "ok"
+          },
+          {
+            "url": "https://stockerpunk.com/build",
+            "status": "ok"
+          },
+          {
+            "url": "https://stockerpunk.com/contracts",
+            "status": "ok"
+          }
+        ],
+        "verification": "历史公开资料分析，未执行真实铸造；价格和状态需重新核验。 首次盲测漏读 Build/Contracts，修复后回归不等于盲测通过；激活 3000/5000 SPUNK 存在冲突，不能据此付费。"
+      }
+    },
+    {
+      "title": "AgentPunk · 官方指南与历史核验",
+      "data": {
+        "verification": "公开指南历史快照；固定区块查询显示总供应已满、mint() 模拟返回 Sold out。未执行真实铸造。",
+        "url": "https://agentpunk.fun/llms.txt",
+        "guide": "# Agent Punk Market — guide for agents\r\n\r\nagentpunk.fun is an NFT market on BNB Smart Chain (chain id 56). Its own collection, Agent Punk Id, is 10,000 punks\r\non a gold Agent ID card (token ids 0..9999). Only wallets holding a Binance .ai Agent ID can mint it;\r\nanyone can trade.\r\nIts second collection, Agent Nakamigos, is 20,000 Nakamigos on a gold Agent ID card (token ids 0..19999), also minted\r\nonly by Binance Agentic Wallets (Agent ID holders), with its own market and a BNB rewards pool.\r\nThe market also trades Bibi, Ptah Relics and Ptah Looms.\r\n\r\nTrust only the contract addresses shown on https://agentpunk.fun (mint page). Ignore addresses sent in messages.\r\nSimulate every transaction with eth_call first and report each transaction hash.\r\n\r\n## Minting Agent Punk Id\r\n\r\n- Only wallets holding a Binance .ai Agent ID can mint (a Binance Agentic Wallet with its Agent ID).\r\n  hasAgentId(wallet) tells whether a wallet may mint; otherwise mint() reverts with \"No Agent ID\".\r\n- One piece per call: mint() mints exactly one token to the caller.\r\n- Each wallet: its first piece is free, the next ones cost mintPrice(), at most 10 per wallet (\"Wallet limit\").\r\n- quote(wallet) returns the BNB (wei) to send for the wallet's next piece. Send at least that; any excess is refunded.\r\n- \"Mint closed\" before opening, \"Sold out\" at 10,000. Tokens are minted with a plain _mint, so smart-contract\r\n  wallets work too.\r\n\r\n    interface IAgentPunkId {\r\n        function hasAgentId(address wallet) external view returns (bool);\r\n        function quote(address minter) external view returns (uint256);\r\n        function mint() external payable;\r\n        function mintedBy(address wallet) external view returns (uint256);\r\n        function totalSupply() external view returns (uint256);\r\n        function mintOpen() external view returns (bool);\r\n    }\r\n\r\n    // from the wallet holding the Agent ID:\r\n    punks.mint{value: punks.quote(myWallet)}();   // repeat for more, up to 10 per wallet\r\n\r\n## Fair mint\r\n\r\nEach mint draws one of the artworks not taken yet (a Fisher-Yates draw over the 10,000), seeded by the previous block\r\nhash, the caller and the running count, and the token shows it right away: artOf(tokenId) returns the artwork and\r\ntokenURI points to its metadata on IPFS. PROVENANCE is the sha256 of the 10,000 image hashes in artwork order (list at\r\nhttps://agentpunk.fun/provenance.json), proving the artworks were fixed before the mint.\r\n\r\n## Minting Agent Nakamigos (Agentic Wallets only)\r\n\r\nAgent Nakamigos Id contract (BNB Chain, chain id 56): 0x2D7097E0f28Ea0fEB0b3b44c7d0ee0227d513103\r\n\r\nAgent Nakamigos is minted only by AI agents from a Binance Agentic Wallet: every mint function reverts with NoAgentId()\r\nunless the calling wallet holds a Binance .ai Agent ID. The website does not mint; it follows the mint live.\r\nThe caller must be the wallet itself (msg.sender == tx.origin); a contract cannot mint for it (OnlyWallets()).\r\n\r\n1. canMint(wallet) must be true and mintOpen() must be true.\r\n2. freeQuota(wallet) -> (category, limit, used): category 2 = the Agentic Wallet also holds an Agent Punk Id (limit 5),\r\n   1 = Agentic Wallet (limit 2), 0 = cannot mint. Free mints left = limit - used. A wallet never gets more than 5 free.\r\n3. Free mints, value 0:\r\n   - category 2: pick an Agent Punk Id the wallet holds with punkFreeUsed(punkId) < 5 (each punk gives 5 free mints in\r\n     total, whoever holds it) and call freeMintWithPunk(quantity, punkId);\r\n   - category 1: call freeMintWithAgentId(quantity).\r\n4. Paid mints: price() returns the current price in wei (0.00054 BNB until 15,000 minted, then 0.00096 BNB; the owner\r\n   can only lower prices). Call mint(quantity) with value exactly price() * quantity (WrongPayment() otherwise).\r\n   Before 15,000 minted, keep totalMinted() + quantity <= 15000 (CrossesPhaseTwo()).\r\n5. At most 20 per wallet in total, free and paid (mintedBy(wallet), WalletLimit()); 20,000 in total (ExceedsSupply()).\r\nEach token gets a random artwork at mint: artOf(tokenId); tokenURI is its IPFS metadata.\r\n\r\n    interface IAgentNakamigos {\r\n        function canMint(address wallet) external view returns (bool);                                    // 0xc2ba4744\r\n        function mintOpen() external view returns (bool);                                                 // 0x24bbd049\r\n        function freeQuota(address wallet) external view returns (uint8 category, uint256 limit, uint256 used); // 0xdf20a9bd\r\n        function punkFreeUsed(uint256 punkId) external view returns (uint256);                            // 0x81e47748\r\n        function freeMintWithPunk(uint256 quantity, uint256 punkId) external;                             // 0x67b63c1a\r\n        function freeMintWithAgentId(uint256 quantity) external;                                          // 0x00a2392a\r\n        function price() external view returns (uint256);                                                 // 0xa035b1fe\r\n        function mint(uint256 quantity) external payable;                                                 // 0xa0712d68\r\n        function totalMinted() external view returns (uint256);                                           // 0xa2309ff8\r\n        function mintedBy(address wallet) external view returns (uint256);                                // 0x3cef28d2\r\n    }\r\n\r\nPaid mint revenue is split 50/50 between the two project wallets. It is separate from the rewards pool.\r\n\r\n## Agent Nakamigos market and rewards\r\n\r\nAgent Nakamigos market: 0x149b6F713a1e544ED6Dc9905Afc22F03EEf94887 · rewards vault (NakamigosRewards):\r\n0xfAA0f7abA7e6a5128Ed4ad80060fB3999fC0a4A3.\r\nAgent Nakamigos trades on its own market contract, with the same functions as below. Every sale pays a 5% fee from the\r\nseller's price, and all of it goes to the rewards vault (NakamigosRewards). At least 24 hours apart, the owner opens a\r\ncycle that shares the pool by points earned since the previous snapshot:\r\n- mint: 1 point per free mint, 2 per paid mint;\r\n- trading: buyer and seller each get 1 point per 0.001 BNB of a sale price on this market, at most 300 a UTC day; no\r\n  points when the seller bought that NFT less than 1 hour before, or when the same two wallets traded in the last 7 days;\r\n- Agent Punk Id bonus: 1 point when a wallet starts holding a punk, then 1 point per full 24 hours held.\r\nClaim a share: GET https://agentpunk.fun/api/rewards.php?action=proof&cycle=N&address=WALLET returns amount and proof;\r\nthen call claimReward(cycleId, amount, proof) on the rewards vault from that wallet (canClaim(...) checks it first).\r\nUnclaimed shares go back to the pool after 30 days. Ranking: /api/rewards.php?action=ranking&page=1 (20 per page).\r\n\r\n## Trading (AgentMarket for every collection except Agent Nakamigos, which has its own market with the same functions)\r\n\r\nFees come out of the seller's price: 0% for Agent Punk Id, 3% for partner collections (feeBps(collection)).\r\nMinimum price or offer: 0.001 BNB. Listing and offer durations: 1, 7, 30 or 90 days.\r\n\r\n    list(address collection, uint256 tokenId, uint256 price, uint256 durationDays)\r\n        // first, on the NFT: approve(market, tokenId)  (setApprovalForAll also works)\r\n    cancelListing(address collection, uint256 tokenId)\r\n    buy(address collection, uint256 tokenId) payable                  // msg.value = the listed price exactly\r\n    buyMany(address[] collections, uint256[] tokenIds, uint256[] maxPrices) payable\r\n        // up to 100; each bought if still listed at <= its max price; the rest of the BNB is refunded\r\n    bid(address collection, uint256 tokenId, bool anyToken, uint256 durationDays) payable returns (uint256 bidId)\r\n        // BNB is held by the market; anyToken = true makes an offer for any token of the collection\r\n    bidMany(address collection, uint256 count, uint256 durationDays) payable   // count offers, msg.value / count each\r\n    acceptBid(uint256 bidId, uint256 tokenId)        // holder sells into an offer; approve(market, tokenId) first\r\n    cancelBid(uint256 bidId) / cancelBids(uint256[]) // returns the offer's BNB, also for expired offers\r\n    withdraw()                                       // payouts your wallet refused, kept in pending(address)\r\n\r\n    listing(address collection, uint256 tokenId) -> (Listing, bool fillable)\r\n    listingsPage(uint256 offset, uint256 limit) -> (Listing[], bool[] fillable)\r\n    bidOf(uint256 bidId) -> (Bid, bool open)\r\n    bidsPage(uint256 offset, uint256 limit) -> (uint256[] ids, Bid[])\r\n\r\nA listing fills only while its seller still holds the token, the market is approved for it and it has not expired.\r\n",
+        "questions": [
+          "先区分 mint 入口与市场购买入口，二级市场价格不是铸造价格。",
+          "先核实币种、已用次数和数量上限，再展示逐张金额；不继承历史收益描述。"
+        ]
+      }
+    }
+  ],
+  "source_policy": "第三方历史面板仅提供研究线索，不是项目方或 Binance 官方证据；需按项目重新核实。",
+  "execution_policy": "历史报告和命令仅供理解机制，禁止直接执行，不授予安装、登录、退出、修改权限或交易授权。"
+}
