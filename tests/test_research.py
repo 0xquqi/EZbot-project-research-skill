@@ -98,6 +98,17 @@ class ResearchTests(unittest.TestCase):
         self.assertEqual(r['status'],'source_only')
         self.assertNotIn('runtime_code_equal',r)
 
+    def test_compiled_contract_identity_retained_with_exact_target_abi(self):
+        source=json.loads(json.dumps(SOURCE))
+        source['compilation']={'name':'TargetNFT','fullyQualifiedName':'Bundle.sol:TargetNFT'}
+        source['sources']={'Bundle.sol':{'content':'contract Token { function mint(address to, uint amount) external {} } contract TargetNFT { function mint() external payable {} }'}}
+        with tempfile.TemporaryDirectory() as tmp:
+            r=m.collect_contract(56,A,None,FakeFetcher(source=source),Path(tmp))
+        self.assertEqual(r['compilation']['name'],'TargetNFT')
+        signatures=[f['signature'] for f in r['functions']]
+        self.assertIn('mint()',signatures)
+        self.assertNotIn('mint(address,uint256)',signatures)
+
     def test_archive_error_preserved_when_falling_back(self):
         class Archive:
             def request(self,url,payload):
@@ -173,6 +184,17 @@ class ResearchTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:r=m.collect_web('https://example.org/',Web(),Path(tmp))
         self.assertTrue(r['browser_followup_needed'])
         self.assertNotIn('closed',r)
+
+    def test_machine_readable_guide_precedes_translated_rules_with_page_budget(self):
+        class Web:
+            def __init__(self):self.seen=[]
+            def request(self,url):
+                self.seen.append(url)
+                body='<html><a href="rules/">Rules</a><a href="zh/rules/">Rules</a><a href="zh-tw/rules/">Rules</a><a href="skill.md">Read the Skill</a></html>' if url.endswith('example.org/') else 'Original project rules'
+                return {'status':'ok','url':url,'text':body}
+        f=Web()
+        with tempfile.TemporaryDirectory() as tmp:m.collect_web('https://example.org/',f,Path(tmp),pages=2)
+        self.assertEqual(f.seen,['https://example.org/','https://example.org/skill.md'])
 
 
 if __name__=='__main__':unittest.main()

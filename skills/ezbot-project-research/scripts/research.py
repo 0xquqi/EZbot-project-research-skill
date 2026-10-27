@@ -119,8 +119,10 @@ class Fetcher:
 
 def link_score(link):
     text = link.get('url', '') + ' ' + link.get('label', '')
+    if re.search(r'(?:agent|skill)\.md|llms(?:-full)?\.txt', text, re.I):
+        return 4
     if re.search(r'agent\.md|llms\.txt|guide|docs|rules|铸造|说明|mint|claim', text, re.I):
-        return 3 if re.search(r'agent\.md|llms\.txt', text, re.I) else 2
+        return 2
     return 0
 
 
@@ -290,6 +292,11 @@ def collect_contract(chain, address, rpc_url, fetcher, out):
         if int(source['chainId']) != chain or source['address'].lower()!=address.lower():raise ValueError('Wrong source identity')
         abi = source['abi']
         row['functions'] = describe_abi(abi)
+        compilation = source.get('compilation')
+        if not isinstance(compilation, dict):
+            compilation = {}
+        row['compilation'] = {key: compilation.get(key) for key in ('name', 'fullyQualifiedName')}
+        row['source_interpretation_required'] = 'Match the compiled contract and exact ABI signature; bundled sources may contain other contracts with the same function name.'
         row['source_runtime_match'] = source.get('runtimeMatch')
         row['proxy_resolution'] = source.get('proxyResolution')
     except (ValueError, KeyError, TypeError):

@@ -20,7 +20,7 @@ git clone https://github.com/0xquqi/EZbot-project-research-skill.git
 cd EZbot-project-research-skill
 ```
 
-将 `skills/ezbot-project-research` **整个目录**放入你的 AI 工具支持的 Skill 搜索目录，具体位置遵循该工具的说明。保持 `SKILL.md`、`agents` 和 `references` 的相对目录不变。也可直接让 AI 读取克隆目录内的 `skills/ezbot-project-research/SKILL.md`，随后按其中的相对链接读取资料。
+将 `skills/ezbot-project-research` **整个目录**放入你的 AI 工具支持的 Skill 搜索目录，具体位置遵循该工具的说明。保持 `SKILL.md`、`agents`、`references` 和 `scripts` 的相对目录不变。也可直接让 AI 读取克隆目录内的 `skills/ezbot-project-research/SKILL.md`，随后按其中的相对链接读取资料。
 
 支持 Skill 调用的环境中可使用：
 
@@ -45,7 +45,9 @@ cd EZbot-project-research-skill
 | `references/contract-research.md` | 部署、源码、ABI 与实时状态 |
 | `references/participation.md` | 铸造、领取、退款等多阶段机制 |
 | `references/report-format.md` | 研究报告与证据结构 |
-| `references/question-cards.json` | 14 类机制问题 |
+| `references/question-cards.json` | 14 类机制研究方法：步骤、实例、反例及限制 |
+| `references/activity-studies.json` | 15个项目家族、16项活动的新原始资料研究及九个部署核验 |
+| `references/ecology-review.json` | 40条本轮生态复核记录，包含未取得材料的情况 |
 | `references/case-index.md` | 历史资料索引和迁移来源 |
 | `references/*-cases.json` | 完整公开历史案例 |
 | `references/source-catalog.json` | 本轮新读取的公开原始来源、时间与哈希 |
@@ -56,9 +58,11 @@ cd EZbot-project-research-skill
 | `references/automatic-research.md` | 网址、文本、合约三种输入的操作与交付步骤 |
 | `tools/check.py` | 独立包完整性、来源及文件边界检查 |
 
-表中 `references` 和 `scripts` 均位于 Skill 目录内。原历史档案仍含5个基础活动、3份附加报告和10个生态案例；本轮不将它们作为新方法学习或测试答案来源。原有15项目/16活动的去重映射见 `references/inventory.json`；40条查阅记录缺逐项清单，尚未独立核验。
+表中 `references` 和 `scripts` 均位于 Skill 目录内。原历史档案仍含5个基础活动、3份附加报告和10个生态案例；本轮不将它们作为新方法学习或测试答案来源。原有15项目/16活动的去重映射见 `references/inventory.json`。
 
-本轮14张问题卡以重新读取的官方项目材料和技术规范为依据，每张保留来源、支持点、限制和未实操标记。它们可以重叠，不能理解为14种已完成实盘验证的独立铸造技巧。
+2026-10-28重新研究了15个项目家族、16项活动；另建40条生态复核记录，逐条记录来源、时间、哈希及观察，其中37条取得公开材料，3条读取失败。**旧汇总的40条原始索引仍未恢复，新记录不回填为历史证据。** 目录条目的身份/接口核对与深入活动研究是不同范围，也不相加成为实盘成功数。
+
+本轮14类方法以重新读取的官方项目材料和技术规范为依据，每类有操作步骤、原始材料实例、反例、限制和未实操标记。它们可以重叠，不能理解为14种已完成实盘验证的独立铸造技巧。
 
 ## 独立性与验证
 
@@ -90,6 +94,8 @@ python3 scripts/research.py --url 'https://example.org/activity/#mint' --out /tm
 2026-10-28 使用公开官网、浏览器及只读 RPC 研究 BUILD-100，从首页找到指南、主网配置和精确 ABI，取得匹配服务记录并比较部署代码，读取当前报价。还研究了 Bibi 的结束条件、同站多系列、旧 ENS 入口、SeaDrop 证明入口、PoW 与退款/异步规则。细节见 [验证记录](evaluation/README.md)。
 
 这是编写者参与的功能验证，没有使用用户钱包、没有交易、不是独立盲测或跨模型成功率评测。离线脚本整理材料，自动入口可采集网页并核对公开 EVM 部署；动态网页和复杂参数的链查询由宿主工具补齐。新项目需要重新核实，旧样例价格不能作为默认参数。
+
+补充核验九个公开部署的代码匹配，并用AnthroBit实际首页检验自动探索；修复多语言规则页占满预算、遗漏官方指南的问题。按公开说明逐项核对的结果与具体研究交付见 [能力验证](evaluation/claim-acceptance-2026-10-28.md)，保留未找到的历史依据与每例缺口。
 
 ## 许可
 

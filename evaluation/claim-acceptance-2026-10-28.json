@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "mode": "author_run_read_only_acceptance",
+  "tweet_scope": [
+    "40条生态记录",
+    "15个项目家族与16项活动研究",
+    "14类参与机制研究方法",
+    "从项目网页探索规则，部分需要补充材料",
+    "要求文本+目标链+合约地址的无网页研究"
+  ],
+  "ecology_review": {
+    "reviewed_records": 40,
+    "retrieved_materials": 37,
+    "unavailable": 3
+  },
+  "historical_40_index_recovered": false,
+  "study_counts": {
+    "project_families": 15,
+    "activity_studies": 16
+  },
+  "method_count": 14,
+  "deployment_checks": {
+    "matched": 9,
+    "block": "0x7c1905b",
+    "detail_file": "skills/ezbot-project-research/references/activity-studies.json"
+  },
+  "web_regression": {
+    "entry": "https://anthrobit.fun/",
+    "packet_sha256": "3e130801305278f2c6930029c9dac1a97abb6c537de220e59852e33894f77997",
+    "started_at": "2026-10-27T17:11:18.869290+00:00",
+    "finished_at": "2026-10-27T17:11:21.967776+00:00",
+    "materials": [
+      {
+        "url": "https://anthrobit.fun/",
+        "status": "ok",
+        "sha256": "9faf76e9d193a6f47b738ee9ab63397cacbe5a56bbcffe65ce248b028ba9a94e"
+      },
+      {
+        "url": "https://anthrobit.fun/skill.md",
+        "status": "ok",
+        "sha256": "9b0d5be6a620b4c4e4faa606403af6f027531d776da84800b82e55be28c68a83"
+      },
+      {
+        "url": "https://anthrobit.fun/rules/",
+        "status": "ok",
+        "sha256": "a5b6f62f71621689599a701806866afc25b010a484cf48720e986dad06c22a91"
+      },
+      {
+        "url": "https://anthrobit.fun/zh/rules/",
+        "status": "ok",
+        "sha256": "507db03611f0da889d7798782cf1ee24da21fd51f9ee92ba2bab6271e80b176c"
+      }
+    ],
+    "before_fix": "预算被三个多语言rules页占用，漏读skill.md",
+    "after_fix": "相同默认4页预算下第二个读取官方skill.md",
+    "ai_report": "见同名Markdown AnthroBit参与说明"
+  },
+  "text_contract_regression": {
+    "record": "automatic-research-2026-10-28.json",
+    "case": "poa_text",
+    "no_activity_web_url_provided": true,
+    "result": "匹配源码和部署，读取固定块状态；AI追踪实现区分普通免费mint与seriesPrice"
+  },
+  "limitations": [
+    "没有钱包、签名、模拟或真实交易",
+    "编写者功能验证，不是盲测或跨模型准确率",
+    "40条新记录不是原历史40逐条清单",
+    "16份活动研究的证据层次不同，9个新增源码例完成部署代码匹配，其余具体局限逐例披露"
+  ]
+}

@@ -1,0 +1,461 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "basis": "新读取原始官网/源码；不以旧历史研究正文、模板或结论作答案",
+  "counts": {
+    "project_families": 15,
+    "activity_studies": 16
+  },
+  "deployment_observations": {
+    "block_requested": {
+      "number": "0x7c1905b",
+      "hash": "0x957ed969ec7f084216a7047ba2f167f9e9d783cade84aa85760bc1d8bb1b580a",
+      "timestamp": "0x6ae0d914"
+    },
+    "endpoint": "https://bsc-rpc.publicnode.com",
+    "results": [
+      {
+        "id": "floppy-agents",
+        "chain_id": 56,
+        "address": "0x8F1E4787f131990d793Af253d118aed7Fe1B29AF",
+        "source_sha256": "3ae4c9a4c9a06dba116af64ece4dfaba26612566636fece365dd9d12b9d5ffda",
+        "runtime_match": "exact_match",
+        "contract_name": "FloppyAgents",
+        "code_equal": true,
+        "observed_at": "2026-10-27T17:02:13.514163+00:00",
+        "block_tag": "0x7c1905b",
+        "code_sha256": "06ae58d4da5ee5cbb34be326cd429a1464d3c1d0a5ade8ddb7de436ffdc0336f",
+        "error": null,
+        "pinned_error": null
+      },
+      {
+        "id": "asset-agents",
+        "chain_id": 56,
+        "address": "0xFC60cdd577759bD2Af7F3351917e80672a91D540",
+        "source_sha256": "f4d7e30344b9eeaccf1876401ca2b47593a48aa280ddbc47978d976a73a7d41d",
+        "runtime_match": "exact_match",
+        "contract_name": "AssetAgents",
+        "code_equal": true,
+        "observed_at": "2026-10-27T17:02:14.145052+00:00",
+        "block_tag": "0x7c1905b",
+        "code_sha256": "7246323a39a7e96b86305759eb2e270e61cd6d5f326ce5b8147155e228d1de4f",
+        "error": null,
+        "pinned_error": null
+      },
+      {
+        "id": "aigt-genesis",
+        "chain_id": 56,
+        "address": "0x1275481d8614D5209857d5524fe60aEBb34d43F4",
+        "source_sha256": "2d84d29002fcb9203f4035c3f98d0277aa43c0ccbb945c6df1c0382d9d0ef685",
+        "runtime_match": "exact_match",
+        "contract_name": "AIGTGenesis",
+        "code_equal": true,
+        "observed_at": "2026-10-27T17:02:14.889423+00:00",
+        "block_tag": "0x7c1905b",
+        "code_sha256": "7155e7787a2239494a5ff435c13aecba63b94258aa8ae713b0a2b226157db3d4",
+        "error": null,
+        "pinned_error": null
+      },
+      {
+        "id": "pixel-pets",
+        "chain_id": 56,
+        "address": "0x85188BC437eCB8677b072529Fc80AC602A7a1465",
+        "source_sha256": "e05fac623bee46fdf00965b57cd52bb95777b34499a372a00f3fb569a1374825",
+        "runtime_match": "exact_match",
+        "contract_name": "PixelPets",
+        "code_equal": true,
+        "observed_at": "2026-10-27T17:02:15.492274+00:00",
+        "block_tag": "0x7c1905b",
+        "code_sha256": "c6197af45e56336e448c35cbd62e0be64904f282150d137f80ac1c57d4410cee",
+        "error": null,
+        "pinned_error": null
+      },
+      {
+        "id": "silicon-souls",
+        "chain_id": 56,
+        "address": "0xA6574a66E45DeDFc878d173522836A49685ea307",
+        "source_sha256": "2f9e88d20b547f1026205ae9dd03810ad1b59111e845d5b31b1e1db64d68187e",
+        "runtime_match": "exact_match",
+        "contract_name": "SiliconSouls",
+        "code_equal": true,
+        "observed_at": "2026-10-27T17:02:16.100462+00:00",
+        "block_tag": "0x7c1905b",
+        "code_sha256": "c622c866f189d19f5490accf98e62ffcb112d30fa93bf229af86547543fa3516",
+        "error": null,
+        "pinned_error": null
+      },
+      {
+        "id": "skynet-token",
+        "chain_id": 56,
+        "address": "0x4364991B28184727CAce1ac659e53cc497a940F7",
+        "source_sha256": "af9d5d6215601a4de404779ad6ea2324349988464a7bacafd510dd3a9901a16b",
+        "runtime_match": "exact_match",
+        "contract_name": "Skynet",
+        "code_equal": true,
+        "observed_at": "2026-10-27T17:02:16.600772+00:00",
+        "block_tag": "0x7c1905b",
+        "code_sha256": "27c69d03ccf41f04e377a3278e6d1bf8b35a1d199bc595998b3d09b8adca45f0",
+        "error": null,
+        "pinned_error": null
+      },
+      {
+        "id": "gearz",
+        "chain_id": 56,
+        "address": "0x02d46599D57A7027FAA96ac58De19097B6eAB03b",
+        "source_sha256": "823e4dea8f68c82e4a95e13500c769d019c05a8d917e69c78ef62be87cb4ef58",
+        "runtime_match": "exact_match",
+        "contract_name": "MintVault",
+        "code_equal": true,
+        "observed_at": "2026-10-27T17:02:17.276872+00:00",
+        "block_tag": "0x7c1905b",
+        "code_sha256": "3e5035e167edfac6130f55d3ae3be9f74c3071d1a12a9431197b88c44378938b",
+        "error": null,
+        "pinned_error": null
+      },
+      {
+        "id": "hashdroids",
+        "chain_id": 56,
+        "address": "0x49718F13F9318dFAC9638Cd0a79a25BBBe4649A9",
+        "source_sha256": "b6bf57a5832490b7c4b96e7451a15566fcd3821c8349fc19782ac7e0a11301d8",
+        "runtime_match": "exact_match",
+        "contract_name": "HashDroidsNFT",
+        "code_equal": true,
+        "observed_at": "2026-10-27T17:02:17.836899+00:00",
+        "block_tag": "0x7c1905b",
+        "code_sha256": "8d5992ad7211f84cbe8b3ff74604c70111901fe759d3144dee2b6285629a3539",
+        "error": null,
+        "pinned_error": null
+      },
+      {
+        "id": "shit-cash-sale",
+        "chain_id": 56,
+        "address": "0x17F5104aCDa9c778aD564920Ef11d9223fF42069",
+        "source_sha256": "81fd741124c4d6d15d8517b311242c8a740c7703691c75891dfac3d7e89488b1",
+        "runtime_match": "exact_match",
+        "contract_name": "ShitSale",
+        "code_equal": true,
+        "observed_at": "2026-10-27T17:02:18.425699+00:00",
+        "block_tag": "0x7c1905b",
+        "code_sha256": "e8486bbe8ce335a24928af883f7e1d1cb4de4bd200ef4fadb476c3b2d3b28e92",
+        "error": null,
+        "pinned_error": null
+      }
+    ]
+  },
+  "studies": [
+    {
+      "id": "bnc-world",
+      "family": "BNC World",
+      "activity": "Onchain Agents",
+      "source_ids": [
+        "fresh-bnc-agents",
+        "fresh-bnc-guide"
+      ],
+      "procedure": [
+        "从/agents的alternate找到llms.txt，先绑定链56的NFT，而非Art、支付代币或市场。",
+        "按钱包与quantity读取mintable/quote；指南先扣免费额度，余量分别报价BNB、USDT、BNW。",
+        "原生币mint与代币mintWithToken分开；图像揭示和市场出价取消是后续独立动作。"
+      ],
+      "finding": "官网描述每钱包先2免费、最多12；具体价格与个人可铸数量必须当前读取。",
+      "limits": [
+        "未核对该部署、钱包资格、报价或揭示状态。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "bibi-ai",
+      "family": "BibiAI",
+      "activity": "BibiAI",
+      "source_ids": [
+        "bibi",
+        "bibi-source"
+      ],
+      "procedure": [
+        "沿官网指南绑定本系列mint(uint256)与quote(address,uint256)，与其他系列、市场分别整理。",
+        "先查结束条件和供应，再查钱包免费余额与本次总价；mintOpen单项不能判可参与。",
+        "API显示该轮结束时说明其来源；验证服务未收录不能推出未部署或关闭。"
+      ],
+      "finding": "官网先前API显示4444/4444且mintEnded=true；本轮源码服务404但RPC有代码。",
+      "limits": [
+        "官网源码尚未独立匹配部署，不给可发送参数。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "agent-punk",
+      "family": "AgentPunk",
+      "activity": "Agent Punk Id / 系列入口辨识",
+      "source_ids": [
+        "fresh-punk-guide"
+      ],
+      "procedure": [
+        "从官方指南识别Agent Punk Id与Agent Nakamigos为不同系列。",
+        "前者每次mint()一张且按钱包quote；后者另有freeQuota、punkFreeUsed等身份/卡片条件。",
+        "按选中系列核对钱包类型限制和链上状态；首页检查页交浏览器处理。"
+      ],
+      "finding": "官网明确两个系列有不同数量入口及免费规则，不能套用同站任意mint。",
+      "limits": [
+        "未取得两系列本轮完整部署状态与个人额度；不是两次成功铸造。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "ptah-relic",
+      "family": "PTAH",
+      "activity": "Genesis Relic / Loom",
+      "source_ids": [
+        "fresh-ptah-guide",
+        "fresh-ptah-full"
+      ],
+      "procedure": [
+        "先识别Genesis公共发行已结束，不沿旧mint教程当新发售。",
+        "持有者路线另查Game、Relic、Loom与Mining，指南说明任意十张自有Relic织一Loom，无需十种符号。",
+        "合成输入、产物、权重及领取分别核对；Launchpad新模板仍属规划，不能套Genesis地址。"
+      ],
+      "finding": "官网确认旧系统保留合成和市场，不等于重新开放发行。",
+      "limits": [
+        "本轮以官网为证；未核对实际销毁、合成余额、矿池分配或收益。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "ptah-poa",
+      "family": "PTAH",
+      "activity": "Proof of Agent（POA）",
+      "source_ids": [
+        "fresh-ptah-guide",
+        "fresh-ptah-poa-source"
+      ],
+      "procedure": [
+        "按链56与POA地址进入源码研究，不把Genesis销售与POA混合。",
+        "追mint()->_checkMint与_issue：普通mint无_charge，mintSeries/changeSeries才走付费选择。",
+        "结合固定块mintOpen、mintCloseTime和身份条件；社交报名与每日抽奖是另一路径。"
+      ],
+      "finding": "文本+链/地址的真实自动核验取得匹配部署，普通mint与seriesPrice无直接收费关系。",
+      "limits": [
+        "未验证任何钱包身份、已用额度、社交报名或获奖。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "stocker-punk",
+      "family": "StockerPunk",
+      "activity": "StockerPunk",
+      "source_ids": [
+        "fresh-stocker-home",
+        "fresh-stocker-build",
+        "fresh-stocker-contracts"
+      ],
+      "procedure": [
+        "从Build页取得NFT、SPUNK、MiningVault角色，Contracts静态页缺表格需渲染补齐。",
+        "官网说明首张免费后按mintPriceWei、每钱包最多5；实际数额与是否开放留给当前合约核验。",
+        "区分铸造、激活、收益入NFT绑定钱包；记录正文3000与路线图5000激活费冲突，先补证。"
+      ],
+      "finding": "同一官网存在激活数量冲突；研究结果应指出矛盾，不能照抄“保证矿收益”。",
+      "limits": [
+        "未核对激活真实合约、费率、收益或池已上线；不执行官网安装命令。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "floppy-agents",
+      "family": "Floppy Agents",
+      "activity": "Floppy Agents",
+      "source_ids": [
+        "live-floppy-agents"
+      ],
+      "procedure": [
+        "锁定FloppyAgents.mint()，沿_mintTo检查总供应。",
+        "区分value必须0、Agent ID余额与hasMinted钱包位；免费本金仍需Gas。",
+        "creatorMint是owner储备入口，不能给普通用户使用。"
+      ],
+      "finding": "入口铸到调用者；身份门禁不代表可任意重复免费。",
+      "limits": [
+        "部署匹配不证明当前用户合格或仍有供应。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "asset-agents",
+      "family": "Asset Agents",
+      "activity": "Asset Agents",
+      "source_ids": [
+        "live-asset-agents"
+      ],
+      "procedure": [
+        "freeMint读取非空handle，并同时检查handleClaimed与walletClaimed。",
+        "付费mint(quantity)另查暂停、数量上限及quantity*PRICE；不能误用免费分支的身份判定。",
+        "两个入口都追踪_mintOne的总量及实际接收者。"
+      ],
+      "finding": "身份和钱包是两个独立防重复键；付费分支必须单独研究。",
+      "limits": [
+        "未读取用户handle、已用位或当前暂停状态。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "aigt-genesis",
+      "family": "AIGT Genesis",
+      "activity": "AIGT Genesis",
+      "source_ids": [
+        "live-aigt-genesis"
+      ],
+      "procedure": [
+        "mint(agentId,quantity)先查ownerOf、按agentId的PER_AGENT及公共供应。",
+        "priceFor逐件按已用量跨低/高档求总价，ERC20 transferFrom付款者；不能单价乘数量。",
+        "后续reveal、burnForPower、claim分别说明；burnForPower实际销毁NFT，不是普通锁仓。"
+      ],
+      "finding": "NFT铸造、销毁增权和USDT应计领取是不同动作。",
+      "limits": [
+        "未核验支付余额、allowance、个人claimable或随机结算。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "pixel-pets",
+      "family": "Pixel Pets",
+      "activity": "Pixel Pets",
+      "source_ids": [
+        "live-pixel-pets"
+      ],
+      "procedure": [
+        "先区分mint(paid)参数、quote返回tokens/cost/getsFree。",
+        "追_bonus与首次免费分支计算最终NFT数量，钱包付费计数不能当实际NFT计数。",
+        "核对总供应使用tokens，费用用cost，实际免费/奖励与paid分开给用户。"
+      ],
+      "finding": "输入付费数量不等于产物数量，全局余量需为附赠预留。",
+      "limits": [
+        "未取得具体钱包的当前quote或执行结果。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "silicon-souls",
+      "family": "Silicon Souls",
+      "activity": "Silicon Souls",
+      "source_ids": [
+        "live-silicon-souls"
+      ],
+      "procedure": [
+        "按编译目标SiliconSouls与ABI mint()进入，不选同文件代币mint(address,uint256)。",
+        "逐项查Agent ID、hasMinted、供应及currentPrice，支付至少当前price。",
+        "代码同时生成NFT和SOUL，发往调用者；付treasury与退超额分别说明。"
+      ],
+      "finding": "同名函数检索会混淆两个合约，必须绑定完整签名和编译目标。",
+      "limits": [
+        "不把源码随机性、附赠或退款视为已实盘验证。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "skynet-token",
+      "family": "Skynet",
+      "activity": "Skynet",
+      "source_ids": [
+        "live-skynet-token"
+      ],
+      "procedure": [
+        "免费claimFreeById核ownerOf，freeLeft同时受身份与钱包记账；与付费mint(amount)分开。",
+        "付费quoteMint依赖bnbUsd正数、时间有效性和向上取整，读取失败不是零价。",
+        "amount是整枚单位，_mint按amount*1 ether发ERC20，不是NFT张数。"
+      ],
+      "finding": "免费身份额度、付费报价与ERC20精度在代码中分开。",
+      "limits": [
+        "未检查任何用户额度，未确认当前预言机时效或开放状态。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "gearz",
+      "family": "GEARZ",
+      "activity": "MintVault / 退款",
+      "source_ids": [
+        "live-gearz",
+        "fresh-gearz-contracts"
+      ],
+      "procedure": [
+        "priceOf返回0可能表示无效数量或额度；追_mintFor的时间、暂停、身份与空投保留供应。",
+        "refundOpen另查finalized、refundForced、mintEnd与FINALIZE_WINDOW，不能仅有refund函数就判可退。",
+        "refundOf为paidOf*(totalPaid-teamDrawn)/totalPaid，refundTo才执行支付；不保证原额退款。"
+      ],
+      "finding": "销售、最终化和退款分支互斥条件须分开验证。",
+      "limits": [
+        "当前用户可退金额、具体开放阶段未读；不与旧Vault版本混用。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "hashdroids",
+      "family": "HashDroids",
+      "activity": "HashDroids PoW NFT",
+      "source_ids": [
+        "live-hashdroids",
+        "fresh-hash-deployment"
+      ],
+      "procedure": [
+        "从部署映射锁定collection而非token、vault或后续phase合约。",
+        "mine需nonce、anchorBlock、expectedPrevWork；workHash绑定chain、合约、矿工与前工作。",
+        "读当前prevWork、难度、区块年龄和间隔，再解释证明易失效；BNB费用与算力成本另列。"
+      ],
+      "finding": "证明不是铸造数量，别人的nonce不能自动成为当前用户有效证明。",
+      "limits": [
+        "未计算或提交工作证明；后续阶段玩法不由此例覆盖。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "shit-cash-sale",
+      "family": "Shit Cash",
+      "activity": "ShitSale 签名购买",
+      "source_ids": [
+        "live-shit-cash-sale",
+        "fresh-shit-state"
+      ],
+      "procedure": [
+        "API区分sale与token，源码目标ShitSale而非ShitToken。",
+        "追buyWithAuthorization的中继、deadline、nonce、LP条件及transferWithAuthorization付款，区别普通approve。",
+        "buyBatch逐单捕获失败；授权已消费、stranded资金与_distribute业务完成分别读记录。"
+      ],
+      "finding": "批次回执成功不能断言每单结算成功，产物是代币份额。",
+      "limits": [
+        "未构造或请求签名、调用中继、测试结算与退款；API不证明用户可购买。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    },
+    {
+      "id": "anthrobit",
+      "family": "AnthroBit",
+      "activity": "AnthroBit 随机铸造与后续生产",
+      "source_ids": [
+        "fresh-anthro-home",
+        "fresh-anthro-guide"
+      ],
+      "procedure": [
+        "从首页找到Core的mint(uint8,uint256)、间接身份注册表、官方指南与多模块角色。",
+        "分别核游戏费、VRF随机预算和Gas；“首张免游戏费”不能写成value为0。",
+        "指南说明mint/fusion请求等待VRF再reveal；未用预算变退款信用需另取，work/BP/ABIT另有领取阶段。"
+      ],
+      "finding": "自动网页采集能引出指南；AI必须读原文解释异步路径，不运行其安装或钱包操作。",
+      "limits": [
+        "本例以官网说明为证，未核对各模块部署、个人费率、VRF状态或领取。"
+      ],
+      "execution_tested": false,
+      "current_user_eligibility": "not_checked"
+    }
+  ]
+}

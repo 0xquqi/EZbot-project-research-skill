@@ -39,6 +39,27 @@ class EvidenceBoundaryTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             m.validate_cards(self.cards, self.sources)
 
+    def test_method_without_procedure_is_rejected(self):
+        self.cards[0]['procedure'] = []
+        with self.assertRaises(ValueError):
+            m.validate_cards(self.cards, self.sources)
+
+    def test_failed_read_cannot_count_as_retrieved_material(self):
+        refs = ROOT / 'skills/ezbot-project-research/references'
+        studies = json.loads((refs / 'activity-studies.json').read_text())
+        ledger = json.loads((refs / 'ecology-review.json').read_text())
+        ledger['counts']['retrieved_materials'] = 40
+        with self.assertRaisesRegex(ValueError, 'Failed read'):
+            m.validate_review(studies, ledger, self.cards, self.sources)
+
+    def test_new_review_cannot_become_recovered_history(self):
+        refs = ROOT / 'skills/ezbot-project-research/references'
+        studies = json.loads((refs / 'activity-studies.json').read_text())
+        ledger = json.loads((refs / 'ecology-review.json').read_text())
+        ledger['historical_40_index_recovered'] = True
+        with self.assertRaisesRegex(ValueError, 'historical evidence'):
+            m.validate_review(studies, ledger, self.cards, self.sources)
+
     def test_real_rpc_errors_are_preserved(self):
         o = json.loads((ROOT / 'evaluation/observations-2026-10-28.json').read_text())
         self.assertTrue(o['rpc']['fixed_block_attempts'])

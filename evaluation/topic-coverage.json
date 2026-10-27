@@ -1,30 +1,36 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "method": "每项核查主题回到本轮新读取的原始材料，记录支持点与明确边界；不是模型评分或实盘测试",
   "topics": [
     {
       "id": "agent-id",
       "source_ids": [
-        "build-guide",
-        "bibi"
+        "live-floppy-agents",
+        "live-asset-agents"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "floppy-agents",
+        "asset-agents"
+      ]
     },
     {
       "id": "direct-mint",
       "source_ids": [
-        "oz721",
+        "live-silicon-souls",
         "seadrop",
-        "bibi-source",
         "abi-spec"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "silicon-souls"
+      ]
     },
     {
       "id": "allowlist",
@@ -33,131 +39,181 @@
         "drop"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": []
     },
     {
       "id": "paid-mint",
       "source_ids": [
-        "erc20",
-        "bibi-source"
+        "live-aigt-genesis",
+        "live-gearz",
+        "erc20"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "aigt-genesis",
+        "gearz"
+      ]
     },
     {
       "id": "craft",
       "source_ids": [
         "build-guide",
+        "fresh-ptah-full",
+        "live-aigt-genesis",
         "erc1155"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "ptah-relic",
+        "aigt-genesis"
+      ]
     },
     {
       "id": "launchpad",
       "source_ids": [
-        "openfour"
+        "openfour",
+        "live-shit-cash-sale"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "shit-cash-sale"
+      ]
     },
     {
       "id": "identity-quota",
       "source_ids": [
-        "build-guide",
-        "punk"
+        "live-asset-agents",
+        "live-aigt-genesis",
+        "live-skynet-token"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "asset-agents",
+        "aigt-genesis",
+        "skynet-token"
+      ]
     },
     {
       "id": "quantity-bonus",
       "source_ids": [
-        "build-guide",
-        "bibi",
-        "erc1155"
+        "live-pixel-pets",
+        "live-silicon-souls"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "pixel-pets",
+        "silicon-souls"
+      ]
     },
     {
       "id": "oracle-randomness",
       "source_ids": [
-        "price-feed",
-        "chainlink-vrf",
-        "build-guide"
+        "live-skynet-token",
+        "fresh-anthro-guide",
+        "chainlink-vrf"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "skynet-token",
+        "anthrobit"
+      ]
     },
     {
       "id": "pow-mint",
       "source_ids": [
+        "live-hashdroids",
         "pow"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "hashdroids"
+      ]
     },
     {
       "id": "refundable-sale",
       "source_ids": [
-        "refund",
-        "build-guide"
+        "live-gearz",
+        "refund"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "gearz"
+      ]
     },
     {
       "id": "signature-settlement",
       "source_ids": [
+        "live-shit-cash-sale",
         "erc3009"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "shit-cash-sale"
+      ]
     },
     {
       "id": "lifecycle",
       "source_ids": [
-        "build-guide",
-        "ens",
-        "erc1155"
+        "live-aigt-genesis",
+        "live-gearz",
+        "fresh-anthro-guide",
+        "build-guide"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "aigt-genesis",
+        "gearz",
+        "anthrobit"
+      ]
     },
     {
       "id": "token-claim",
       "source_ids": [
-        "pow",
-        "drop",
+        "live-skynet-token",
+        "live-shit-cash-sale",
         "erc20"
       ],
       "reviewed": true,
-      "evidence_level": "public_material_review",
+      "evidence_level": "primary_material_worked_example_and_procedure",
       "execution_tested": false,
-      "cross_project_performance": "not_measured"
+      "cross_project_performance": "not_measured",
+      "case_refs": [
+        "skynet-token",
+        "shit-cash-sale"
+      ]
     }
   ]
 }

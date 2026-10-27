@@ -13,13 +13,15 @@ EXPECTED = {
     'evaluation/README.md', 'evaluation/observations-2026-10-28.json',
     'evaluation/topic-coverage.json', 'evaluation/automatic-research-2026-10-28.json',
     'evaluation/automatic-research-2026-10-28.md', 'release-manifest.json',
+    'evaluation/claim-acceptance-2026-10-28.json', 'evaluation/claim-acceptance-2026-10-28.md',
     PREFIX + 'SKILL.md', PREFIX + 'agents/openai.yaml',
     PREFIX + 'scripts/inspect_material.py', PREFIX + 'scripts/research.py',
     *{PREFIX + 'references/' + n for n in (
         'web-research.md', 'contract-research.md', 'participation.md',
         'report-format.md', 'case-index.md', 'question-cards.json',
         'agcid-cases.json', 'ecosystem-cases.json', 'source-catalog.json',
-        'inventory.json', 'validation.md', 'case-studies.md', 'automatic-research.md')},
+        'inventory.json', 'validation.md', 'case-studies.md', 'automatic-research.md',
+        'activity-studies.json', 'ecology-review.json')},
 }
 ARCHIVES = {
     # Filled from the first release; checked without reading their research bodies.
@@ -39,13 +41,38 @@ def validate_cards(cards, sources):
     for card in cards:
         require(card.get('basis') == 'new_public_source_review', 'Topic has no new public basis')
         require(card.get('execution_tested') is False, 'Do not upgrade material review to execution')
-        for field in ('questions', 'supported_points', 'limits', 'source_ids'):
+        for field in ('questions', 'supported_points', 'limits', 'source_ids', 'procedure'):
             value = card.get(field)
             require(isinstance(value, list) and value and all(isinstance(s, str) and s.strip() for s in value), f'{card["id"]}: missing {field}')
         for source in card['source_ids']:
             require(source in sources, f'Unknown source: {source}')
             require(sources[source]['status'] in ('fetched', 'read_via_web'), f'Unread source: {source}')
+        require(len(card['procedure']) >= 3 and card.get('worked_example') and card.get('counterexample'), 'Method needs procedure, example and boundary')
         require(not re.search(r'0x[0-9a-fA-F]{40}', json.dumps(card)), 'Historical target address in general questions')
+
+
+def validate_review(studies, ledger, cards, sources):
+    rows = studies['studies']
+    require(len(rows) == 16 and len({r['id'] for r in rows}) == 16, 'Expected 16 distinct activity studies')
+    require(len({r['family'] for r in rows}) == 15, 'Expected 15 project families')
+    ids = {r['id'] for r in rows}
+    for row in rows:
+        require(row['execution_tested'] is False and row['current_user_eligibility'] == 'not_checked', 'Unverified execution/eligibility claim')
+        require(len(row['procedure']) >= 3 and row['finding'] and row['limits'], 'Incomplete case explanation')
+        require(row['source_ids'] and all(s in sources and sources[s]['status'] == 'fetched' for s in row['source_ids']), 'Case has unread source')
+    for card in cards:
+        require(all(i in ids for i in card['case_refs']), 'Method points to nonexistent case')
+    records = ledger['records']
+    require(len(records) == 40 and len({r['record_id'] for r in records}) == 40, 'Expected 40 distinct review records')
+    require(len({r['read_url'].lower() for r in records}) == 40, 'Duplicate source counted as a record')
+    require(ledger['historical_40_index_recovered'] is False, 'Do not relabel new review as recovered historical evidence')
+    for row in records:
+        require(row['observation'] and row['read_at'] and row['read_url'].startswith('https://'), 'Missing record evidence')
+        require(row['status'] in ('contract_record_read', 'public_document_retrieved', 'unavailable', 'challenge_page'), 'Unknown read status')
+        require(re.fullmatch('[a-f0-9]{64}', row['sha256']), 'Missing content digest')
+    successful = sum(r['status'] in ('contract_record_read', 'public_document_retrieved') for r in records)
+    require(ledger['counts']['retrieved_materials'] == successful, 'Failed read counted as retrieved material')
+    require(ledger['counts']['unavailable'] == sum(r['status'] == 'unavailable' for r in records), 'Failure count differs')
 
 
 def check(root=ROOT):
@@ -87,6 +114,7 @@ def check(root=ROOT):
             require(s['status'] != 'read_via_web' or s['sha256'] is None, 'Do not invent capture digest')
     cards = json.loads((refs / 'question-cards.json').read_text())['rules']
     validate_cards(cards, sources)
+    validate_review(json.loads((refs / 'activity-studies.json').read_text()), json.loads((refs / 'ecology-review.json').read_text()), cards, sources)
     coverage = json.loads((root / 'evaluation/topic-coverage.json').read_text())['topics']
     require({c['id'] for c in cards} == {c['id'] for c in coverage}, 'Coverage and topic IDs differ')
     for c in coverage:

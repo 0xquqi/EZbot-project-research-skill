@@ -105,5 +105,15 @@
     "verification": "not_reconciled",
     "reason": "缺少40条查阅记录的逐条清单；不作为本轮验证数量"
   },
-  "current_review": "见 source-catalog.json，不能与历史项目数量相加宣称新增实测"
+  "current_review": {
+    "date": "2026-10-28",
+    "ecology_ledger": "ecology-review.json",
+    "reviewed_records": 40,
+    "retrieved_materials": 37,
+    "unavailable": 3,
+    "new_activity_studies": "activity-studies.json",
+    "project_families": 15,
+    "activity_studies": 16,
+    "historical_index_recovered": false
+  }
 }

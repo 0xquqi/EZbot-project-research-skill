@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 2,
-  "purpose": "14 个可重叠核查主题；逐项附新公开资料依据，不等于14种独立铸造技巧或实盘能力。",
+  "schemaVersion": 3,
+  "purpose": "14类可重叠参与机制研究方法：每类含操作步骤、原始来源实例与反例；不是14项实盘认证。",
   "rules": [
     {
       "id": "agent-id",
@@ -11,11 +11,11 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "build-guide",
-        "bibi"
+        "live-floppy-agents",
+        "live-asset-agents"
       ],
       "supported_points": [
-        "两个官网分别使用身份门禁和 NFT 持有检查。"
+        "Floppy查余额；Asset免费分支同时查handle与钱包位。"
       ],
       "questions": [
         "当前活动到底读取哪个身份注册表、哪个函数？",
@@ -24,7 +24,18 @@
       "limits": [
         "官网声明未自动等于部署规则；本轮未登录钱包或验证任何用户资格。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "floppy-agents",
+        "asset-agents"
+      ],
+      "procedure": [
+        "从入口追身份外部调用，记录注册表地址、函数与调用主体。",
+        "分开持有余额、ownerOf、handle非空等谓词，不因页面写Agent ID就互相替代。",
+        "结合目标入口所需的其他条件给资格待核清单；没有用户地址保留个人未知。"
+      ],
+      "worked_example": "Floppy查余额；Asset免费分支同时查handle与钱包位。",
+      "counterexample": "拥有身份≠未用免费额度；不同分支资格可能不同。"
     },
     {
       "id": "direct-mint",
@@ -36,13 +47,12 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "oz721",
+        "live-silicon-souls",
         "seadrop",
-        "bibi-source",
         "abi-spec"
       ],
       "supported_points": [
-        "公开示例存在接收者参数；不同销售实现会组合自己的条件。"
+        "Silicon文件的SOUL mint(address,uint256)和NFT mint()不同。"
       ],
       "questions": [
         "本次应调用销售合约还是 NFT 合约？函数完整参数与收件人来源在哪里？",
@@ -51,7 +61,17 @@
       "limits": [
         "不能从 mint 名称或 ERC 标准推出公开可铸造。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "silicon-souls"
+      ],
+      "procedure": [
+        "绑定链、地址、编译目标、完整ABI签名，识别代理与继承来源。",
+        "追入口所有门禁、数量、支付、供应，再追最终生成资产和实际收件人。",
+        "把公开调用、管理员发行、另合约内部mint分开，交付准确入口及缺证条件。"
+      ],
+      "worked_example": "Silicon文件的SOUL mint(address,uint256)和NFT mint()不同。",
+      "counterexample": "存在mint或ERC721支持不等于普通用户可公开铸造。"
     },
     {
       "id": "allowlist",
@@ -67,7 +87,7 @@
         "drop"
       ],
       "supported_points": [
-        "SeaDrop 的名单证明与签名入口分离；Drop 名单可覆盖普通价格和数量条件。"
+        "SeaDrop分开mintPublic、mintAllowList、mintSigned和mintAllowedTokenHolder。"
       ],
       "questions": [
         "本阶段使用 Merkle proof 还是签名，证明从哪个当前官方入口获取？",
@@ -76,7 +96,15 @@
       "limits": [
         "已读设计与源码，没有生成、请求或使用真实 proof/签名。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [],
+      "procedure": [
+        "先从选定活动配置确定公开、Merkle、签名或持有凭证入口。",
+        "按ABI与验证实现记录proof/签名绑定的参与者、阶段、数额、价格、截止与nonce。",
+        "到当前官方入口核实凭证取得方式；缺proof/签名只能解释规则并标待补。"
+      ],
+      "worked_example": "SeaDrop分开mintPublic、mintAllowList、mintSigned和mintAllowedTokenHolder。",
+      "counterexample": "这是官方源码方法实例，没有目标活动凭证；不能补造proof或保证名单命中。"
     },
     {
       "id": "paid-mint",
@@ -88,11 +116,12 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "erc20",
-        "bibi-source"
+        "live-aigt-genesis",
+        "live-gearz",
+        "erc20"
       ],
       "supported_points": [
-        "ERC20 授权与原生币 value 是不同支付手段。"
+        "AIGT priceFor逐件跨档累加，GEARZ的0价可表示无效数量。"
       ],
       "questions": [
         "支付规则从哪条目标代码或官方报价得出？单位和 decimals 是否确定？",
@@ -101,7 +130,18 @@
       "limits": [
         "未测试真实付费；未知支付金额不能按零处理。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "aigt-genesis",
+        "gearz"
+      ],
+      "procedure": [
+        "追付款表达式并确定BNB value或具体ERC20及decimals、spender。",
+        "逐次/跨档/免费抵扣时读精确总价函数，保留无效数量与报价失败。",
+        "分别给本金、授权要求和Gas；价格时点变化留作执行前重读。"
+      ],
+      "worked_example": "AIGT priceFor逐件跨档累加，GEARZ的0价可表示无效数量。",
+      "counterexample": "0报价不总是免费；当前单价乘数量可能少付跨档总价。"
     },
     {
       "id": "craft",
@@ -114,10 +154,12 @@
       "basis": "new_public_source_review",
       "source_ids": [
         "build-guide",
+        "fresh-ptah-full",
+        "live-aigt-genesis",
         "erc1155"
       ],
       "supported_points": [
-        "BUILD 指南区分合成销毁输入与质押；ERC1155 余额按 id 区分。"
+        "PTAH文档为任意十Relic织Loom；AIGT burnForPower销毁NFT取得权重。"
       ],
       "questions": [
         "目标步骤是销毁、转入托管还是仅锁定？每个输入 id 和数量是什么？",
@@ -126,7 +168,18 @@
       "limits": [
         "合成规则来自官网说明；未进行资产消耗或合成。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "ptah-relic",
+        "aigt-genesis"
+      ],
+      "procedure": [
+        "对目标步骤区分销毁、托管、锁定或内部记账，逐个列输入id与数量。",
+        "查输入所有权、授权、消耗函数与产物类型/接收者，确定是否不可逆。",
+        "拆出产出与后续claim/reveal；文档和部署状态不一致则停在缺口。"
+      ],
+      "worked_example": "PTAH文档为任意十Relic织Loom；AIGT burnForPower销毁NFT取得权重。",
+      "counterexample": "增加权重不等于生成可交易资产或立即收到收益。"
     },
     {
       "id": "launchpad",
@@ -138,10 +191,11 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "openfour"
+        "openfour",
+        "live-shit-cash-sale"
       ],
       "supported_points": [
-        "OpenFour 将报价、交易策略、金库和迁移模块分开。"
+        "OpenFour文档将金库/策略/迁移分开；ShitSale是另一种签名销售，不能照搬曲线。"
       ],
       "questions": [
         "目标资产当前走哪个平台版本、金库阶段和模块？",
@@ -150,7 +204,17 @@
       "limits": [
         "未验证任意发射资产可成交，不将平台文档的参数带入别的平台。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "shit-cash-sale"
+      ],
+      "procedure": [
+        "先识别平台、目标资产、版本和当前销售/曲线/迁移阶段，区分factory与实际销售目标。",
+        "从对应模块追报价、购买或出售、流动性与迁移条件；分开平台文档与本资产状态。",
+        "按真实产物说明是token买入而非NFT mint；未开放的后续阶段只列待核。"
+      ],
+      "worked_example": "OpenFour文档将金库/策略/迁移分开；ShitSale是另一种签名销售，不能照搬曲线。",
+      "counterexample": "此类方法不保证每个平台或资产都支持卖出、迁移或报价。"
     },
     {
       "id": "identity-quota",
@@ -162,11 +226,12 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "build-guide",
-        "punk"
+        "live-asset-agents",
+        "live-aigt-genesis",
+        "live-skynet-token"
       ],
       "supported_points": [
-        "BUILD 按身份限制次数；AgentPunk 文档另有钱包和持有卡片的限制。"
+        "Asset为handle+wallet，AIGT按agentId，Skynet免费记双键。"
       ],
       "questions": [
         "额度存在哪个键上：钱包、身份或某张 tokenId？",
@@ -175,7 +240,19 @@
       "limits": [
         "仅说明这些公开文档的差异，不能推定其他项目也使用同样计数。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "asset-agents",
+        "aigt-genesis",
+        "skynet-token"
+      ],
+      "procedure": [
+        "从每条入口的读写定位计数映射键：地址、身份id或特定持有NFT。",
+        "确认免费/付费/不同入口是否共用计数，以及转移后哪些位仍保留。",
+        "分别报告身份额度、钱包额度、每笔和公共上限，不将它们缩成一个剩余量。"
+      ],
+      "worked_example": "Asset为handle+wallet，AIGT按agentId，Skynet免费记双键。",
+      "counterexample": "换钱包或转身份不必然重置已使用额度。"
     },
     {
       "id": "quantity-bonus",
@@ -187,12 +264,11 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "build-guide",
-        "bibi",
-        "erc1155"
+        "live-pixel-pets",
+        "live-silicon-souls"
       ],
       "supported_points": [
-        "BUILD 页面返利是另发 LAB，不等于铸造操作多出一张卡；ERC1155 数量不等于 tokenId。"
+        "PixelPets的paid与quote.tokens不同；Silicon附赠SOUL不是第二张NFT。"
       ],
       "questions": [
         "用户输入量、实际扣费量、目标产物数量和附赠资产数量是否分别有依据？",
@@ -201,7 +277,18 @@
       "limits": [
         "返利是项目方说明，未验证登记、发放或收益。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "pixel-pets",
+        "silicon-souls"
+      ],
+      "procedure": [
+        "分开输入数量、计费数量、目标NFT数量及附赠token/游戏信用。",
+        "沿quote与mint里的额外生成调用核对免费/附赠规则、全局供应与钱包计数单位。",
+        "给每种产物的地址角色、单位及取得阶段，注明是否需要另领。"
+      ],
+      "worked_example": "PixelPets的paid与quote.tokens不同；Silicon附赠SOUL不是第二张NFT。",
+      "counterexample": "数量参数或事件名不能替代完整产物计算。"
     },
     {
       "id": "oracle-randomness",
@@ -213,12 +300,12 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "price-feed",
-        "chainlink-vrf",
-        "build-guide"
+        "live-skynet-token",
+        "fresh-anthro-guide",
+        "chainlink-vrf"
       ],
       "supported_points": [
-        "报价读取与随机结果出现是两件事；BUILD 自己使用 commit-reveal，不是 Chainlink VRF。"
+        "Skynet检查价格时效且向上取整；AnthroBit免费游戏mint仍付VRF预算。"
       ],
       "questions": [
         "当前目标到底用哪种定价或随机方案？接口精度、时间和额外费用如何解释？",
@@ -227,7 +314,18 @@
       "limits": [
         "文档中的通用随机性建议不能替代目标实现，不承诺随机性安全。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "skynet-token",
+        "anthrobit"
+      ],
+      "procedure": [
+        "先区分价格预言机与随机性请求，再核对应实现的精度、时效、费率或预算。",
+        "动态报价使用整数与实现舍入；异步请求记录request/item id、fulfilled状态及reveal步骤。",
+        "分别说明现在附带金额、实际消耗、Gas及退款信用；回调/揭示未知不能报完成。"
+      ],
+      "worked_example": "Skynet检查价格时效且向上取整；AnthroBit免费游戏mint仍付VRF预算。",
+      "counterexample": "价格错误不是零价；请求回执成功不是随机产物已可用。"
     },
     {
       "id": "pow-mint",
@@ -239,10 +337,11 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
+        "live-hashdroids",
         "pow"
       ],
       "supported_points": [
-        "0xBitcoin 源码把 challenge、调用者和 nonce 组成摘要并检查目标。"
+        "HashDroids工作绑定链、合约、miner、nonce、prevWork和anchor。"
       ],
       "questions": [
         "目标函数输入是数量还是工作证明？当前挑战与难度从哪里读？",
@@ -251,7 +350,17 @@
       "limits": [
         "历史源码研究，不代表当前网络运行状态，也不测算挖矿收益。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "hashdroids"
+      ],
+      "procedure": [
+        "从当前目标源码明确哈希输入与绑定主体，而非只读取难度名称。",
+        "核当前challenge/prevWork、目标难度、anchor/过期/间隔，说明证明失效条件。",
+        "说明输入proof而非quantity，并确认产物ERC20或NFT；未计算/提交则仅交规则。"
+      ],
+      "worked_example": "HashDroids工作绑定链、合约、miner、nonce、prevWork和anchor。",
+      "counterexample": "历史nonce或另一钱包的结果不等于当前有效证明。"
     },
     {
       "id": "refundable-sale",
@@ -262,11 +371,11 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "refund",
-        "build-guide"
+        "live-gearz",
+        "refund"
       ],
       "supported_points": [
-        "RefundEscrow 的退款状态需要启用；BUILD 的出价托管与取消也不是 mint 退款。"
+        "GEARZ refundOf扣teamDrawn占比且refundOpen按阶段判定。"
       ],
       "questions": [
         "资金当前属于什么托管和状态？谁可切换到可退款阶段？",
@@ -275,7 +384,17 @@
       "limits": [
         "库代码是机制示例，不代表某项目部署含有该功能。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "gearz"
+      ],
+      "procedure": [
+        "先找实际收款/托管合约、账本主体与退款入口。",
+        "沿阶段切换、期限、finalize互斥和权限判断能否退款；网络失败不作false。",
+        "用目标公式说明可退额、已扣部分、收件人和是否需主动领取。"
+      ],
+      "worked_example": "GEARZ refundOf扣teamDrawn占比且refundOpen按阶段判定。",
+      "counterexample": "有refund函数不保证当前开放，更不保证退原额或含Gas。"
     },
     {
       "id": "signature-settlement",
@@ -287,10 +406,11 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
+        "live-shit-cash-sale",
         "erc3009"
       ],
       "supported_points": [
-        "标准草案将签名授权转账与 allowance 区分，并规定独立 nonce 与时间参数。"
+        "ShitSale buyBatch逐单捕获失败，settleStranded与普通buy分开。"
       ],
       "questions": [
         "目标实际支持哪套签名协议？域、链、合约、付款人、接收者和数额是否完整？",
@@ -299,7 +419,17 @@
       "limits": [
         "没有签名或执行；不假设任意 x402 服务都使用 ERC-3009。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "shit-cash-sale"
+      ],
+      "procedure": [
+        "确认目标真实协议与币种，完整记录签名域、链、验证合约、from/to、value、有效期与nonce。",
+        "追授权消费到业务产物，核中继权限、重放位、资金滞留及目标恢复接口。",
+        "批次按每项事件/状态给结果，不由整批成功概括每单；只研究不索取或生成签名。"
+      ],
+      "worked_example": "ShitSale buyBatch逐单捕获失败，settleStranded与普通buy分开。",
+      "counterexample": "ERC3009不等于普通allowance；不是任意x402服务都使用此协议。"
     },
     {
       "id": "lifecycle",
@@ -312,12 +442,13 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "build-guide",
-        "ens",
-        "erc1155"
+        "live-aigt-genesis",
+        "live-gearz",
+        "fresh-anthro-guide",
+        "build-guide"
       ],
       "supported_points": [
-        "BUILD 提交后要揭示，合成另消耗资产；ENS 文档展示旧入口失效风险。"
+        "AnthroBit请求→VRF→reveal；AIGT铸造/销毁增权/claim不是一个动作。"
       ],
       "questions": [
         "当前只完成了哪一步？后续步骤的前置状态、等待时间和额外消耗是什么？",
@@ -326,7 +457,19 @@
       "limits": [
         "没有实际多步交易，不把一种系统的恢复方法迁移给另一系统。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "aigt-genesis",
+        "gearz",
+        "anthrobit"
+      ],
+      "procedure": [
+        "从目标源码或官网列必要阶段及各自前置状态，区分可选动作。",
+        "逐步列等待、资产锁定/销毁、追加费用、实际产物与完成判据。",
+        "仅在目标明确支持时给过期/失败恢复入口；先查原请求，避免重复提交。"
+      ],
+      "worked_example": "AnthroBit请求→VRF→reveal；AIGT铸造/销毁增权/claim不是一个动作。",
+      "counterexample": "一个系统的cancel/recovery不能推给另一项目。"
     },
     {
       "id": "token-claim",
@@ -338,12 +481,12 @@
       ],
       "basis": "new_public_source_review",
       "source_ids": [
-        "pow",
-        "drop",
+        "live-skynet-token",
+        "live-shit-cash-sale",
         "erc20"
       ],
       "supported_points": [
-        "同为 mint/claim，产物可能为 ERC20；Drop 同时有多种 token 标准。"
+        "Skynet _mint(n*1 ether)是ERC20；ShitSale从库存转份额而非增发NFT。"
       ],
       "questions": [
         "目标到底生成哪一种资产？输入量与最小单位如何转换？",
@@ -352,7 +495,18 @@
       "limits": [
         "未执行领取；标准未强制所有发行场景产生同样的铸造事件。"
       ],
-      "execution_tested": false
+      "execution_tested": false,
+      "case_refs": [
+        "skynet-token",
+        "shit-cash-sale"
+      ],
+      "procedure": [
+        "核实际资产标准和产生位置，区分NFT mint、ERC20增发、既有库存转账与内部信用。",
+        "确认输入整枚或最小单位，找实际_mint/transfer的接收者与额度来源。",
+        "把claimable应计值与已转入余额分开；没有状态或回执证据不宣称领取成功。"
+      ],
+      "worked_example": "Skynet _mint(n*1 ether)是ERC20；ShitSale从库存转份额而非增发NFT。",
+      "counterexample": "同名mint/claim不代表同样产物或同样单位。"
     }
   ]
 }
