@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "mode": "author_run_live_read_only_functional_test",
+  "cases": {
+    "build_web": {
+      "packet_sha256": "e0838cb47e7ca516ff5d062ccf50dc8e2935149cc5aac7b3f3461b4ff6caee07",
+      "started_at": "2026-10-27T16:34:34.409625+00:00",
+      "finished_at": "2026-10-27T16:34:37.631888+00:00",
+      "web_requests": 5,
+      "contract_requests": 0,
+      "materials": [
+        {
+          "url": "https://build-100.com/lab/",
+          "status": "ok",
+          "sha256": "a23f891be3a18bff3e3b5a1238c6084d16a3618d6823d5afdd6774f9761e0162"
+        },
+        {
+          "url": "https://build-100.com/lab/agent.md",
+          "status": "ok",
+          "sha256": "16eaf42b3143f20497699eeb9251b2d52b1b3ffffccdd2b79a85fba9069a893d"
+        },
+        {
+          "url": "https://build-100.com/lab/llms.txt",
+          "status": "ok",
+          "sha256": "fdd09b5f845a91496883653a817e20b3ddfd80e1f549134559e72c7c47012224"
+        },
+        {
+          "url": "https://build-100.com/lab/config.js?v=20261027ez1",
+          "status": "ok",
+          "sha256": "a5dfc0e0091c1f0b5c91c6eba21e4ce0522fcdd79cd63c2b475831bde84c1efa"
+        },
+        {
+          "url": "https://build-100.com/lab/abi.js?v=20261023r7",
+          "status": "ok",
+          "sha256": "e4d3469e735509e83a95c5e1cdf4e404f1c745594cec011f32ce1b6edf1a952f"
+        }
+      ],
+      "browser_followup_needed": true
+    },
+    "build_chain": {
+      "packet_sha256": "b80c03b701fb88e321a303ad92fb1d795bc04397e117d1e5bffd30bb03d89a3a",
+      "started_at": "2026-10-27T16:35:37.269914+00:00",
+      "finished_at": "2026-10-27T16:35:44.744110+00:00",
+      "web_requests": 0,
+      "contract_requests": 10,
+      "contract": {
+        "chain_id": 56,
+        "address": "0xfE5Ab5ce9b1D86a55d70E7D0573a14D559029C18",
+        "status": "deployment_matched",
+        "runtime_code_equal": true,
+        "single_block_snapshot": true,
+        "block_requested": {
+          "number": "0x7c18288",
+          "hash": "0xe89f98287179e8c2d32bce8af682bf089c79c7e53c2308f8b9d94bc621403b6a"
+        }
+      },
+      "scalar_reads": [
+        {
+          "signature": "drawPrice()",
+          "block_tag": "0x7c18288",
+          "decoded": [
+            {
+              "name": "nativeWei",
+              "type": "uint256",
+              "value": "680000000000000"
+            },
+            {
+              "name": "tokenAmt",
+              "type": "uint256",
+              "value": "15000000000000000000000"
+            }
+          ]
+        },
+        {
+          "signature": "drawPriceNative()",
+          "block_tag": "0x7c18288",
+          "decoded": [
+            {
+              "name": "",
+              "type": "uint256",
+              "value": "680000000000000"
+            }
+          ]
+        },
+        {
+          "signature": "drawPriceToken()",
+          "block_tag": "0x7c18288",
+          "decoded": [
+            {
+              "name": "",
+              "type": "uint256",
+              "value": "15000000000000000000000"
+            }
+          ]
+        },
+        {
+          "signature": "BASE_CAP_TOTAL()",
+          "block_tag": "0x7c18288",
+          "decoded": [
+            {
+              "name": "",
+              "type": "uint256",
+              "value": "88888"
+            }
+          ]
+        },
+        {
+          "signature": "MAX_MINTS()",
+          "block_tag": "0x7c18288",
+          "decoded": [
+            {
+              "name": "",
+              "type": "uint256",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "signature": "MAX_NATURAL()",
+          "block_tag": "0x7c18288",
+          "decoded": [
+            {
+              "name": "",
+              "type": "uint256",
+              "value": "94"
+            }
+          ]
+        }
+      ]
+    },
+    "poa_text": {
+      "packet_sha256": "ad74fd2d3df2c2ca607a577b2825d001c74900daf07b242297a922d780ac5c80",
+      "started_at": "2026-10-27T16:41:25.160115+00:00",
+      "finished_at": "2026-10-27T16:41:30.800412+00:00",
+      "web_requests": 0,
+      "contract_requests": 9,
+      "contract": {
+        "chain_id": 56,
+        "address": "0xD87ADb2E47979d6cb323896B1A9320E0dd132213",
+        "status": "deployment_matched",
+        "runtime_code_equal": true,
+        "single_block_snapshot": true,
+        "block_requested": {
+          "number": "0x7c1858c",
+          "hash": "0xa2635b95f0ef4f63c4dec5b88702b9cb03687d2684e0f9e216f92b4715200df1",
+          "timestamp": "0x6ae0d436"
+        }
+      },
+      "scalar_reads": [
+        {
+          "signature": "mintOpen()",
+          "block_tag": "0x7c1858c",
+          "decoded": [
+            {
+              "name": "",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "signature": "totalMinted()",
+          "block_tag": "0x7c1858c",
+          "decoded": [
+            {
+              "name": "",
+              "type": "uint256",
+              "value": "35310"
+            }
+          ]
+        },
+        {
+          "signature": "mintCloseTime()",
+          "block_tag": "0x7c1858c",
+          "decoded": [
+            {
+              "name": "",
+              "type": "uint64",
+              "value": "1794113040"
+            }
+          ]
+        },
+        {
+          "signature": "requireHandle()",
+          "block_tag": "0x7c1858c",
+          "decoded": [
+            {
+              "name": "",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "signature": "seriesPrice()",
+          "block_tag": "0x7c1858c",
+          "decoded": [
+            {
+              "name": "",
+              "type": "uint256",
+              "value": "4440000000000000000"
+            }
+          ]
+        }
+      ]
+    },
+    "bibi_source_missing": {
+      "packet_sha256": "b13c5416b25ca67dae3192090c68e51ba21a6acaddc2e5396eacc0f399bf704d",
+      "started_at": "2026-10-27T16:39:41.154098+00:00",
+      "finished_at": "2026-10-27T16:39:44.137743+00:00",
+      "web_requests": 0,
+      "contract_requests": 4,
+      "contract": {
+        "chain_id": 56,
+        "address": "0x15f9733eccb21dab0458e6446f4914004524efe7",
+        "status": "source_unavailable_deployed",
+        "block_requested": {
+          "number": "0x7c184a5",
+          "hash": "0x42302e2b6b0e23a9f5dd3e865a9797d0e85dcc468cd049a6cb7f9da45b0cb5cf"
+        },
+        "source_error": "HTTP 404"
+      },
+      "scalar_reads": []
+    }
+  },
+  "limitations": [
+    "No wallet connected, no user-specific eligibility checked, no simulation or transaction sent.",
+    "Source interpretation by the same author; not blind or cross-model evaluation.",
+    "Fixed budgets and public endpoints do not cover every possible dynamic site, proxy or signature flow."
+  ]
+}

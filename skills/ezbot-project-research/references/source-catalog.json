@@ -325,6 +325,18 @@
       "finding": "读取 decimals 与 round 数据，再按目标合约的报价规则解释。",
       "evidence_scope": "官方技术资料；未保存完整网页副本，未验证任意当前部署",
       "locator": "decimals; latestRoundData"
+    },
+    {
+      "id": "sourcify-api",
+      "url": "https://docs.sourcify.dev/docs/api/",
+      "title": "Sourcify v2 API 官方说明",
+      "status": "read_via_web",
+      "sha256": null,
+      "bytes": null,
+      "retrieved_at": "2026-10-28",
+      "finding": "使用v2/contract/{chainId}/{address}?fields=all读取现有验证信息，不提交验证任务。",
+      "evidence_scope": "官方接口说明；具体合约与部署仍须本轮核对",
+      "locator": "Contract Lookup"
     }
   ]
 }

@@ -5,3 +5,5 @@ __pycache__/
 .env.*
 *.sqlite*
 *.db
+
+research-output/

@@ -9,16 +9,17 @@ ROOT = Path(__file__).resolve().parents[1]
 PREFIX = 'skills/ezbot-project-research/'
 EXPECTED = {
     'AGENTS.md', '.gitignore', '.github/workflows/check.yml', 'README.md', 'LICENSE',
-    'tools/check.py', 'tests/test_inspect_material.py', 'tests/test_package.py',
+    'tools/check.py', 'tests/test_inspect_material.py', 'tests/test_package.py', 'tests/test_research.py',
     'evaluation/README.md', 'evaluation/observations-2026-10-28.json',
-    'evaluation/topic-coverage.json', 'release-manifest.json',
+    'evaluation/topic-coverage.json', 'evaluation/automatic-research-2026-10-28.json',
+    'evaluation/automatic-research-2026-10-28.md', 'release-manifest.json',
     PREFIX + 'SKILL.md', PREFIX + 'agents/openai.yaml',
-    PREFIX + 'scripts/inspect_material.py',
+    PREFIX + 'scripts/inspect_material.py', PREFIX + 'scripts/research.py',
     *{PREFIX + 'references/' + n for n in (
         'web-research.md', 'contract-research.md', 'participation.md',
         'report-format.md', 'case-index.md', 'question-cards.json',
         'agcid-cases.json', 'ecosystem-cases.json', 'source-catalog.json',
-        'inventory.json', 'validation.md', 'case-studies.md')},
+        'inventory.json', 'validation.md', 'case-studies.md', 'automatic-research.md')},
 }
 ARCHIVES = {
     # Filled from the first release; checked without reading their research bodies.
@@ -60,6 +61,8 @@ def check(root=ROOT):
         if name != 'tools/check.py':
             for pattern in (r'/Users/', r'127\.0\.0\.1', r'/api/mint/', r'gh[pousr]_[A-Za-z0-9]{20,}',
                             r'github_pat_[A-Za-z0-9_]{20,}', r'-----BEGIN .*PRIVATE KEY-----'):
+                if name == 'tests/test_research.py' and pattern == r'127\.0\.0\.1':
+                    continue  # Explicit synthetic private-network rejection test.
                 require(not re.search(pattern, text), f'Private/runtime pattern in {name}')
         if path.suffix == '.md':
             for target in re.findall(r'\]\(([^)]+)\)', text):
